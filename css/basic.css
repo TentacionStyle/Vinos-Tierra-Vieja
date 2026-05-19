@@ -148,32 +148,25 @@ section div {
     box-sizing: border-box;
 }
 
-/* --- NAVBAR (Barra de Navegación) --- */
+/* --- NAVBAR (Barra de Navegación) — Estilo Tierra Vieja --- */
 
 .navbar {
-    padding: 20px 0;
-    /* Espaciado interno arriba y abajo */
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
     position: fixed;
-    /* Mantiene la barra pegada en la pantalla */
     top: 0;
-    /* Pegada exactamente al borde superior */
     width: 100%;
-    height: 7%;
-    /* Ocupa todo el ancho */
     z-index: 1000;
-    /* Un número muy alto para asegurar que NADA se ponga por encima del menú */
     background-color: #f6eee3;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(111, 34, 54, 0.1);
     opacity: 0;
-    /* Empieza totalmente transparente (invisible) */
-
-    /* Configuración de animación ligada al scroll */
     animation: fade-in forwards;
-    /* Ejecuta la animación "fade-in" y se queda en su estado final (forwards) */
     animation-timeline: --scroll;
-    /* Conecta esta animación al scroll del body que definiste arriba */
     animation-range: exit 80% exit 100%;
-    /* Define en qué punto exacto del scroll ocurre la animación */
 }
 
 /* Fallback/Fix para Scroll.js */
@@ -182,53 +175,79 @@ section div {
     visibility: visible !important;
 }
 
-/* Estilos para la lista del menú */
+/* Logo + nombre de marca */
+.logo_nav {
+    position: static;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo_nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo_nav img {
+    width: 200px;
+    object-fit: contain;
+}
+
+.logo_nav .brand-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #6f2236;
+    text-transform: uppercase;
+}
+
+/* Links centrados absolutamente */
 .navbar ul {
     list-style: none;
-    /* Quita los puntos ("bullets") de la lista HTML */
     margin: 0;
     padding: 0;
     display: flex;
-    /* Pone los elementos en fila horizontal */
     justify-content: center;
-    /* Los centra en la barra */
-    gap: 40px;
-    /* Separación horizontal entre cada enlace del menú */
+    gap: 36px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* Estilo para los enlaces (<a>) dentro del menú */
 .navbar li a {
-    color: rgb(0, 0, 0);
-    /* Letra negra por defecto */
+    color: #333;
     text-decoration: none;
-    /* Quita el subrayado típico de los enlaces web */
     font-family: 'Montserrat', sans-serif;
-    /* Nueva tipografía aplicada */
     font-weight: 600;
-    /* Letra en negrita media para mayor elegancia */
+    font-size: 1rem;
+    letter-spacing: 0.5px;
     transition: color 0.3s ease;
-    /* Hace que el cambio de color al pasar el ratón sea suave (0.3 segundos) */
+    position: relative;
+    padding-bottom: 4px;
 }
 
-/* Efecto al pasar el ratón (hover) por encima de los enlaces del menú y para el enlace activo */
+.navbar li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #6f2236;
+    transition: width 0.3s ease;
+}
+
+.navbar li a:hover::after,
+.navbar li a.active::after {
+    width: 100%;
+}
+
 .navbar li a:hover,
 .navbar li a.active {
     color: #6f2236;
-    /* Cambia al color principal de la marca (Tono granate/vino) */
-}
-
-/* Contenedor del logo que está dentro de la barra de navegación */
-.logo_nav {
-    position: fixed;
-    /* Lo fija respecto a la pantalla */
-    top: 0%;
-    /* Pegado arriba */
-}
-
-/* Tamaño de la imagen del logo en la navegación */
-.logo_nav img {
-    width: 150px;
-    height: 150px;
 }
 
 
