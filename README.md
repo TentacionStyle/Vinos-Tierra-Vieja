@@ -25,5 +25,3 @@
 * **Menú de Navegación (`.navbar`):** `'Montserrat', sans-serif` (Peso: 600)
 * **Títulos del Footer:** `'Playfair Display', Georgia, serif` (Pesos: 400 y 500)
 * **Textos del Footer:** `'Lato', Arial, sans-serif` (Peso: 300)
-
-> 💡 **Nota de Diseño:** Los títulos (`h2`, `h3` y `h1 span`) utilizan la función `clamp()` de CSS para hacer que el tamaño de la fuente sea completamente responsivo y se adapte de forma fluida al ancho de la pantalla sin necesidad de añadir media queries adicionales.
