@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 502 | Tierra Vieja</title>
+    <link rel="icon" href="/css/img/logo-uva.png" type="image/png">
+    <link rel="stylesheet" href="/css/basic.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6eee3;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+        }
+
+    
+
+        /* HERO - Fondo corregido */
+        .error-hero {
+            position: relative;
+            min-height: 100vh;
+            background: url('/css/img/Fondo_portada.jpeg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px; /* Espacio para la navbar */
+        }
+
+        .error-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        .error-portada { position: relative; z-index: 2; width: 90%; max-width: 800px; }
+
+        .error-portada img.main-logo { width: 100px; margin-bottom: 20px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); }
+
+        .error-code-badge {
+            color: #c9a96e;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .error-portada h1 span {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 6vw, 5rem);
+            color: #fff;
+            line-height: 1.1;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-divider { width: 60px; height: 3px; background: #c9a96e; margin: 25px auto; }
+
+        .error-desc { color: #ddd; max-width: 600px; margin: 0 auto 40px; font-size: 1.1rem; }
+
+        /* BOTONES */
+        .cta-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary { background: #6f2236; color: #fff; box-shadow: 0 5px 15px rgba(111,34,54,0.4); }
+        .btn-primary:hover { background: #4e1826; transform: translateY(-3px); }
+
+        .btn-secondary { border: 1px solid #fff; color: #fff; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+        /* SECCIÓN DE ENLACES (Las cajas blancas) */
+        .error-content { padding: 80px 20px; text-align: center; background: #fdfaf7; }
+        .error-content h2 { font-family: 'Cinzel', serif; color: #6f2236; font-size: 2.5rem; margin-bottom: 40px; }
+
+        .error-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .link-card {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #6f2236;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .link-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centrado vertical */
+            text-align: center;
+            min-height: 150px; /* Para que todas midan lo mismo */
+        }
+
+        .link-card i { font-size: 2rem; }
+        .link-card span { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.8rem; }
+        .link-card:hover { transform: translateY(-10px); background: #6f2236; color: #fff; }
+
+        </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo_nav">
+            <a href="/index.html"><img src="/css/img/logotipo.png" alt="Tierra Vieja"></a>
+        </div>
+        <ul>
+            <li><a href="/index.html">Inicio</a></li>
+            <li><a href="/bodega.html">Bodega</a></li>
+            <li><a href="/Tienda.html">Tienda</a></li>
+            <li><a href="/viñedos.html">Viñedos</a></li>
+            <li><a href="/actualidad.html">Actualidad</a></li>
+        </ul>
+    </nav>
+
+    <header class="error-hero">
+        <div class="error-portada">
+            <img src="/css/img/logotipo.png" alt="Logo" class="main-logo">
+            <div class="error-code-badge">Error 502</div>
+            <h1>
+                <span>PUERTA DE</span>
+                <span>ENLACE ERRÓNEA</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="error-desc">Parece que nuestro servidor ha tenido un contratiempo. Estamos trabajando para que puedas seguir disfrutando de nuestros vinos.</p>
+            
+            <div class="cta-group">
+                <a href="/index.html" class="btn btn-primary">Volver al Inicio</a>
+                <a href="javascript:history.back()" class="btn btn-secondary">Página Anterior</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="error-content">
+        <h2>¿A dónde quieres ir?</h2>
+        <div class="error-links">
+            <a href="/index.html" class="link-card">
+                <i class="fa-solid fa-house"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="/Tienda.html" class="link-card">
+                <i class="fa-solid fa-wine-bottle"></i>
+                <span>Tienda</span>
+            </a>
+            <a href="/viñedos.html" class="link-card">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Viñedos</span>
+            </a>
+            <a href="/actualidad.html" class="link-card">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Actualidad</span>
+            </a>
+            <a href="/bodega.html" class="link-card">
+                <i class="fa-solid fa-warehouse"></i>
+                <span>Bodega</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="ftv">
+        <div class="ftv-top">
+            <h2 class="ftv-contact-title">Contacto</h2>
+        </div>
+        
+        <div class="ftv-body">
+            <div class="ftv-logo-col">
+            <div class="ftv-logo-wrap">
+                <img src="/css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+            </div>
+            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
+            </div>
+        
+            <div class="ftv-cols">
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Oficina</h3>
+                <p>Ctra. N-330, km 450, 50400</p>
+                <p>Cariñena, Zaragoza</p>
+                <p class="ftv-email-row">
+                <a href="mailto:vinostierravieja@gmail.com" class="ftv-email">vinostierravieja@gmail.com</a>
+                </p>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Horario</h3>
+                    <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
+                    <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
+            </h3>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Teléfono</h3>
+                <p class="ftv-call-label">Llámanos</p>
+                <p class="ftv-phone-num">+34 634 44 55 46</p>
+            </div>
+            </div>
+        </div>
+        
+        <div class="ftv-social">
+            <p class="ftv-social-title">Redes Sociales</p>
+            <div class="ftv-icons">
+            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
+                <!-- Opción A: Font Awesome -->
+                <i class="fa-brands fa-instagram"></i>
+                <!-- Opción B: tu PNG — comenta la línea de arriba y descomenta: -->
+                <!-- <img src="./css/img/Instagram.png" alt="Instagram" class="ftv-icon-png"> -->
+            </a>
+            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <!-- <img src="./css/img/WhatsApp.png" alt="WhatsApp" class="ftv-icon-png"> -->
+            </a>
+            </div>
+        </div>
+        
+        <div class="ftv-bottom-bar">
+            © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+/* =========================================
+   BLANCO CARIÑENA (Garnacha Blanca / Macabeo)
+   Paleta: blanco verdoso #E8F0D6 | dorado #c9a96e | oscuro #1a1a1a
+   ========================================= */
+
+/* --- VARIABLES --- */
+:root {
+    --blanco-bg: #1a1f18;
+    /* Fondo oscuro verdoso muy sutil */
+    --blanco-text: #f4f7f0;
+    --blanco-gold: #d4b872;
+    --blanco-lime: #b4c982;
+    /* Tono verde lima suave para acentos */
+    --blanco-cream: #f6eee3;
+
+    --font-hero: 'Cinzel', serif;
+    --font-head: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body.blanco-page {
+    background-color: var(--blanco-bg);
+    color: var(--blanco-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   1. HERO
+   ========================================= */
+.blanco-hero {
+    position: relative;
+    background: url('./img/Fondo_portada.jpeg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.blanco-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Degradado oscuro para resaltar el texto blanco */
+    background: linear-gradient(160deg, rgba(20, 25, 20, 0.6) 0%, rgba(15, 20, 15, 0.95) 100%);
+    z-index: 1;
+}
+
+.blanco-hero .portada {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blanco-hero h1 {
+    position: relative !important;
+    z-index: 2;
+    pointer-events: none;
+    margin: 30px auto 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.blanco-hero h1 span {
+    display: block;
+    font-family: var(--font-hero);
+    font-size: clamp(2rem, 7vw, 8rem);
+    letter-spacing: 12px;
+    color: #ffffff;
+    text-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+    line-height: 1.15;
+    max-width: 100%;
+}
+
+.blanco-hero h1 a {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 10;
+}
+
+.blanco-hero h1 #logotipo {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    translate: none !important;
+    transform: none !important;
+    height: 120px !important;
+    width: 120px !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    display: block !important;
+}
+
+/* Línea bajo el título */
+.hero-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--blanco-gold);
+    margin: 1.5rem auto 0;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.75;
+}
+
+.scroll-indicator p {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--blanco-lime);
+    margin: 0;
+}
+
+.mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--blanco-lime) !important;
+    border-radius: 50% !important;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--blanco-lime);
+    border-radius: 2px;
+    animation: mouse-scroll 2s infinite;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.blanco-page .navbar {
+    background-color: var(--blanco-cream);
+}
+
+.blanco-page .navbar li a {
+    color: #1a1a1a;
+}
+
+.blanco-page .navbar li a:hover {
+    color: #5a7035;
+}
+
+/* =========================================
+   3. SECCIÓN INTRO
+   ========================================= */
+.bl-intro {
+    padding: 120px 5%;
+    position: relative;
+    background: url('./img/Viñedos.png') no-repeat center center;
+    background-size: cover;
+}
+
+.bl-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, var(--blanco-bg) 35%, rgba(26, 31, 24, 0.7) 100%);
+    z-index: 0;
+}
+
+.bl-intro-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px !important;
+    width: 90% !important;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    background: rgba(20, 25, 20, 0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(180, 201, 130, 0.1);
+    border-radius: 28px;
+    padding: 64px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.bl-intro-text {
+    flex: 1.4;
+}
+
+.bl-eyebrow {
+    font-family: var(--font-hero);
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--blanco-lime);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.bl-intro-text h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.3;
+    margin: 0 0 20px;
+}
+
+.bl-intro-text h2 em {
+    color: var(--blanco-gold);
+    font-style: italic;
+}
+
+.bl-intro-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--blanco-lime);
+    margin-bottom: 28px;
+}
+
+.bl-intro-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 22px;
+}
+
+.bl-intro-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.bl-intro-image img {
+    width: 100%;
+    max-width: 320px;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+    animation: float-grape 12s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@media (max-width: 900px) {
+    .bl-intro-inner {
+        flex-direction: column;
+        padding: 40px !important;
+        gap: 40px;
+    }
+
+    .bl-intro-text h2 {
+        text-align: center;
+    }
+
+    .bl-intro-divider {
+        margin: 0 auto 28px;
+    }
+}
+
+/* =========================================
+   4. PERFIL AROMÁTICO
+   ========================================= */
+.bl-aromas {
+    padding: 100px 5%;
+    background-color: #11140f;
+}
+
+.bl-section-header {
+    text-align: center !important;
+    margin-bottom: 60px !important;
+    width: auto !important;
+    max-width: none !important;
+}
+
+.bl-section-header h2 {
+    font-family: var(--font-hero) !important;
+    font-size: clamp(1.8rem, 4vw, 3.2rem) !important;
+    letter-spacing: 8px !important;
+    font-weight: 400 !important;
+    color: #fff !important;
+    margin: 0 0 16px !important;
+    text-align: center !important;
+}
+
+.bl-section-header .bl-line {
+    display: block;
+    width: 60px !important;
+    height: 2px !important;
+    background: var(--blanco-lime) !important;
+    margin: 0 auto 18px !important;
+}
+
+.bl-section-header p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Override basic.css section div width for ALL bl sections */
+.bl-aromas div,
+.bl-ficha div,
+.bl-cta div,
+.bl-intro div,
+.bl-section-header {
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Re-apply padding where needed after override */
+.bl-aroma-card {
+    padding: 44px 30px !important;
+}
+
+.bl-intro-inner {
+    padding: 64px !important;
+    width: 90% !important;
+    max-width: 1100px !important;
+    box-sizing: border-box !important;
+}
+
+.bl-ficha-inner {
+    max-width: 900px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+.bl-aromas-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1100px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+.bl-aroma-card {
+    background: linear-gradient(145deg, #1d241a, #141a12);
+    border: 1px solid rgba(180, 201, 130, 0.15);
+    border-radius: 20px;
+    padding: 44px 30px !important;
+    text-align: center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.bl-aroma-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border-color: rgba(180, 201, 130, 0.5);
+}
+
+.bl-aroma-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.bl-aroma-card h3 {
+    font-family: var(--font-head);
+    font-size: 1.3rem;
+    color: var(--blanco-gold);
+    margin: 0 0 12px;
+}
+
+.bl-aroma-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+/* =========================================
+   5. FICHA TÉCNICA
+   ========================================= */
+.bl-ficha {
+    padding: 100px 5%;
+    background-color: var(--blanco-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bl-ficha-inner {
+    max-width: 900px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+.bl-ficha-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.bl-ficha-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: background 0.25s;
+}
+
+.bl-ficha-table tr:hover {
+    background: rgba(180, 201, 130, 0.05);
+}
+
+.bl-ficha-table td {
+    padding: 22px 16px;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.bl-ficha-table td:first-child {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blanco-lime);
+    width: 200px;
+}
+
+.bl-ficha-table td:last-child {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================
+   6. CTA
+   ========================================= */
+.bl-cta {
+    padding: 110px 5%;
+    background: linear-gradient(135deg, #1f2b1c, #111a0f);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    width: auto !important;
+}
+
+.bl-cta::before {
+    content: 'BL';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-hero);
+    font-size: 25vw;
+    color: rgba(180, 201, 130, 0.05);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 20px;
+}
+
+.bl-cta h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: #fff;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.bl-cta p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.bl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background-color: #5a7035;
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 44px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    font-family: var(--font-hero);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.bl-btn:hover {
+    background-color: #728c43;
+    transform: scale(1.04);
+}
+
+.bl-btn .arrow {
+    transition: transform 0.3s;
+}
+
+.bl-btn:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* FOOTER HERENCIA */
+.footer-tv {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.social-section {
+    border-top: 1px solid #444;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}
+
+@keyframes mouse-scroll {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 14px);
+        opacity: 0;
+    }
+}
+
+@keyframes float-grape {
+    0% {
+        transform: rotate(-2.5deg);
+    }
+
+    50% {
+        transform: rotate(2.5deg);
+    }
+
+    100% {
+        transform: rotate(-2.5deg);
+    }
+}

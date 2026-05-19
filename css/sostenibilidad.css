@@ -1,0 +1,495 @@
+/* -------------------- ESTILOS SECCIÓN SOSTENIBILIDAD -------------------- */
+
+/* --- ESCUDO CONTRA BASIC.CSS (Margen Global Fix) --- */
+/* Eliminamos el padding global que rompía el diseño en Sostenibilidad */
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6eee3;
+}
+
+/* --- VARIABLES --- */
+:root {
+    --vino: #6f2236;
+    --vino-oscuro: #4a1725;
+    --crema: #f6eee3;
+    --arena: #eee4db;
+    --gris-texto: #444;
+    --gold: #c9a96e;
+    --font-titulo: 'Cinzel', serif;
+    --font-elegante: 'Playfair Display', serif;
+    --font-cuerpo: 'Montserrat', sans-serif;
+}
+
+/* 1. HERO */
+/* (We force width auto here to avoid the 800px bug from basic.css) */
+.sostenibilidad-hero div {
+    width: auto !important;
+}
+
+.sostenibilidad-hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: url('./img/sostenibilidad.png') no-repeat center center; /* Solar panels image */
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+.sostenibilidad-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(18,16,15,0.4) 0%, rgba(18,16,15,0.85) 100%);
+    z-index: 1;
+}
+
+.sostenibilidad-hero .portada {
+    z-index: 2;
+    text-align: center;
+}
+
+.sostenibilidad-hero h1 span {
+    display: block;
+    font-family: var(--font-titulo);
+    font-size: clamp(1.8rem, 6vw, 4.5rem); /* Reduced size per request */
+    letter-spacing: 12px;
+    color: #ffffff;
+    text-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   2. INTRO (Style from Bodega)
+   ========================================= */
+.bodega-intro {
+    padding: 100px 20px 60px;
+    text-align: center;
+    background: var(--crema);
+}
+
+.intro-inner {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.intro-eyebrow {
+    font-family: var(--font-titulo);
+    font-size: 0.85rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 20px;
+}
+
+.intro-titulo {
+    font-family: var(--font-elegante);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.4;
+    margin: 0 0 25px;
+}
+
+.intro-titulo em {
+    color: var(--vino);
+    font-style: italic;
+}
+
+.intro-linea {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 30px;
+}
+
+.intro-texto {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #555;
+    text-align: center !important;
+}
+
+/* =========================================
+   3. STATS BAR
+   ========================================= */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: var(--vino);
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 40px;
+    min-width: 200px;
+}
+
+.stat-numero {
+    font-family: var(--font-titulo);
+    font-size: 3rem;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.stat-separador {
+    width: 1px;
+    height: 60px;
+    background: rgba(255,255,255,0.25);
+}
+
+/* =========================================
+   4. PILARES DE SOSTENIBILIDAD
+   ========================================= */
+.seccion-sostenibilidad {
+    padding: 80px 20px;
+    background-color: var(--crema);
+}
+
+.sost-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 lines of 2 */
+    gap: 30px;
+    max-width: 900px; /* Reduced to keep cards elegant in 2x2 */
+    margin: 0 auto 50px auto;
+    width: 100% !important; /* Overriding basic.css 800px */
+}
+
+.sost-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--vino);
+}
+
+.sost-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(111, 34, 54, 0.1);
+}
+
+.sost-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.sost-card h3 {
+    color: var(--vino);
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.sost-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* =========================================
+   5. MANIFIESTO (Call to Action)
+   ========================================= */
+.sost-manifesto {
+    background: linear-gradient(rgba(111, 34, 54, 0.9), rgba(111, 34, 54, 0.9)), 
+                url('#') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+    padding: 80px 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.sost-manifesto h3 {
+    font-family: var(--font-titulo);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.sost-manifesto p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+}
+
+.sost-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: var(--gold);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: var(--font-titulo);
+    letter-spacing: 2px;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.sost-btn:hover {
+    background-color: #b09460;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   6. TRIVIA GAME (INTERACTIVE SECTION)
+   ========================================= */
+.section-trivia {
+    padding: 100px 20px;
+    background-color: var(--crema);
+    display: flex;
+    justify-content: center;
+}
+
+.trivia-container {
+    max-width: 700px;
+    width: 100%;
+    background: #ffffff;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 1px solid var(--arena);
+}
+
+/* Fix for the 800px overflow bug from basic.css */
+.trivia-container div {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+.trivia-container h1 {
+    font-family: var(--font-titulo);
+    color: var(--vino);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+#info-panel {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    color: var(--gold);
+}
+
+#pregunta {
+    font-family: var(--font-elegante);
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 40px;
+    min-height: 80px;
+}
+
+.btn-group {
+    display: grid;
+    gap: 15px;
+}
+
+.btn-group button {
+    width: 100%;
+    padding: 18px;
+    background-color: var(--crema);
+    color: var(--vino);
+    border: 1px solid var(--vino);
+    font-family: var(--font-cuerpo);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    pointer-events: auto !important; /* Force clickability */
+    position: relative;
+    z-index: 10 !important;
+}
+
+.btn-group button:hover {
+    background-color: var(--vino);
+    color: #fff;
+}
+
+/* Clases de estado para el juego */
+.btn-group button.correcto {
+    background-color: #28a745 !important;
+    color: #fff !important;
+    border-color: #28a745 !important;
+}
+
+.btn-group button.incorrecto {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    border-color: #dc3545 !important;
+}
+
+#resultado {
+    margin-top: 25px;
+    font-weight: 700;
+    min-height: 24px;
+    color: var(--vino);
+}
+
+#reiniciar-btn {
+    margin: 30px auto !important;
+    display: none; /* Controlled by JS */
+    padding: 15px 35px;
+    background-color: var(--vino);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(111, 34, 54, 0.3);
+    position: relative;
+    z-index: 100;
+}
+
+#reiniciar-btn:hover {
+    background-color: var(--vino-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(111, 34, 54, 0.4);
+}
+
+/* =========================================
+   7. FOOTER ADJUSTMENTS
+   ========================================= */
+.footer-tv {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 60px 0 20px;
+    margin-top: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 60px; /* Consistent with premium footer */
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+    color: #fff;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+    color: #ccc;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+.email-link:hover {
+    text-decoration: underline;
+}
+
+.social-section {
+    border-top: 1px solid #333;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 768px) {
+    .stat-separador { display: none; }
+    .stat-item { min-width: 50%; }
+    .sost-manifesto h3 { font-size: 1.6rem; }
+    .sost-grid { grid-template-columns: 1fr; }
+}

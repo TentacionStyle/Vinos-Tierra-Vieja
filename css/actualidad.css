@@ -1,0 +1,729 @@
+/* =========================================
+   ACTUALIDAD — Tierra Vieja
+   Paleta: crema #f6eee3 | vino #6f2236 | dorado #c9a872 | oscuro #1a0f0b
+   ========================================= */
+
+:root {
+    --act-dark:   #1a0f0b;
+    --act-wine:   #6f2236;
+    --act-ruby:   #8b1a3a;
+    --act-cream:  #f6eee3;
+    --act-sand:   #ede0d4;
+    --act-gold:   #c9a872;
+    --act-text:   #2c1a12;
+    --font-hero:  'Cinzel', serif;
+    --font-head:  'Playfair Display', serif;
+    --font-body:  'Montserrat', sans-serif;
+}
+
+body.actualidad-page {
+    background-color: var(--act-cream);
+    color: var(--act-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Shield against basic.css */
+.actualidad-page section div {
+    width: auto;
+    max-width: none;
+    padding: 0;
+}
+
+/* Contenedor centrado reutilizable */
+.act-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   1. HERO
+   ========================================= */
+.actualidad-hero {
+    position: relative;
+    height: 100vh;
+    background: url('./img/actualidad-fuente-vino.png') no-repeat center center;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+}
+
+.actualidad-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(26, 15, 11, 0.6) 0%, rgba(10, 5, 3, 0.92) 100%);
+    z-index: 1;
+}
+
+.actualidad-hero .portada {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actualidad-hero h1 {
+    pointer-events: none;
+    margin: 30px auto 0;
+    width: 100%;
+    text-align: center;
+}
+
+.actualidad-hero h1 span {
+    display: block;
+    font-family: var(--font-hero);
+    font-size: clamp(2rem, 6vw, 7rem);
+    letter-spacing: 12px;
+    color: #fff;
+    text-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    line-height: 1.2;
+}
+
+.hero-divider {
+    width: 70px;
+    height: 2px;
+    background: var(--act-gold);
+    margin: 1.5rem auto 0;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.75;
+}
+
+.scroll-indicator p {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--act-gold);
+    margin: 0;
+}
+
+.actualidad-page .mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--act-gold) !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: block !important;
+}
+
+.actualidad-page .mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--act-gold);
+    border-radius: 50%;
+    animation: mouse-scroll 2s infinite;
+}
+
+@keyframes mouse-scroll {
+    0%   { transform: translate(-50%, 0);    opacity: 1; }
+    100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.actualidad-page .navbar {
+    background-color: var(--act-cream);
+}
+
+.actualidad-page .navbar li a {
+    color: var(--act-dark);
+}
+
+.actualidad-page .navbar li a:hover,
+.actualidad-page .navbar li a.active {
+    color: var(--act-wine);
+}
+
+/* =========================================
+   3. SECCIÓN DESTACADA
+   ========================================= */
+.act-destacada {
+    background-color: var(--act-cream);
+    padding: 100px 0 60px;
+}
+
+.act-eyebrow {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--act-wine);
+    margin-bottom: 28px;
+    display: block;
+    text-align: center;
+}
+
+.act-featured-card {
+    display: flex;
+    gap: 60px;
+    margin: 1%;
+    align-items: center;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(111, 34, 54, 0.1);
+    border: 1px solid var(--act-sand);
+}
+
+.act-featured-img {
+    flex: 1.2;
+    position: relative;
+    min-height: 420px;
+    overflow: hidden;
+}
+
+.act-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.act-featured-card:hover .act-featured-img img {
+    transform: scale(1.04);
+}
+
+.act-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--act-wine);
+    color: #fff;
+    font-family: var(--font-hero);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 50px;
+}
+
+.act-featured-text {
+    flex: 1;
+    padding: 50px 50px 50px 0 !important;
+}
+
+.act-date {
+    font-size: 0.85rem;
+    color: #999;
+    display: block;
+    margin-bottom: 16px;
+    font-family: var(--font-body);
+}
+
+.act-featured-text h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+    font-weight: 700;
+    color: var(--act-dark);
+    line-height: 1.4;
+    margin: 0 0 20px;
+}
+
+.act-featured-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #555;
+    margin-bottom: 32px;
+}
+
+.act-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--act-wine);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-family: var(--font-hero);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.act-btn-primary:hover {
+    background: var(--act-ruby);
+    transform: scale(1.03);
+}
+
+.act-btn-primary span {
+    transition: transform 0.3s;
+}
+
+.act-btn-primary:hover span {
+    transform: translateX(4px);
+}
+
+/* =========================================
+   4. FILTRO DE CATEGORÍAS
+   ========================================= */
+.act-categories-centered {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.act-cat-btn {
+    background: transparent;
+    border: 1px solid var(--act-gold);
+    color: var(--act-text);
+    font-family: var(--font-hero);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.act-cat-btn:hover,
+.act-cat-btn.active {
+    background: var(--act-wine);
+    border-color: var(--act-wine);
+    color: #fff;
+}
+
+/* =========================================
+   5. GRID DE NOTICIAS
+   ========================================= */
+.act-noticias {
+    background: var(--act-cream);
+    padding: 80px 0 100px;
+}
+
+.act-section-title {
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    color: var(--act-dark);
+    margin: 0 0 50px;
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.act-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--act-gold);
+}
+
+.act-nav-arrows {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.act-arrow {
+    background: #fff;
+    border: 1px solid var(--act-sand);
+    color: var(--act-wine);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.act-arrow:hover {
+    background: var(--act-wine);
+    color: #fff;
+    border-color: var(--act-wine);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(111, 34, 54, 0.2);
+}
+
+.act-scroll-wrapper {
+    overflow: hidden;
+    padding: 20px 40px !important; /* Aumentamos el relleno horizontal significativamente */
+    /* Eliminamos el margen negativo para que respete el contenedor act-inner */
+}
+
+.act-grid {
+    display: flex;
+    gap: 30px; 
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    padding: 10px 0 20px;
+}
+
+/* Truco de centrado robusto sin justify-content: center (que rompe el scroll) */
+.act-grid::before,
+.act-grid::after {
+    content: '';
+    margin: auto;
+}
+
+.act-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+.act-card {
+    flex: 0 0 320px; /* Force width and don't shrink */
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    border: 1px solid var(--act-sand);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.act-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(111, 34, 54, 0.12);
+}
+
+.act-card-img {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.act-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.act-card:hover .act-card-img img {
+    transform: scale(1.06);
+}
+
+.act-card-body {
+    padding: 28px !important;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.act-card-body h3 {
+    font-family: var(--font-head);
+    font-size: 1.15rem;
+    color: var(--act-dark);
+    margin: 10px 0 12px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.act-card-body p {
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.act-btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--act-wine);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    transition: gap 0.25s ease;
+    margin-top: auto;
+}
+
+.act-btn-link:hover {
+    gap: 12px;
+}
+
+.act-btn-link span {
+    transition: transform 0.25s;
+}
+
+.act-btn-link:hover span {
+    transform: translateX(4px);
+}
+
+/* =========================================
+   6. NEWSLETTER BANNER
+   ========================================= */
+.act-newsletter {
+    background: linear-gradient(135deg, var(--act-wine), #3b0f20);
+    padding: 90px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.act-newsletter::before {
+    content: '✉';
+    position: absolute;
+    font-size: 25vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    user-select: none;
+}
+
+.act-newsletter .act-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.act-nl-text {
+    flex: 1;
+    min-width: 260px;
+    text-align: center ;
+}
+
+.act-nl-text h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: #fff;
+    font-style: italic;
+    margin: 0 0 12px;
+}
+
+.act-nl-text p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.act-nl-form {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.act-nl-form input[type="email"] {
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: 50px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: background 0.3s;
+}
+
+.act-nl-form input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.act-nl-form input:focus {
+    background: rgba(255,255,255,0.25);
+}
+
+.act-nl-form button {
+    padding: 14px 30px;
+    border-radius: 50px;
+    border: none;
+    background: var(--act-gold);
+    color: var(--act-dark);
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    white-space: nowrap;
+}
+
+.act-nl-form button:hover {
+    background: #e2c08a;
+    transform: scale(1.03);
+}
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+.footer-tv {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.email-link:hover {
+    text-decoration: underline;
+}
+
+.social-section {
+    border-top: 1px solid #444;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}
+
+/* =========================================
+   8. RESPONSIVE
+   ========================================= */
+@media (max-width: 900px) {
+    .act-featured-card {
+        flex-direction: column;
+    }
+
+    .act-featured-img {
+        min-height: 260px;
+    }
+
+    .act-featured-text {
+        padding: 30px !important;
+    }
+
+    .act-newsletter .act-inner {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .act-nl-form {
+        flex-direction: column;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .logo-section {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .act-grid {
+        grid-template-columns: 1fr;
+    }
+}

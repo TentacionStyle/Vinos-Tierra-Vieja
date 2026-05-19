@@ -1,0 +1,273 @@
+/* =========================================
+   STYLES-INDEX.CSS — Inicio Tierra Vieja
+   ========================================= */
+
+/* --- VARIABLES GLOBALES --- */
+:root {
+    --vino: #6f2236;
+    --vino-oscuro: #4a1725;
+    --crema: #f6eee3;
+    --arena: #eee4db;
+    --gris-texto: #444;
+    --gold: #c9a96e;
+    --font-titulo: 'Cinzel', serif;
+    --font-elegante: 'Playfair Display', serif;
+    --font-cuerpo: 'Montserrat', sans-serif;
+}
+
+body.index-page {
+    background-color: var(--crema);
+    color: var(--gris-texto);
+    font-family: var(--font-cuerpo);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+
+/* =========================================
+   1. HERO
+   ========================================= */
+.home-hero {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./img/Fondo_portada.jpeg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.home-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(18,16,15,0.4) 0%, rgba(18,16,15,0.85) 100%);
+    z-index: 1;
+}
+
+.home-hero .portada {
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-hero h1 {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    translate: none !important;
+    margin: 20px 0 0 0 !important;
+    pointer-events: none;
+}
+
+.home-hero h1 span {
+    display: block;
+    font-family: var(--font-titulo);
+    font-size: clamp(2.5rem, 8vw, 7rem);
+    letter-spacing: 12px;
+    color: #ffffff;
+    text-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    line-height: 1.2;
+}
+
+#logotipo {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    translate: none !important;
+    height: 180px;
+    width: 180px;
+    pointer-events: auto;
+    transition: transform 0.3s ease;
+}
+
+#logotipo:hover {
+    transform: scale(1.05);
+}
+
+.hero-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 30px auto 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+
+
+.mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--gold) !important;
+    border-radius: 50% !important;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: scroll-mouse 2s infinite;
+}
+
+@keyframes scroll-mouse {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 15px);
+        opacity: 0;
+    }
+}
+
+.scroll-indicator p {
+    font-family: var(--font-cuerpo);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0;
+}
+
+
+
+/* =========================================
+   2. SECCIONES BANNER (PARALLAX)
+   ========================================= */
+.banner-section {
+    position: relative;
+    padding: 120px 40px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 85vh;
+}
+
+.banner-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(18,16,15,0.7);
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+.banner-content h2 {
+    font-family: var(--font-elegante);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    margin: 0 0 30px;
+    font-style: italic;
+    color: #ffffff;
+}
+
+.banner-content p {
+    font-family: var(--font-cuerpo);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #e8e0d5;
+    margin-bottom: 25px;
+}
+
+.banner-content p:last-of-type {
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: var(--vino);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: var(--font-cuerpo);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--gold);
+    transform: translateY(-3px);
+}
+
+/* Fondos específicos */
+.banner-nosotros {
+    background-image: url('./img/SobreNosotros.jpg');
+}
+
+.banner-bodega {
+    background-image: url('./img/Bodega.png');
+}
+
+.banner-tienda {
+    background-image: url('./img/tienda-san-valero.png');
+}
+
+.banner-vinedos {
+    background-image: url('./img/Viñedos.png');
+}
+
+/* =========================================
+   3. RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .home-hero h1 span {
+        font-size: 3.5rem;
+    }
+    
+    .banner-section {
+        background-attachment: scroll; /* Desactiva parallax en móvil para mejor rendimiento */
+        padding: 80px 20px;
+        min-height: 60vh;
+    }
+    
+    .banner-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .banner-content p {
+        font-size: 1rem;
+    }
+}

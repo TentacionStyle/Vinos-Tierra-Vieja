@@ -1,0 +1,657 @@
+/* =========================================
+   VARIABLES Y ESTILO GLOBAL TEMPRANILLO
+   ========================================= */
+:root {
+    --tempranillo-ruby: #6E1229;
+    /* Color tinto brillante */
+    --tempranillo-dark: #1F0D15;
+    /* Casi negro con toque rojo */
+    --earth-sand: #D4C5B0;
+    --text-white: #F5EAEB;
+    --gold-accent: #CBA365;
+
+    --font-hero: 'Cinzel', serif;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body.tempranillo-page {
+    background-color: var(--tempranillo-dark);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   1. HERO ANIMADO (ESTILO INDEX.HTML)
+   ========================================= */
+/* .hero ya viene de basic.css pero aplicamos filtros para Tempranillo */
+.tempranillo-hero {
+    position: relative;
+    background-image: url('./img/uva-tempranillo.png') !important;
+    /* Foto paisajística alineada con web */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.tempranillo-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(31, 13, 21, 0.6) 0%, rgba(31, 13, 21, 0.95) 100%);
+    z-index: 1;
+}
+
+.tempranillo-hero .portada {
+    z-index: 2;
+    position: relative;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tempranillo-hero h1 span {
+    font-family: var(--font-hero);
+    color: var(--text-white);
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+    letter-spacing: 8px;
+    font-size: clamp(3rem, 7vw + 1rem, 11rem);
+}
+
+/* Indicador de Scroll */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.8;
+}
+
+.mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--gold-accent) !important;
+    border-radius: 50% !important;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--gold-accent);
+    border-radius: 2px;
+    animation: scroll-mouse 2s infinite;
+}
+
+@keyframes scroll-mouse {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 15px);
+        opacity: 0;
+    }
+}
+
+.scroll-indicator p {
+    font-family: var(--font-hero);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-accent);
+    margin: 0;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.tempranillo-page .navbar {
+    background-color: #f6eee3;
+}
+
+.tempranillo-page .navbar li a {
+    color: #12100f;
+}
+
+.tempranillo-page .navbar li a:hover {
+    color: var(--tempranillo-ruby);
+}
+
+
+/* =========================================
+   3. SECCIÓN 1: INTRODUCCIÓN Y GRÁFICO CIRCULAR
+   ========================================= */
+.section-intro-tempranillo {
+    padding: 120px 5%;
+    position: relative;
+    background: url('./img/Viñedos.png') no-repeat center right;
+    background-size: cover;
+    background-attachment: fixed;
+    /* Quitamos el overlay antiguo para aplicar un pseudo-elemento más fuerte */
+}
+
+/* Capa oscura que oscurece la foto del viñedo detrás del texto */
+.section-intro-tempranillo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, var(--tempranillo-dark) 0%, rgba(31, 13, 21, 0.8) 50%, rgba(31, 13, 21, 0.4) 100%);
+    z-index: 0;
+}
+
+.glass-card-tempranillo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 1100px !important;
+    width: 90% !important;
+    background: rgba(31, 13, 21, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 1;
+    /* Pone el texto por encima de la capa oscura */
+    gap: 60px;
+    margin: 0 auto;
+}
+
+.glass-content {
+    flex: 1.5;
+    z-index: 2;
+}
+
+.title-tempranillo {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+.linea-decorativa {
+    width: 80px;
+    height: 3px;
+    background: var(--gold-accent);
+    margin-bottom: 30px;
+    border-radius: 2px;
+}
+
+.glass-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+.glass-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.img-flotante {
+    width: 100%;
+    max-width: 800px !important;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.8));
+    /* Cambiamos el punto de anclaje de la animación a la parte superior central (el tallo) */
+    transform-origin: top center;
+    /* Efecto "Balanceo al viento" o "Colgar de la vid" de 12s muy relajado */
+    animation: mecer-vid 12s ease-in-out infinite;
+}
+
+@keyframes mecer-vid {
+
+    /* El racimo se balancea muy suavemente como un péndulo desde su tallo */
+    0% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(2deg);
+    }
+
+    100% {
+        transform: rotate(-2deg);
+    }
+}
+
+@media (max-width: 900px) {
+    .glass-card-tempranillo {
+        flex-direction: column;
+        padding: 40px;
+    }
+
+    .img-flotante {
+        max-width: 250px;
+    }
+}
+
+
+/* =========================================
+   4. SECCIÓN 2: TIMELINE ZIGZAG VERTICAL
+   ========================================= */
+.section-timeline {
+    padding: 100px 5%;
+    background-color: #14080e;
+    position: relative;
+}
+
+/* Línea central vertical */
+.section-timeline::before {
+    content: '';
+    position: absolute;
+    top: 100px;
+    bottom: 100px;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--tempranillo-ruby), transparent);
+    transform: translateX(-50%);
+}
+
+.timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-block {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+}
+
+.t-left {
+    flex-direction: row;
+}
+
+.t-right {
+    flex-direction: row-reverse;
+}
+
+.t-image {
+    flex: 1;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.t-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(1.2);
+    transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.t-image:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1);
+}
+
+/* El punto conector */
+.t-image::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--tempranillo-ruby);
+    border: 4px solid #14080e;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 15px var(--tempranillo-ruby);
+}
+
+.t-left .t-image::after {
+    right: -73px;
+}
+
+.t-right .t-image::after {
+    left: -73px;
+}
+
+
+.t-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.t-number {
+    font-family: var(--font-hero);
+    font-size: 5rem;
+    color: rgba(203, 163, 101, 0.15);
+    /* Dorado muy transparente */
+    line-height: 0.8;
+    margin-bottom: -15px;
+}
+
+.t-content h3 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.t-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #b5b5b5;
+}
+
+
+/* =========================================
+   5. SECCIÓN BENTON BOX (EXPERIENCIA MODERNA)
+   ========================================= */
+.section-bento {
+    padding: 100px 5% 150px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 250px 250px;
+    gap: 30px;
+}
+
+.bento-item {
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.bento-large,
+.bento-tienda {
+    grid-row: 1 / 3;
+    background: url('./img/san-valero-tienda.png') center/cover no-repeat !important;
+    /* Actualizado a san-valero-tienda.png */
+}
+
+.bento-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(31, 13, 21, 1) 0%, rgba(31, 13, 21, 0.2) 100%);
+    z-index: 1;
+}
+
+.bento-content {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    /* Empuja el contenido hacia abajo */
+}
+
+.bento-content h3 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin: 0 0 15px 0;
+}
+
+.bento-content p {
+    font-size: 1.1rem;
+    color: #dedede;
+    margin-bottom: 30px;
+    max-width: 400px;
+}
+
+.btn-explore {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--tempranillo-ruby);
+    color: white;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-explore:hover {
+    background-color: #8c1734;
+}
+
+.btn-explore .arrow {
+    transition: transform 0.3s ease;
+}
+
+.btn-explore:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* Stats Bento */
+.bento-stat {
+    background: linear-gradient(135deg, #2b131d, #14080e);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    align-items: center;
+    text-align: center;
+}
+
+.stat-dark {
+    background: #0a0407;
+}
+
+.stat-number {
+    font-family: var(--font-hero);
+    font-size: 5rem;
+    color: var(--gold-accent);
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.stat-text {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================
+   6. RESPONSIVE DESIGN (Móviles / Tablets)
+   ========================================= */
+@media (max-width: 1024px) {
+    .grid-intro {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .section-intro-tempranillo {
+        background-position: center;
+    }
+
+    /* Romper Timeline */
+    .section-timeline::before {
+        display: none;
+    }
+
+    .timeline-block {
+        flex-direction: column !important;
+        gap: 30px;
+    }
+
+    .t-image {
+        width: 100%;
+    }
+
+    .t-image::after {
+        display: none;
+    }
+
+    .t-content {
+        text-align: center;
+    }
+
+    /* Romper Bento */
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .bento-large {
+        grid-row: auto;
+        padding-top: 200px;
+        /* Para que se vea la foto */
+    }
+}
+
+/* FOOTER - Manteniendo coherencia básica */
+.footer-tv {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.email-link:hover {
+    text-decoration: underline;
+}
+
+.social-section {
+    border-top: 1px solid #444;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}

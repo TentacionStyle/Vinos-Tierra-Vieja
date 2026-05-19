@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sostenibilidad | Tierra Vieja</title>
+    <link rel="icon" href="./css/img/logo-uva.png" type="image/png">
+
+    <link rel="stylesheet" href="./css/basic.css">
+    <link rel="stylesheet" href="./css/sostenibilidad.css">
+    <link rel="stylesheet" href="./css/Animaciones.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<script src="./Javascript/Hamburger.js"></script>
+<body>
+
+    <!-- HERO -->
+    <section id="hero" class="hero sostenibilidad-hero">
+        <div class="portada">
+            <a href="index"><img id="logotipo" src="./css/img/logotipo.png" alt="Logotipo"></a>
+            <h1>
+                <span>SOSTENIBILIDAD</span>
+                <span>TIERRA VIEJA</span>
+            </h1>
+        </div>
+        <!-- Flecha decorativa animada -->
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <p>Descubre Nuestro Compromiso</p>
+        </div>
+    </section>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo_nav">
+            <a href="index"><img src="./css/img/logotipo.png" alt="Logotipo"></a>
+        </div>
+        <ul>
+            <li><a href="index">Inicio</a></li>
+            <li><a href="bodega">Bodega</a></li>
+            <li><a href="Tienda">Tienda</a></li>
+            <li><a href="viñedos">Viñedos</a></li>
+            <li><a href="actualidad">Actualidad</a></li>
+            <li><a href="sostenibilidad" class="active">Sostenibilidad</a></li>
+        </ul>
+    </nav>
+
+    <!-- INTRO -->
+    <section class="bodega-intro">
+        <div class="intro-inner">
+            <span class="intro-eyebrow">Compromiso con el Futuro</span>
+            <h2 class="intro-titulo">Un brindis por<br><em>el mañana</em></h2>
+            <div class="intro-linea"></div>
+            <p class="intro-texto">El buen vino nace de una tierra sana. En Tierra Vieja, hemos adaptado nuestra
+                logística, producción y selección para respetar el medio ambiente y garantizar que cada copa refleje
+                nuestro profundo respeto por la naturaleza.</p>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-numero">100%</span>
+            <span class="stat-label">Energía Renovable</span>
+        </div>
+        <div class="stat-separador"></div>
+        <div class="stat-item">
+            <span class="stat-numero">0%</span>
+            <span class="stat-label">Plásticos de un solo uso</span>
+        </div>
+        <div class="stat-separador"></div>
+        <div class="stat-item">
+            <span class="stat-numero">+500</span>
+            <span class="stat-label">Paneles Solares</span>
+        </div>
+        <div class="stat-separador"></div>
+        <div class="stat-item">
+            <span class="stat-numero">100%</span>
+            <span class="stat-label">Embalaje Reciclable</span>
+        </div>
+    </div>
+
+    <!-- PILARES -->
+    <section class="seccion-sostenibilidad">
+        <div class="sost-grid">
+            <article class="sost-card">
+                <span class="sost-icon">📦</span>
+                <h3>Packaging Eco</h3>
+                <p>Cajas certificadas FSC y protecciones libres de plástico. Todo es 100% reciclable y sostenible.</p>
+            </article>
+
+            <article class="sost-card">
+                <span class="sost-icon">🍇</span>
+                <h3>Vino Orgánico</h3>
+                <p>Priorizamos bodegas ecológicas, biodinámicas y de mínima intervención en todo el proceso.</p>
+            </article>
+
+            <article class="sost-card">
+                <span class="sost-icon">🚚</span>
+                <h3>Transporte Verde</h3>
+                <p>Logística optimizada para reducir drásticamente la huella de carbono en cada entrega.</p>
+            </article>
+
+            <article class="sost-card">
+                <span class="sost-icon">♻️</span>
+                <h3>Circularidad</h3>
+                <p>Botellas de vidrio aligerado y fomento activo del reciclaje de corcho y materiales.</p>
+            </article>
+        </div>
+
+        <!-- MANIFIESTO -->
+        <div class="sost-manifesto">
+            <h3>¿Brindamos con conciencia?</h3>
+            <p>Descubre nuestra selección única de vinos que cuidan el planeta tanto como tu paladar más exigente.</p>
+            <a href="Tienda" class="sost-btn">Ver Catálogo Sostenible</a>
+        </div>
+    </section>
+
+    <!-- TRIVIA INTERACTIVA -->
+    <section class="section-trivia">
+        <div class="trivia-container">
+            <h1>🍷 Trivia de Vinos</h1>
+
+            <div id="info-panel">
+                <p id="puntos">Puntos: 0</p>
+                <p id="timer">Tiempo: 10</p>
+            </div>
+
+            <h2 id="pregunta">Cargando pregunta...</h2>
+
+            <div class="btn-group" id="opciones-div"
+                style="pointer-events: auto !important; position: relative; z-index: 100;">
+                <button id="btn0" type="button" onclick="tv_resolver(0)">Opción 1</button>
+                <button id="btn1" type="button" onclick="tv_resolver(1)">Opción 2</button>
+                <button id="btn2" type="button" onclick="tv_resolver(2)">Opción 3</button>
+            </div>
+
+            <p id="resultado"></p>
+            <button id="reiniciar-btn" onclick="window.tv_iniciar_partida()" style="display:none; margin: 30px auto; padding: 15px 30px; background-color: #6f2236; color: #fff; border: none; border-radius: 5px; font-family: 'Cinzel', serif; font-weight: 700; cursor: pointer;">
+                🔁 Volver a jugar
+            </button>
+        </div>
+    </section>
+
+    <script src="./Javascript/Scroll.js"></script>
+
+    <script>
+        // --- Configuración y Datos ---
+        var TV_TRIVIA = {
+            preguntas: [
+                { q: "¿De qué país es originario el Malbec?", o: ["Francia", "Argentina", "Italia"], a: 0 },
+                { q: "¿Qué tipo de vino es el Cabernet Sauvignon?", o: ["Blanco", "Tinto", "Espumoso"], a: 1 },
+                { q: "¿Qué significa que un vino sea reserva?", o: ["Más tiempo de crianza", "Más azúcar", "Más gas"], a: 0 },
+                { q: "¿Qué color tiene un vino rosado?", o: ["Rosa", "Verde", "Amarillo"], a: 0 },
+                { q: "¿Cuál es la bebida alcohólica que se hace de uvas?", o: ["Cerveza", "Vino", "Whisky"], a: 1 },
+                { q: "¿El champán es un tipo de vino...", o: ["Espumoso", "Tinto", "Dulce"], a: 0 },
+                { q: "¿Qué fruta se usa para hacer vino?", o: ["Manzana", "Uva", "Cereza"], a: 1 },
+                { q: "¿Qué instrumento se usa para descorchar?", o: ["Sacacorchos", "Cuchillo", "Martillo"], a: 0 }
+            ],
+            puntos: 0,
+            indice: 0,
+            tiempo: 10,
+            activo: false,
+            intervalo: null
+        };
+
+        // --- Funciones de Juego ---
+        function tv_iniciar_partida() {
+            TV_TRIVIA.puntos = 0;
+            TV_TRIVIA.indice = 0;
+            TV_TRIVIA.activo = true;
+            document.getElementById("puntos").innerText = "Puntos: 0";
+            document.getElementById("opciones-div").style.display = "grid";
+            document.getElementById("reiniciar-btn").style.display = "none";
+            tv_cargar_pregunta();
+        }
+
+        function tv_cargar_pregunta() {
+            if (TV_TRIVIA.indice >= TV_TRIVIA.preguntas.length) {
+                tv_finalizar();
+                return;
+            }
+
+            var p = TV_TRIVIA.preguntas[TV_TRIVIA.indice];
+            document.getElementById("pregunta").innerText = p.q;
+            document.getElementById("resultado").innerText = "";
+
+            // Configurar botones
+            for (var i = 0; i < 3; i++) {
+                var btn = document.getElementById("btn" + i);
+                btn.innerText = p.o[i];
+                btn.className = ""; // Limpiar clases (remueve correcto/incorrecto)
+            }
+
+            TV_TRIVIA.tiempo = 10;
+            document.getElementById("timer").innerText = "Tiempo: " + TV_TRIVIA.tiempo;
+            TV_TRIVIA.activo = true;
+
+            tv_iniciar_timer();
+        }
+
+        function tv_iniciar_timer() {
+            clearInterval(TV_TRIVIA.intervalo);
+            TV_TRIVIA.intervalo = setInterval(function () {
+                if (!TV_TRIVIA.activo) return;
+                TV_TRIVIA.tiempo--;
+                document.getElementById("timer").innerText = "Tiempo: " + TV_TRIVIA.tiempo;
+                if (TV_TRIVIA.tiempo <= 0) {
+                    tv_resolver(-1); // Tiempo agotado
+                }
+            }, 1000);
+        }
+
+        function tv_resolver(eleccion) {
+            if (!TV_TRIVIA.activo) return;
+            TV_TRIVIA.activo = false;
+            clearInterval(TV_TRIVIA.intervalo);
+
+            var correcta = TV_TRIVIA.preguntas[TV_TRIVIA.indice].a;
+            var feedback = document.getElementById("resultado");
+
+            if (eleccion === correcta) {
+                var ganancia = TV_TRIVIA.tiempo * 10;
+                if (ganancia < 10) ganancia = 10; // Mínimo de puntos
+                TV_TRIVIA.puntos += ganancia;
+                feedback.innerText = "✅ ¡Correcto! +" + ganancia + " pts";
+                document.getElementById("btn" + eleccion).classList.add("correcto");
+            } else {
+                feedback.innerText = (eleccion === -1) ? "⏰ ¡Tiempo agotado!" : "❌ Incorrecto";
+                if (eleccion !== -1) {
+                    document.getElementById("btn" + eleccion).classList.add("incorrecto");
+                }
+                document.getElementById("btn" + correcta).classList.add("correcto");
+            }
+
+            document.getElementById("puntos").innerText = "Puntos: " + TV_TRIVIA.puntos;
+
+            setTimeout(function () {
+                TV_TRIVIA.indice++;
+                tv_cargar_pregunta();
+            }, 1500);
+        }
+
+        function tv_finalizar() {
+            TV_TRIVIA.activo = false;
+            clearInterval(TV_TRIVIA.intervalo);
+            document.getElementById("pregunta").innerText = "¡Enhorabuena!";
+            document.getElementById("opciones-div").style.display = "none";
+            document.getElementById("timer").innerText = "";
+            document.getElementById("resultado").innerText = "Tu puntuación final: " + TV_TRIVIA.puntos;
+            document.getElementById("reiniciar-btn").style.display = "block";
+        }
+
+
+        // --- Registro Global ---
+        window.tv_resolver = tv_resolver;
+        window.tv_iniciar_partida = tv_iniciar_partida;
+
+        // --- Auto-inicio ---
+        document.addEventListener("DOMContentLoaded", function() {
+            tv_iniciar_partida();
+        });
+
+        // Fallback redundante
+        window.addEventListener("load", function() {
+            if (!TV_TRIVIA.activo && TV_TRIVIA.indice === 0) {
+                tv_iniciar_partida();
+            }
+        });
+    </script>
+
+    <footer class="ftv">
+        <div class="ftv-top">
+            <h2 class="ftv-contact-title">Contacto</h2>
+        </div>
+        
+        <div class="ftv-body">
+            <div class="ftv-logo-col">
+            <div class="ftv-logo-wrap">
+                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+            </div>
+            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
+            </div>
+        
+            <div class="ftv-cols">
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Oficina</h3>
+                <p>Ctra. N-330, km 450, 50400</p>
+                <p>Cariñena, Zaragoza</p>
+                <p class="ftv-email-row">
+                <a href="mailto:vinostierravieja@gmail.com" class="ftv-email">vinostierravieja@gmail.com</a>
+                </p>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Horario</h3>
+                    <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
+                    <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
+            </h3>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Teléfono</h3>
+                <p class="ftv-call-label">Llámanos</p>
+                <p class="ftv-phone-num">+34 634 44 55 46</p>
+            </div>
+            </div>
+        </div>
+        
+        <div class="ftv-social">
+            <p class="ftv-social-title">Redes Sociales</p>
+            <div class="ftv-icons">
+            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
+                <!-- Opción A: Font Awesome -->
+                <i class="fa-brands fa-instagram"></i>
+                <!-- Opción B: tu PNG — comenta la línea de arriba y descomenta: -->
+                <!-- <img src="./css/img/Instagram.png" alt="Instagram" class="ftv-icon-png"> -->
+            </a>
+            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <!-- <img src="./css/img/WhatsApp.png" alt="WhatsApp" class="ftv-icon-png"> -->
+            </a>
+            </div>
+        </div>
+        
+        <div class="ftv-bottom-bar">
+            © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
+        </div>
+    </footer>
+
+</body>
+
+</html>

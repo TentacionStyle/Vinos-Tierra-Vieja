@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualidad | Tierra Vieja</title>
+    <link rel="icon" href="./css/img/logo-uva.png" type="image/png">
+    <meta name="description" content="Las últimas noticias, eventos y novedades de Tierra Vieja y el mundo del vino de Cariñena.">
+    <link rel="stylesheet" href="./css/basic.css">
+    <link rel="stylesheet" href="./css/actualidad.css">
+    <link rel="stylesheet" href="./css/Animaciones.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<script src="./Javascript/Hamburger.js"></script>
+<body class="actualidad-page">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section id="hero" class="hero actualidad-hero">
+        <div class="portada">
+            <a href="index"><img id="logotipo" src="./css/img/logotipo.png" alt="Logotipo Tierra Vieja"></a>
+            <h1>
+                <span>ACTUALIDAD</span>
+                <span>TIERRA VIEJA</span>
+            </h1>
+            <div class="hero-divider"></div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <p>Últimas Noticias</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         NAVBAR
+         ============================================================ -->
+    <nav class="navbar">
+        <div class="logo_nav">
+            <a href="index"><img src="./css/img/logotipo.png" alt="Logotipo Tierra Vieja"></a>
+        </div>
+        <ul>
+            <li><a href="index">Inicio</a></li>
+            <li><a href="bodega">Bodega</a></li>
+            <li><a href="Tienda">Tienda</a></li>
+            <li><a href="viñedos">Viñedos</a></li>
+            <li><a href="actualidad" class="active">Actualidad</a></li>
+            <li><a href="sostenibilidad">Sostenibilidad</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============================================================
+         SECCIÓN DESTACADA (Noticia principal)
+         ============================================================ -->
+    <section class="act-destacada">
+        <div class="act-inner">
+            <div class="act-eyebrow">Noticia Destacada</div>
+            <div class="act-featured-card">
+                <div class="act-featured-img">
+                    <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=900&q=80"
+                        alt="Vendimia Garnacha">
+                    <span class="act-tag">Cosecha</span>
+                </div>
+                <div class="act-featured-text">
+                    <span class="act-date">📅 25 de Febrero, 2026</span>
+                    <h2>La vendimia de este año destaca por la excelente calidad de la uva Garnacha</h2>
+                    <p>
+                        Las condiciones climáticas excepcionales durante el verano han dado lugar a una cosecha de
+                        Garnacha de calidad extraordinaria en nuestros viñedos de Cariñena. La combinación de
+                        días cálidos y noches frescas ha concentrado los aromas y el color hasta lograr un fruto
+                        perfecto que augura algunos de los mejores vinos de la última década.
+                    </p>
+                    <a href="noticias_actualidad/noticia_destacada" class="act-btn-primary">Leer artículo completo <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ============================================================
+         GRID DE NOTICIAS
+         ============================================================ -->
+    <section class="act-noticias">
+        <div class="act-inner">
+            <h2 class="act-section-title">Más Noticias</h2>
+
+            <div class="act-categories-centered">
+                <button class="act-cat-btn active" data-cat="all">Todas</button>
+                <button class="act-cat-btn" data-cat="cosecha">Cosecha</button>
+                <button class="act-cat-btn" data-cat="sostenibilidad">Sostenibilidad</button>
+                <button class="act-cat-btn" data-cat="enoturismo">Enoturismo</button>
+            </div>
+            
+            <div class="act-scroll-wrapper">
+                <div class="act-grid" id="contenedor-noticias">
+
+                <!-- Noticia 1 -->
+                <article class="act-card" data-cat="sostenibilidad">
+                    <div class="act-card-img">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80"
+                            alt="Vinos ecológicos">
+                        <span class="act-tag">Sostenibilidad</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 20 Feb, 2026</span>
+                        <h3>El auge de los vinos ecológicos: cómo la sostenibilidad cambia el sabor en la copa</h3>
+                        <p>La apuesta por la viticultura ecológica crece entre los bodegueros de Cariñena...</p>
+                        <a href="noticias_actualidad/noticia1_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 2 -->
+                <article class="act-card" data-cat="enoturismo">
+                    <div class="act-card-img">
+                        <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=600&q=80"
+                            alt="Enoturismo">
+                        <span class="act-tag">Enoturismo</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 15 Feb, 2026</span>
+                        <h3>Tierra Vieja anuncia nuevas rutas de enoturismo para esta primavera</h3>
+                        <p>Descubre nuestros viñedos centenarios, desde la vendimia hasta la cata, como nunca antes...</p>
+                        <a href="noticias_actualidad/noticia2_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 3 -->
+                <article class="act-card" data-cat="cosecha">
+                    <div class="act-card-img">
+                        <img src="./css/img/actualidad_noticia3.png" alt="Viñedos">
+                        <span class="act-tag">Cosecha</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 5 Feb, 2026</span>
+                        <h3>El cambio climático y cómo Tierra Vieja adapta su viticultura al nuevo entorno</h3>
+                        <p>La empresa invierte en nuevas técnicas de microirrigación y gestión del suelo para proteger...</p>
+                        <a href="noticias_actualidad/noticia3_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 4 -->
+                <article class="act-card" data-cat="enoturismo">
+                    <div class="act-card-img">
+                        <img src="./css/img/actualidad_noticia4.png"
+                            alt="Maridaje">
+                        <span class="act-tag">Enoturismo</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 28 Ene, 2026</span>
+                        <h3>Taller de maridaje: descubre las combinaciones perfectas con nuestros vinos</h3>
+                        <p>Un evento exclusivo en nuestra bodega para aprender a maridar vino y gastronomía aragonesa...</p>
+                        <a href="noticias_actualidad/noticia4_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 5 -->
+                <article class="act-card" data-cat="sostenibilidad">
+                    <div class="act-card-img">
+                        <img src="./css/img/viñedos_noticia5.png" alt="Viñedo sostenible">
+                        <span class="act-tag">Sostenibilidad</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 20 Ene, 2026</span>
+                        <h3>Certificación de carbono neutro: Tierra Vieja lidera el camino sostenible en Cariñena</h3>
+                        <p>Tras dos años de trabajo, obtenemos la certificación que acredita nuestra huella de carbono cero...</p>
+                        <a href="noticias_actualidad/noticia5_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 6 (Extra para scroll) -->
+                <article class="act-card" data-cat="cosecha">
+                    <div class="act-card-img">
+                        <img src="./css/img/fiestavendimia_noticia6.png" alt="Vendimia">
+                        <span class="act-tag">Cosecha</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 26 - 28 de septiembre, 2026</span>
+                        <h3>Preparativos para la Gran Fiesta de la Vendimia 2026</h3>
+                        <p>Ya conocemos las fechas oficiales para el evento más esperado del año en Cariñena...</p>
+                        <a href="noticias_actualidad/noticia6_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 7 (Extra para scroll) -->
+                <article class="act-card" data-cat="enoturismo">
+                    <div class="act-card-img">
+                        <img src="./css/img/tierracubas_noticia7.png"
+                            alt="Enoturismo">
+                        <span class="act-tag">Enoturismo</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 5 Ene, 2026</span>
+                        <h3>Tierra de Cubas: un espacio para los sentidos</h3>
+                        <p>Inauguramos nuestra renovada sala de catas con tecnología de vanguardia y diseño premium...</p>
+                        <a href="noticias_actualidad/noticia7_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 8 (Cosecha) -->
+                <article class="act-card" data-cat="cosecha">
+                    <div class="act-card-img">
+                        <img src="./css/img/actualidad_noticia8.png"
+                            alt="Innovación vendimia">
+                        <span class="act-tag">Cosecha</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 02 Ene, 2026</span>
+                        <h3>Innovación en la vendimia: drones para analizar la madurez de la uva</h3>
+                        <p>Implementamos tecnología de última generación para optimizar el momento exacto de la recogida...</p>
+                        <a href="noticias_actualidad/noticia8_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+
+                <!-- Noticia 9 (Sostenibilidad) -->
+                <article class="act-card" data-cat="sostenibilidad">
+                    <div class="act-card-img">
+                        <img src="./css/img/actualidad_noticia9.png"
+                            alt="Vino biodegradable">
+                        <span class="act-tag">Sostenibilidad</span>
+                    </div>
+                    <div class="act-card-body">
+                        <span class="act-date">📅 28 Dic, 2025</span>
+                        <h3>Tierra Vieja lanza su primer vino con envase 100% biodegradable</h3>
+                        <p>Un paso más en nuestro compromiso con el planeta, reduciendo residuos en toda la cadena de valor...</p>
+                        <a href="noticias_actualidad/noticia9_actualidad" class="act-btn-link">Leer más <span>→</span></a>
+                    </div>
+                </article>
+            </div> <!-- .act-scroll-wrapper -->
+
+            <div class="act-nav-arrows">
+                <button class="act-arrow prev" id="btn-prev-bottom" aria-label="Anterior">←</button>
+                <button class="act-arrow next" id="btn-next-bottom" aria-label="Siguiente">→</button>
+            </div>
+        </div> <!-- .act-inner -->
+    </section>
+
+    <!-- ============================================================
+         BANNER NEWSLETTER
+         ============================================================ -->
+    <section class="act-newsletter">
+        <div class="act-inner">
+            <div class="act-nl-text">
+                <h2>¿No quieres perderte nada?</h2>
+                <p>Suscríbete y recibe las novedades de Tierra Vieja directamente en tu bandeja de entrada.</p>
+            </div>
+            <form class="act-nl-form" onsubmit="return false;">
+                <input type="email" id="nl-email" placeholder="tu@email.com" aria-label="Correo electrónico">
+                <button type="submit" id="nl-submit">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="ftv">
+        <div class="ftv-top">
+            <h2 class="ftv-contact-title">Contacto</h2>
+        </div>
+        
+        <div class="ftv-body">
+            <div class="ftv-logo-col">
+            <div class="ftv-logo-wrap">
+                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+            </div>
+            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
+            </div>
+        
+            <div class="ftv-cols">
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Oficina</h3>
+                <p>Ctra. N-330, km 450, 50400</p>
+                <p>Cariñena, Zaragoza</p>
+                <p class="ftv-email-row">
+                <a href="mailto:vinostierravieja@gmail.com" class="ftv-email">vinostierravieja@gmail.com</a>
+                </p>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Horario</h3>
+                    <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
+                    <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
+            </h3>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Teléfono</h3>
+                <p class="ftv-call-label">Llámanos</p>
+                <p class="ftv-phone-num">+34 634 44 55 46</p>
+            </div>
+            </div>
+        </div>
+        
+        <div class="ftv-social">
+            <p class="ftv-social-title">Redes Sociales</p>
+            <div class="ftv-icons">
+            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
+                <!-- Opción A: Font Awesome -->
+                <i class="fa-brands fa-instagram"></i>
+                <!-- Opción B: tu PNG — comenta la línea de arriba y descomenta: -->
+                <!-- <img src="./css/img/Instagram.png" alt="Instagram" class="ftv-icon-png"> -->
+            </a>
+            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <!-- <img src="./css/img/WhatsApp.png" alt="WhatsApp" class="ftv-icon-png"> -->
+            </a>
+            </div>
+        </div>
+        
+        <div class="ftv-bottom-bar">
+            © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
+        </div>
+    </footer>
+
+    <script src="./Javascript/ActualidadScroll.js"></script>
+    <script src="./Javascript/Scroll.js"></script>
+    <script>
+        // Filtro de categorías
+        const catBtns = document.querySelectorAll('.act-cat-btn');
+        const cards = document.querySelectorAll('.act-card');
+
+        catBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.dataset.cat;
+                cards.forEach(card => {
+                    if (cat === 'all' || card.dataset.cat === cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

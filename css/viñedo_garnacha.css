@@ -1,0 +1,600 @@
+/* =========================================
+   VARIABLES PREMIUM - ESTILO GARNACHA
+   ========================================= */
+:root {
+    --garnacha-dark: #2a0815;
+    --garnacha-red: #8B1A3F;
+    --garnacha-light: #E8D3DC;
+    --text-light: #F7F0F3;
+    --accent-gold: #D4AF37;
+    --bg-dark: #12100f;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Reset básico para esta página específica */
+.garnacha-page {
+    background-color: var(--garnacha-dark);
+    color: var(--text-light);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+}
+
+/* Escudo contra el ancho fijo de 'section div' de basic.css que rompe las tarjetas */
+.garnacha-page section div {
+    width: auto;
+    max-width: none;
+    padding: 0;
+}
+
+/* Override: restaurar dimensiones correctas para el scroll indicator */
+.garnacha-hero .scroll-indicator {
+    width: auto !important;
+    padding: 0 !important;
+}
+
+.garnacha-hero .mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--accent-gold) !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: block !important;
+}
+
+/* =========================================
+   1. HERO (Mantiene animaciones, adapta look)
+   ========================================= */
+/* La clase .hero ya viene de basic.css pero añadimos .garnacha-hero para un overlay */
+.garnacha-hero {
+    position: relative;
+    background-image: url('./img/uva-garnacha.png') !important;
+    /* Foto paisajística estilo Chardonnay */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+/* Pseudo element para teñir el hero de rojo oscuro sin cambiar el HTML */
+.garnacha-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(42, 8, 21, 0.85) 0%, rgba(18, 16, 15, 0.7) 100%);
+    z-index: 1;
+    /* Por detrás del texto */
+}
+
+/* Asegurar que el contenido del hero quede por encima del tinte */
+.garnacha-hero .portada {
+    z-index: 2;
+    position: relative;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajustes de tipografía para el título GARNACHA para que destaque más */
+/* Usamos basic.css h1 span, pero lo extendemos */
+.garnacha-hero h1 span {
+    font-family: var(--font-heading);
+    color: var(--garnacha-light);
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+    letter-spacing: 5px;
+    font-size: clamp(3.5rem, 8vw + 1rem, 12rem);
+    /* Aún más grande */
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.75;
+}
+
+.scroll-indicator p {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin: 0;
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--accent-gold);
+    border-radius: 20px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-gold);
+    border-radius: 50%;
+    animation: mouse-scroll 2s infinite;
+}
+
+@keyframes mouse-scroll {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 14px);
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+/* Aseguramos que la navbar sea coherente. 
+   Por defecto, basic usa #f6eee3. Lo mantenemos igual. */
+.garnacha-page .navbar {
+    background-color: #f6eee3;
+}
+
+.garnacha-page .navbar li a {
+    color: #12100f;
+}
+
+.garnacha-page .navbar li a:hover {
+    color: var(--garnacha-red);
+}
+
+/* Redefinimos los separadores del footer para que queden bien con el fondo oscuro */
+.garnacha-page .footer-tv {
+    background-color: #1a1716;
+}
+
+
+/* =========================================
+   3. SECCIÓN INNOVADORA: INTRO CON GLASSMORPHISM
+   ========================================= */
+.garnacha-intro {
+    padding: 120px 5%;
+    position: relative;
+    background: radial-gradient(circle at 80% 20%, rgba(139, 26, 63, 0.15) 0%, var(--bg-dark) 60%);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.glass-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 1100px !important;
+    /* Muy forzado para asegurar que se note corto */
+    width: 90% !important;
+    /* Margen de seguridad en móviles */
+    background: rgba(42, 8, 21, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+    gap: 60px;
+    margin: 0 auto;
+    /* Trata de mantenerlo centrado siempre */
+    padding: 40px !important;
+}
+
+.glass-content {
+    flex: 1.5;
+    z-index: 2;
+}
+
+.title-garnacha {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--garnacha-light);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.linea-decorativa {
+    width: 80px;
+    height: 3px;
+    background: var(--accent-gold);
+    margin-bottom: 30px;
+    border-radius: 2px;
+}
+
+.glass-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+.glass-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Efecto de luz detrás de la uva */
+.glass-image::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--garnacha-red);
+    filter: blur(80px);
+    border-radius: 50%;
+    opacity: 0.3;
+    z-index: 0;
+    transition: all 0.5s ease;
+}
+
+.img-flotante {
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+    animation: float-grape 10s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes float-grape {
+    0% {
+        transform: rotate(-2.5deg);
+    }
+
+    50% {
+        transform: rotate(2.5deg);
+    }
+
+    100% {
+        transform: rotate(-2.5deg);
+    }
+}
+
+/* =========================================
+   4. NOTAS DE CATA (Grilla de Tarjetas 3D)
+   ========================================= */
+.garnacha-atributos {
+    padding: 100px 5%;
+    background-color: var(--bg-dark);
+    text-align: center;
+}
+
+.section-title-light {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 80px;
+    display: inline-block;
+    position: relative;
+}
+
+.section-title-light::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background-color: var(--garnacha-red);
+}
+
+.grid-atributos {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Evita que aparezca una barra vertical fea */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 60px 20px;
+    /* Padding extra abajo para la sombra y el hover */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Para móviles */
+}
+
+/* Opcional: centra las tarjetas cuando hay espacio de sobra en PC */
+@media (min-width: 1200px) {
+    .grid-atributos {
+        justify-content: center;
+    }
+}
+
+/* --- Barra de Desplazamiento Personalizada más fina y elegante --- */
+.grid-atributos::-webkit-scrollbar {
+    height: 4px;
+    /* Muy fina */
+}
+
+.grid-atributos::-webkit-scrollbar-track {
+    background: transparent;
+    /* Transparente para no recargar visualmente */
+    border-radius: 10px;
+}
+
+.grid-atributos::-webkit-scrollbar-thumb {
+    background: var(--accent-gold);
+    /* Dorado sutil */
+    border-radius: 10px;
+}
+
+.grid-atributos::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+    /* Blanco brillante al pasar por encima */
+}
+
+.card-atributo {
+    flex: 0 0 350px;
+    /* Tamaño fijo para que no se encojan */
+    max-width: calc(100% - 20px);
+    /* Para móviles */
+    scroll-snap-align: center;
+    /* Alinea cada tarjeta al centro al hacer scroll */
+    background: linear-gradient(145deg, #1a1716, #12100f);
+    border: 1px solid rgba(139, 26, 63, 0.2);
+    border-radius: 20px;
+    padding: 50px 30px !important;
+    /* Forzamos padding frente a basic.css */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    /* Quitamos overflow: hidden para permitir sombras extra */
+}
+
+/* Brillo hover */
+.card-atributo::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(139, 26, 63, 0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.card-atributo:hover {
+    transform: translateY(-15px);
+    border-color: var(--garnacha-red);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 26, 63, 0.2);
+}
+
+.card-atributo:hover::after {
+    opacity: 1;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+    text-align: center;
+    /* Alinea el emoji correctamente */
+    width: 100%;
+}
+
+.card-atributo h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--garnacha-light);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.card-atributo p {
+    font-size: 1rem;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* =========================================
+   5. PARALLAX QUOTE
+   ========================================= */
+.garnacha-parallax {
+    height: 400px;
+    background-image: url('./img/Bodega.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(42, 8, 21, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5%;
+}
+
+.garnacha-parallax blockquote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--accent-gold);
+    text-align: center;
+    max-width: 800px;
+    line-height: 1.5;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+/* =========================================
+   6. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 900px) {
+    .glass-card {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .linea-decorativa {
+        margin: 0 auto 30px auto;
+    }
+
+    .grid-atributos {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* --- PIE DE PÁGINA (FOOTER) --- 
+   (Nota: Tienes estos mismos estilos en styles-index.css. Si todos tus HTML 
+   cargan ambas hojas, podrías borrarlo de aquí para no repetir código) */
+
+.footer-tv {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.email-link:hover {
+    text-decoration: underline;
+}
+
+.social-section {
+    border-top: 1px solid #444;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.social-icon {
+    color: #ffffff;
+    font-size: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}

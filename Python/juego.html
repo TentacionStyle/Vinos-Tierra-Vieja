@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia de Vinos - PyScript</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>🍷 Trivia de Vinos (Python)</h1>
+    <div id="info-panel">
+        <p id="puntos">Puntos: 0</p>
+        <p id="timer">Tiempo: 10</p>
+    </div>
+    
+    <h2 id="pregunta">Cargando pregunta...</h2>
+    
+    <div class="btn-group" id="opciones-div">
+        <button py-click="responder(0)" id="btn0">Opción 1</button>
+        <button py-click="responder(1)" id="btn1">Opción 2</button>
+        <button py-click="responder(2)" id="btn2">Opción 3</button>
+    </div>
+
+    <p id="resultado"></p>
+</div>
+
+<script type="py" terminal>
+import asyncio
+from pyscript import document
+
+# --- Datos ---
+preguntas = [
+    {"texto": "¿De qué país es originario el Malbec?", "opciones": ["Francia", "Argentina", "Italia"], "correcta": 0},
+    {"texto": "¿Qué tipo de vino es el Cabernet Sauvignon?", "opciones": ["Blanco", "Tinto", "Espumoso"], "correcta": 1},
+    {"texto": "¿Qué significa que un vino sea reserva?", "opciones": ["Más tiempo de crianza", "Más azúcar", "Más gas"], "correcta": 0},
+    {"texto": "¿Qué color tiene un vino rosado?", "opciones": ["Rosa", "Verde", "Amarillo"], "correcta": 0},
+    {"texto": "¿Cuál es la bebida alcohólica que se hace de uvas?", "opciones": ["Cerveza", "Vino", "Whisky"], "correcta": 1},
+    {"texto": "¿El champán es un tipo de vino...", "opciones": ["Espumoso", "Tinto", "Dulce"], "correcta": 0},
+    {"texto": "¿Qué fruta se usa para hacer vino?", "opciones": ["Manzana", "Uva", "Cereza"], "correcta": 1},
+    {"texto": "¿Qué instrumento se usa para descorchar?", "opciones": ["Sacacorchos", "Cuchillo", "Martillo"], "correcta": 0}
+]
+
+# --- Variables Globales ---
+indice = 0
+puntos = 0
+tiempo = 10
+timer_task = None
+juego_activo = True
+
+# --- Funciones ---
+
+def actualizar_ui():
+    global tiempo
+    if indice < len(preguntas):
+        p_actual = preguntas[indice]
+        document.getElementById("pregunta").innerText = p_actual["texto"]
+        document.getElementById("btn0").innerText = p_actual["opciones"][0]
+        document.getElementById("btn1").innerText = p_actual["opciones"][1]
+        document.getElementById("btn2").innerText = p_actual["opciones"][2]
+        
+        # Resetear estilos y mensajes
+        document.getElementById("resultado").innerText = ""
+        document.getElementById("btn0").style.backgroundColor = "#800000"
+        document.getElementById("btn1").style.backgroundColor = "#800000"
+        document.getElementById("btn2").style.backgroundColor = "#800000"
+        
+        tiempo = 10
+        document.getElementById("timer").innerText = f"Tiempo: {tiempo}"
+    else:
+        finalizar_juego()
+
+async def cuenta_regresiva():
+    global tiempo, juego_activo
+    while juego_activo and tiempo > 0:
+        await asyncio.sleep(1)
+        if juego_activo:
+            tiempo -= 1
+            document.getElementById("timer").innerText = f"Tiempo: {tiempo}"
+            if tiempo <= 0:
+                document.getElementById("resultado").innerText = "¡Tiempo agotado!"
+                await siguiente_pregunta()
+
+async def responder(opcion_elegida):
+    global puntos, juego_activo, timer_task
+    
+    if not juego_activo:
+        return
+
+    # Pausar lógica mientras se muestra el resultado
+    juego_activo = False 
+    
+    pregunta_actual = preguntas[indice]
+    botones = [document.getElementById("btn0"), document.getElementById("btn1"), document.getElementById("btn2")]
+    
+    puntos_ganados = tiempo * 10
+    
+    if opcion_elegida == pregunta_actual["correcta"]:
+        puntos += puntos_ganados
+        document.getElementById("resultado").innerText = f"✅ ¡Correcto! +{puntos_ganados} pts"
+        botones[opcion_elegida].style.backgroundColor = "green"
+    else:
+        document.getElementById("resultado").innerText = "❌ Incorrecto"
+        botones[opcion_elegida].style.backgroundColor = "red"
+
+    document.getElementById("puntos").innerText = f"Puntos: {puntos}"
+    
+    # Esperar un momento antes de pasar a la siguiente
+    await asyncio.sleep(1)
+    await siguiente_pregunta()
+
+async def siguiente_pregunta():
+    global indice, juego_activo, timer_task
+    indice += 1
+    
+    # Cancelar la tarea del timer anterior si existe
+    if timer_task:
+        timer_task.cancel()
+        
+    if indice < len(preguntas):
+        juego_activo = True
+        actualizar_ui()
+        # Iniciar nuevo timer
+        timer_task = asyncio.create_task(cuenta_regresiva())
+    else:
+        finalizar_juego()
+
+def finalizar_juego():
+    global juego_activo
+    juego_activo = False
+    document.getElementById("pregunta").innerText = "¡Juego Terminado!"
+    document.getElementById("opciones-div").style.display = "none"
+    document.getElementById("timer").innerText = ""
+    document.getElementById("resultado").innerText = f"Puntaje Final: {puntos}"
+
+# --- Iniciar el juego al cargar ---
+actualizar_ui()
+timer_task = asyncio.create_task(cuenta_regresiva())
+</script>
+</body>
+</html>

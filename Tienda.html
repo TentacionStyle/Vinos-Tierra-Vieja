@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda | Tierra Vieja</title>
+    <link rel="icon" href="./css/img/logo-uva.png" type="image/png">
+    <link rel="stylesheet" href="./css/basic.css">
+    <link rel="stylesheet" href="./css/Tienda.css">
+    <link rel="stylesheet" href="./css/Animaciones.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<script src="./Javascript/Hamburger.js"></script>
+<body>
+
+    <section id="hero" class="hero tienda-hero">
+        <div class="portada">
+            <a href="index"><img id="logotipo" src="./css/img/logotipo.png" alt="Logotipo"></a>
+
+            <h1>
+                <span>TIENDA VINOS</span>
+                <span>TIERRA VIEJA</span>
+            </h1>
+        </div>
+        <!-- Flecha decorativa animada -->
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <p>Descubre Nuestros Vinos</p>
+        </div>
+    </section>
+
+    <nav class="navbar">
+        <div class="logo_nav">
+            <a href="index"><img src="./css/img/logotipo.png" alt="Logotipo"></a>
+        </div>
+        <ul>
+            <li><a href="index">Inicio</a></li>
+            <li><a href="bodega">Bodega</a></li>
+            <li><a href="Tienda" class="active">Tienda</a></li>
+            <li><a href="viñedos">Viñedos</a></li>
+            <li><a href="actualidad">Actualidad</a></li>
+            <li><a href="sostenibilidad">Sostenibilidad</a></li>
+        </ul>
+    </nav>
+
+    <div class="div-tienda">
+        <header>
+            <h2>Tienda</h2>
+            <div id="container-carrito" class="container-carrito">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="icono-carrito">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
+
+                <div class="container-cart-products hidden-cart">
+                    <div class="row-product">
+                        <p class="cart-empty">El carrito está vacío</p>
+                    </div>
+
+                    <div class="cart-total">
+                        <h3>Total:</h3>
+                        <span class="total-pagar">$0</span>
+                    </div>
+
+                    <a href="Pago"><button class="btn-pagar">Finalizar Compra</button></a>
+                </div>
+
+
+            </div>
+    </div>
+    </header>
+    <div class="contenido-principal">
+
+        <aside class="sidebar-filtros">
+
+            <div class="grupo-filtro">
+                <div class="titulo-filtro">
+                    <h3>MARCA</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                    </svg>
+                </div>
+                <ul>
+                    <li><label><input type="checkbox"> 8.0.1</label></li>
+                    <li><label><input type="checkbox"> Castillo Ducay</label></li>
+                    <li><label><input type="checkbox"> Celebrities</label></li>
+                    <li><label><input type="checkbox"> Gran Ducay</label></li>
+                    <li><label><input type="checkbox"> Julietta</label></li>
+                    <li><label><input type="checkbox"> Marqués de Tosos</label></li>
+                    <li><label><input type="checkbox"> Particular</label></li>
+                </ul>
+            </div>
+
+            <div class="grupo-filtro">
+                <div class="titulo-filtro">
+                    <h3>TIPO DE VINO</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                    </svg>
+                </div>
+                <ul>
+                    <li><label><input type="checkbox"> Blanco</label></li>
+                    <li><label><input type="checkbox"> Cava</label></li>
+                    <li><label><input type="checkbox"> Crianza</label></li>
+                    <li><label><input type="checkbox"> Reserva</label></li>
+                    <li><label><input type="checkbox"> Roble</label></li>
+                    <li><label><input type="checkbox"> Rosado</label></li>
+                    <li><label><input type="checkbox"> Tinto</label></li>
+                    <li><label><input type="checkbox"> Vinos de autor</label></li>
+                </ul>
+            </div>
+
+            <div class="grupo-filtro">
+                <div class="titulo-filtro">
+                    <h3>PRECIO</h3>
+                </div>
+                <div class="slider-precio">
+                    <input type="range" min="0" max="25" class="input-rango">
+                    <div class="etiquetas-precio">
+                        <span class="precio-tag">€0.00</span>
+                        <span class="precio-tag">€25.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-borrar-filtros">BORRAR FILTROS</button>
+
+        </aside>
+        <div class="container-items">
+            <div class="item" data-marca="8.0.1" data-tipo="Tinto" data-precio="16.00">
+                <figure>
+                    <img src="./css/vinos/8.0.1.-MAGNUM-_-web-500x804.png" alt="8.0.1 MAGNUM" />
+                </figure>
+                <div class="info-producto">
+                    <h4>8.0.1 MAGNUM</h4>
+                    <p class="precio">16€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="8.0.1" data-tipo="Tinto" data-precio="8,95">
+                <figure>
+                    <img src="./css/vinos/801-1.png" alt="8.0.1" />
+                </figure>
+                <div class="info-producto">
+                    <h4>8.0.1</h4>
+                    <p class="precio">8,95€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Celebrities" data-tipo="Tinto" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/BOTELLAS_WEB_bsv_0013_Celebritie.png" alt="Celebrities" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Celebrities Syrah 2024</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Gran Ducay" data-tipo="Rosado" data-precio="5.70">
+                <figure>
+                    <img src="./css/vinos/BOTELLAS_WEB_bsv_GranDucya-BrutN.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Gran Ducay Brut Nature Rosado</h4>
+                    <p class="precio">5,70€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+
+
+
+            <div class="item" data-marca="Celebrities" data-tipo="Tinto" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/BSV-celebrities-cabernet-sauvign.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Celebrities Cabernet Sauvignon 2024</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+
+            <div class="item" data-marca="Celebrities" data-tipo="Tinto" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/BSV-celebrities-merlot-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Celebrities Merlot 2024</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+
+            <div class="item" data-marca="Particular" data-tipo="Vinos de autor" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/Garnacha-Blanca-2023-450x612.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Garnacha Blanca 2025</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+
+
+            <div class="item" data-marca="Ginebra" data-tipo="Tinto" data-precio="24.00">
+                <figure>
+                    <img src="./css/vinos/Ginebra-500x646.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Vínica Premium Dry Gin Garnacha</h4>
+                    <p class="precio">24,00€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+
+
+            <div class="item" data-marca="Julietta" data-tipo="Blanco" data-precio="7.95">
+                <figure>
+                    <img src="./css/vinos/JULIETTA-Zero-Alcohol-Sparkling.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>JULIETTA ESPUMOSO BLANCO ZERO ALCOHOL</h4>
+                    <p class="precio">7,95€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Julietta" data-tipo="Rosado" data-precio="7.95">
+                <figure>
+                    <img src="./css/vinos/JULIETTA-Zero-Alcohol-Sparkling (1).png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>JULIETTA ESPUMOSO ROSÉ ZERO ALCOHOL</h4>
+                    <p class="precio">7.95€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Marqués de Tosos" data-tipo="Tinto" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/Marques-Crianza-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Marqués de Tosos Crianza 2022</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Márques de Tosos" data-tipo="Tinto" data-precio="7.50">
+                <figure>
+                    <img src="./css/vinos/Marques-Gran_Reserva-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Marqués de Tosos Gran Reserva 2018</h4>
+                    <p class="precio">7,50€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Vinos de autor" data-precio="5.90">
+                <figure>
+                    <img src="./css/vinos/Particular-Carinena-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Cariñena 2023</h4>
+                    <p class="precio">5,90€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Cava" data-precio="8.50">
+                <figure>
+                    <img src="./css/vinos/Particular-Cava.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Cava Particular Garnacha Blanc de Noir</h4>
+                    <p class="precio">8,50€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Tinto" data-precio="5.90">
+                <figure>
+                    <img src="./css/vinos/Particular-Garnacha-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Garnacha Old Vine 2022</h4>
+                    <p class="precio">5,90€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Rosado" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/Particular-Garnacha_Rose-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Garnacha Rosé 2025</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Vinos de autor" data-precio="11.20">
+                <figure>
+                    <img src="./css/vinos/Particular-garnacha-2021-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Estuche Magnum Particular Garnacha</h4>
+                    <p class="precio">11,20€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Tinto" data-precio="12.00">
+                <figure>
+                    <img src="./css/vinos/Vinyas-centenarias-1.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Garnacha Viñas Centenarias 2023</h4>
+                    <p class="precio">12,00€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+            <div class="item" data-marca="Julietta" data-tipo="Blanco" data-precio="5.15">
+                <figure>
+                    <img src="./css/vinos/blanco-500x714.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>JULIETTA FRIZZANTE BLANCO</h4>
+                    <p class="precio">5,15€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Castillo Ducay" data-tipo="Blanco" data-precio="3.50">
+                <figure>
+                    <img src="./css/vinos/castillo-ducay-blanco.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Castillo Ducay Blanco 2025</h4>
+                    <p class="precio">3,50€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Castillo Ducay" data-tipo="Tinto" data-precio="4.20">
+                <figure>
+                    <img src="./css/vinos/castillo-ducay-crianza-450x612.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Castillo Ducay Crianza 2020</h4>
+                    <p class="precio">4,20€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Castillo Ducay" data-tipo="Blanco" data-precio="5.00">
+                <figure>
+                    <img src="./css/vinos/castillo-ducay-moscatel-de-aleja.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Castillo Ducay Moscatel de Alejandría</h4>
+                    <p class="precio">5,00€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Castillo Ducay" data-tipo="Tinto" data-precio="3.90">
+                <figure>
+                    <img src="./css/vinos/castillo-ducay-roble-450x612.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Castillo Ducay Roble 2022</h4>
+                    <p class="precio">3,90€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Castillo Ducay" data-tipo="Rosado" data-precio="3.50">
+                <figure>
+                    <img src="./css/vinos/castillo-ducay-rosado-450x612.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Castillo Ducay Rosado 2025</h4>
+                    <p class="precio">3,50€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Castillo Ducay" data-tipo="Tinto" data-precio="3.50">
+                <figure>
+                    <img src="./css/vinos/castillo-ducay-tinto-450x612.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Castillo Ducay Tinto 2024</h4>
+                    <p class="precio">3,50€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Rosado" data-precio="8.50">
+                <figure>
+                    <img src="./css/vinos/particular-cava-garnacha-rose.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Cava Particular Garnacha Rosé</h4>
+                    <p class="precio">8,50€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Blanco" data-precio="5.90">
+                <figure>
+                    <img src="./css/vinos/particular-chardonnay-fermentado.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Chardonnay fermentado en barrica 2024</h4>
+                    <p class="precio">5,90€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Blanco" data-precio="5.10">
+                <figure>
+                    <img src="./css/vinos/particular-chardonnay-moscatel-a.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Chardonnay 2025</h4>
+                    <p class="precio">5,10€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Particular" data-tipo="Tinto" data-precio="12.00">
+                <figure>
+                    <img src="./css/vinos/particular-vinyas-centenarias-ma.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>Particular Garnacha Viñas Centenarias 2023</h4>
+                    <p class="precio">12,00€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <div class="item" data-marca="Julietta" data-tipo="Rosado" data-precio="5.15">
+                <figure>
+                    <img src="./css/vinos/rosado-500x714.png" alt="Gran Ducay" />
+                </figure>
+                <div class="info-producto">
+                    <h4>JULIETTA FRIZZANTE ROSADO</h4>
+                    <p class="precio">5,15€</p>
+                    <button class="botonAñadir">Añadir al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="ftv">
+        <div class="ftv-top">
+            <h2 class="ftv-contact-title">Contacto</h2>
+        </div>
+        
+        <div class="ftv-body">
+            <div class="ftv-logo-col">
+            <div class="ftv-logo-wrap">
+                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+            </div>
+            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
+            </div>
+        
+            <div class="ftv-cols">
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Oficina</h3>
+                <p>Ctra. N-330, km 450, 50400</p>
+                <p>Cariñena, Zaragoza</p>
+                <p class="ftv-email-row">
+                <a href="mailto:vinostierravieja@gmail.com" class="ftv-email">vinostierravieja@gmail.com</a>
+                </p>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Horario</h3>
+                    <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
+                    <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
+            </h3>
+            </div>
+        
+            <div class="ftv-col">
+                <h3 class="ftv-col-title">Teléfono</h3>
+                <p class="ftv-call-label">Llámanos</p>
+                <p class="ftv-phone-num">+34 634 44 55 46</p>
+            </div>
+            </div>
+        </div>
+        
+        <div class="ftv-social">
+            <p class="ftv-social-title">Redes Sociales</p>
+            <div class="ftv-icons">
+            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
+                <!-- Opción A: Font Awesome -->
+                <i class="fa-brands fa-instagram"></i>
+                <!-- Opción B: tu PNG — comenta la línea de arriba y descomenta: -->
+                <!-- <img src="./css/img/Instagram.png" alt="Instagram" class="ftv-icon-png"> -->
+            </a>
+            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <!-- <img src="./css/img/WhatsApp.png" alt="WhatsApp" class="ftv-icon-png"> -->
+            </a>
+            </div>
+        </div>
+        
+        <div class="ftv-bottom-bar">
+            © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
+        </div>
+    </footer>
+    <script src="./Javascript/Scroll.js"></script>
+    <script src="./Javascript/Tienda.js"></script>
+</body>
+
+</html>

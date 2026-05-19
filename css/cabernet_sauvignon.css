@@ -1,0 +1,676 @@
+/* =========================================
+   CABERNET SAUVIGNON — Tierra Vieja
+   Paleta: vino oscuro #1E0A14 | crema #f6eee3 | rubí #6f2236 | dorado #c9a96e
+   ========================================= */
+
+/* --- VARIABLES --- */
+:root {
+    --cs-dark: #1E0A14;
+    --cs-ruby: #6f2236;
+    --cs-deep: #3b0f20;
+    --cs-cream: #f6eee3;
+    --cs-sand: #eee4db;
+    --cs-gold: #c9a96e;
+    --cs-text: #f0e8e0;
+    --font-hero: 'Cinzel', serif;
+    --font-head: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body.cabernet-page {
+    background-color: var(--cs-dark);
+    color: var(--cs-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   1. HERO
+   ========================================= */
+.cabernet-hero {
+    position: relative;
+    background: url('./img/uva-cabernet_sauvignon.png') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.cabernet-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(30, 10, 20, 0.5) 0%, rgba(30, 10, 20, 0.92) 100%);
+    z-index: 1;
+}
+
+.cabernet-hero .portada {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cabernet-hero h1 {
+    position: relative !important;
+    z-index: 2;
+    pointer-events: none;
+    margin: 30px auto 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.cabernet-hero h1 span {
+    display: block;
+    /* Stack on two lines */
+    font-family: var(--font-hero);
+    font-size: clamp(2.2rem, 6.5vw, 8rem);
+    letter-spacing: 12px;
+    color: #ffffff;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
+    line-height: 1.1;
+    max-width: 100%;
+}
+
+.cabernet-hero h1 a {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 10;
+}
+
+.cabernet-hero h1 #logotipo {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    translate: none !important;
+    transform: none !important;
+    height: 120px !important;
+    width: 120px !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    display: block !important;
+}
+
+/* Línea dorada bajo el título */
+.hero-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--cs-gold);
+    margin: 1.5rem auto 0;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.75;
+}
+
+.scroll-indicator p {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cs-gold);
+    margin: 0;
+}
+
+.mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--cs-gold) !important;
+    border-radius: 50% !important;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--cs-gold);
+    border-radius: 2px;
+    animation: mouse-scroll 2s infinite;
+}
+
+@keyframes mouse-scroll {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 14px);
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   2. NAVBAR (hereda de basic.css)
+   ========================================= */
+.cabernet-page .navbar {
+    background-color: var(--cs-cream);
+}
+
+.cabernet-page .navbar li a {
+    color: #1a1a1a;
+}
+
+.cabernet-page .navbar li a:hover {
+    color: var(--cs-ruby);
+}
+
+/* =========================================
+   3. SECCIÓN INTRO — Glassmorphism
+   ========================================= */
+.cs-intro {
+    padding: 120px 5%;
+    position: relative;
+    background: url('./img/Viñedos.png') no-repeat center center;
+    background-size: cover;
+}
+
+.cs-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, var(--cs-dark) 35%, rgba(30, 10, 20, 0.65) 100%);
+    z-index: 0;
+}
+
+.cs-intro-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px !important;
+    width: 90% !important;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    background: rgba(30, 10, 20, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 28px;
+    padding: 64px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.cs-intro-text {
+    flex: 1.4;
+}
+
+.cs-eyebrow {
+    font-family: var(--font-hero);
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cs-gold);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.cs-intro-text h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.3;
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+.cs-intro-text h2 em {
+    color: var(--cs-gold);
+    font-style: italic;
+}
+
+.cs-intro-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--cs-gold);
+    margin-bottom: 28px;
+}
+
+.cs-intro-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 22px;
+}
+
+.cs-intro-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cs-intro-image img {
+    width: 100%;
+    max-width: 350px;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
+    animation: float-grape 10s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes float-grape {
+    0% {
+        transform: rotate(-2.5deg);
+    }
+
+    50% {
+        transform: rotate(2.5deg);
+    }
+
+    100% {
+        transform: rotate(-2.5deg);
+    }
+}
+
+@media (max-width: 900px) {
+    .cs-intro-inner {
+        flex-direction: column;
+        padding: 40px;
+        gap: 40px;
+    }
+
+    .cs-intro-text h2 {
+        text-align: center;
+    }
+
+    .cs-intro-divider {
+        margin: 0 auto 28px;
+    }
+}
+
+/* =========================================
+   4. FICHA AROMÁTICA — Cards de notas
+   ========================================= */
+.cs-aromas {
+    padding: 100px 5%;
+    background-color: #14080e;
+}
+
+.cs-section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.cs-section-header h2 {
+    font-family: var(--font-hero);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: 8px;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 16px;
+}
+
+.cs-section-header .cs-gold-line {
+    width: 60px;
+    height: 2px;
+    background: var(--cs-gold);
+    margin: 0 auto 18px;
+}
+
+.cs-section-header p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.cs-aromas-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1100px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+/* Override basic.css section div width for ALL cs sections */
+.cs-aromas div,
+.cs-ficha div,
+.cs-cta div,
+.cs-intro div,
+.cs-section-header {
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Re-apply padding where needed after override */
+.cs-aroma-card {
+    padding: 44px 30px !important;
+}
+
+.cs-intro-inner {
+    padding: 64px !important;
+    width: 90% !important;
+    max-width: 1100px !important;
+    box-sizing: border-box !important;
+}
+
+.cs-ficha-inner {
+    max-width: 900px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+.cs-ficha-table {
+    width: 100% !important;
+}
+
+.cs-section-header {
+    text-align: center !important;
+    margin-bottom: 60px !important;
+}
+
+/* Override basic.css h2 sizing so it doesn't conflict */
+.cs-section-header h2 {
+    font-family: var(--font-hero) !important;
+    font-size: clamp(1.8rem, 4vw, 3.2rem) !important;
+    letter-spacing: 8px !important;
+    font-weight: 400 !important;
+    color: #fff !important;
+    margin: 0 0 16px !important;
+    text-align: center !important;
+    width: auto !important;
+    max-width: none !important;
+}
+
+.cs-section-header .cs-gold-line {
+    display: block;
+    width: 60px !important;
+    height: 2px !important;
+    background: var(--cs-gold) !important;
+    margin: 0 auto 18px !important;
+}
+
+.cs-aroma-card {
+    background: linear-gradient(145deg, #2e0f1e, #1a0a12);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    border-radius: 20px;
+    padding: 44px 30px;
+    text-align: center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.cs-aroma-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    border-color: rgba(201, 169, 110, 0.5);
+}
+
+.cs-aroma-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.cs-aroma-card h3 {
+    font-family: var(--font-head);
+    font-size: 1.3rem;
+    color: var(--cs-gold);
+    margin: 0 0 12px;
+}
+
+.cs-aroma-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+/* =========================================
+   5. FICHA TÉCNICA — Tabla elegante
+   ========================================= */
+.cs-ficha {
+    padding: 100px 5%;
+    background-color: var(--cs-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cs-ficha-inner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.cs-ficha-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.cs-ficha-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: background 0.25s;
+}
+
+.cs-ficha-table tr:hover {
+    background: rgba(201, 169, 110, 0.05);
+}
+
+.cs-ficha-table td {
+    padding: 22px 16px;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.cs-ficha-table td:first-child {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cs-gold);
+    width: 200px;
+}
+
+.cs-ficha-table td:last-child {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================
+   6. CTA FINAL — Banda oscura con botón
+   ========================================= */
+.cs-cta {
+    padding: 110px 5%;
+    background: linear-gradient(135deg, #3b0f20, #1a0a12);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cs-cta::before {
+    content: 'CS';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-hero);
+    font-size: 25vw;
+    color: rgba(111, 34, 54, 0.1);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 20px;
+}
+
+.cs-cta h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: #fff;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.cs-cta p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.cs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--cs-ruby);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 44px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    font-family: var(--font-hero);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.cs-btn:hover {
+    background-color: #8c1734;
+    transform: scale(1.04);
+}
+
+.cs-btn .arrow {
+    transition: transform 0.3s;
+}
+
+.cs-btn:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* =========================================
+   7. FOOTER (coherente con el resto del sitio)
+   ========================================= */
+.footer-tv {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.email-link:hover {
+    text-decoration: underline;
+}
+
+.social-section {
+    border-top: 1px solid #444;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}

@@ -1,0 +1,525 @@
+/* -------------------- Estructura básica -------------------- */
+
+/*Colores (Guardados aquí como referencia visual para el desarrollador)
+fondo: #f6eee3
+color principal: #6f2236
+color secundario: #eee4db
+*/
+
+/* Reset Global: Aplica a todos los elementos (*) y a sus pseudoelementos (::before, ::after) */
+*::after,
+*::before,
+* {
+    margin: 0;
+    /* Elimina márgenes automáticos de los navegadores */
+    padding: 0%;
+    /* Elimina el espaciado interno automático */
+    /* box-sizing: border-box hace que el padding y los bordes se incluyan 
+       dentro del ancho y alto total del elemento, evitando que la página se desborde */
+    box-sizing: border-box;
+}
+
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Candara;
+    /* Tipografía principal de toda la página */
+    background-color: #f6eee3;
+    /* Color de fondo general (tono crema/arena) */
+
+    /* Propiedad MUY moderna de CSS para animaciones basadas en el scroll. 
+       Crea un "ámbito" llamado --scroll que otros elementos pueden leer para animarse */
+    timeline-scope: --scroll;
+}
+
+/* Estilos para el elemento con el ID "logotipo" (probablemente el logo de la portada) */
+#logotipo {
+    height: 150px;
+    width: 150px;
+    position: fixed;
+    /* Se queda fijo en la pantalla aunque hagas scroll */
+    top: 10%;
+    /* Lo sitúa a un 10% de distancia desde la parte superior */
+    left: 50%;
+    /* Lo mueve al centro horizontal de la pantalla */
+    /* Este translate mueve el logo hacia la izquierda y arriba exactamente la mitad 
+       de su propio tamaño, logrando un centrado absoluto y perfecto */
+    translate: -50% -50%;
+    z-index: 10;
+    /* Asegura que esté por encima del fondo y otros elementos básicos */
+}
+
+
+/* Estilos para el fondo de la sección principal (portada) */
+.hero {
+    background-image: url(./img/Fondo_portada.jpeg);
+    /* Imagen de fondo */
+    background-size: cover;
+    /* Hace que la imagen cubra todo el espacio sin deformarse */
+    background-position: center;
+    /* Centra la imagen para que se vea la parte principal */
+    background-repeat: no-repeat;
+    /* Evita que la imagen forme un "mosaico" si la pantalla es muy grande */
+}
+
+/* Estilos básicos de títulos */
+h1 {
+    display: grid;
+    text-align: center;
+}
+
+h2 {
+    /* clamp() es genial: el texto será de mínimo 2rem, 
+       crecerá dinámicamente según el ancho de la pantalla (5vw + 1rem), 
+       y tendrá un tamaño máximo de 6rem. ¡Puro diseño responsivo! */
+    font-size: clamp(2rem, 5vw + 1rem, 6rem);
+    text-align: center;
+}
+
+h3 {
+    font-size: clamp(2rem, 2vw + 1rem, 3rem);
+    /* Igual que el h2, pero con proporciones más pequeñas */
+    text-align: center;
+}
+
+
+/* -------------------- ESTILOS BÁSICOS -------------------- */
+
+/* NOTA: Vuelves a declarar la clase .hero aquí. CSS combinará estas reglas con 
+   las que pusiste más arriba. */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    /* Ocupa al menos el 100% del alto visible de la ventana del navegador */
+    display: grid;
+    place-items: center;
+    /* Centra el contenido interior tanto vertical como horizontalmente en la cuadrícula */
+}
+
+/* Estilos para las etiquetas <span> dentro del título principal <h1> */
+h1 span {
+    line-height: 1;
+    /* Altura de línea ajustada para que el texto no quede muy separado verticalmente */
+    font-size: clamp(2.5rem, 7vw + 1rem, 10rem);
+    /* Texto responsivo muy grande para el nombre del vino */
+}
+
+/* Para mantener el texto centrado en la pantalla y que se quede fijo al hacer scroll */
+.hero h1 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    /* Centrado perfecto como vimos en el logo */
+    margin: 0;
+    width: 100%;
+}
+
+/* Clase general para el logotipo (a diferencia del ID #logotipo de arriba) */
+.logotipo {
+    width: 250px;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    translate: -50% 0;
+    /* Lo centra horizontalmente, pero no lo ajusta verticalmente (0) */
+}
+
+/* Un contenedor de contenido genérico que fuerza un alto grande para permitir hacer bastante scroll */
+.contenido {
+    height: 140vh;
+    /* 140% del alto visible de la pantalla */
+}
+
+/* Restringe el ancho máximo de los divs directos dentro de las secciones para que no se estiren demasiado */
+section div {
+    width: 800px;
+    max-width: 100vw;
+    /* Evita que el contenedor sea más ancho que la propia pantalla en móviles */
+    padding: 0 1rem;
+}
+
+/* Reset de caja (repetido): Tienes esto al principio del archivo, 
+   funciona perfectamente, pero como anotación, podrías borrar uno de los dos para limpiar el código. */
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+/* --- NAVBAR (Barra de Navegación) --- */
+
+.navbar {
+    padding: 20px 0;
+    /* Espaciado interno arriba y abajo */
+    text-align: center;
+    position: fixed;
+    /* Mantiene la barra pegada en la pantalla */
+    top: 0;
+    /* Pegada exactamente al borde superior */
+    width: 100%;
+    height: 7%;
+    /* Ocupa todo el ancho */
+    z-index: 1000;
+    /* Un número muy alto para asegurar que NADA se ponga por encima del menú */
+    background-color: #f6eee3;
+    opacity: 0;
+    /* Empieza totalmente transparente (invisible) */
+
+    /* Configuración de animación ligada al scroll */
+    animation: fade-in forwards;
+    /* Ejecuta la animación "fade-in" y se queda en su estado final (forwards) */
+    animation-timeline: --scroll;
+    /* Conecta esta animación al scroll del body que definiste arriba */
+    animation-range: exit 80% exit 100%;
+    /* Define en qué punto exacto del scroll ocurre la animación */
+}
+
+/* Fallback/Fix para Scroll.js */
+.navbar.scrolled {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Estilos para la lista del menú */
+.navbar ul {
+    list-style: none;
+    /* Quita los puntos ("bullets") de la lista HTML */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Pone los elementos en fila horizontal */
+    justify-content: center;
+    /* Los centra en la barra */
+    gap: 40px;
+    /* Separación horizontal entre cada enlace del menú */
+}
+
+/* Estilo para los enlaces (<a>) dentro del menú */
+.navbar li a {
+    color: rgb(0, 0, 0);
+    /* Letra negra por defecto */
+    text-decoration: none;
+    /* Quita el subrayado típico de los enlaces web */
+    font-family: 'Montserrat', sans-serif;
+    /* Nueva tipografía aplicada */
+    font-weight: 600;
+    /* Letra en negrita media para mayor elegancia */
+    transition: color 0.3s ease;
+    /* Hace que el cambio de color al pasar el ratón sea suave (0.3 segundos) */
+}
+
+/* Efecto al pasar el ratón (hover) por encima de los enlaces del menú y para el enlace activo */
+.navbar li a:hover,
+.navbar li a.active {
+    color: #6f2236;
+    /* Cambia al color principal de la marca (Tono granate/vino) */
+}
+
+/* Contenedor del logo que está dentro de la barra de navegación */
+.logo_nav {
+    position: fixed;
+    /* Lo fija respecto a la pantalla */
+    top: 0%;
+    /* Pegado arriba */
+}
+
+/* Tamaño de la imagen del logo en la navegación */
+.logo_nav img {
+    width: 150px;
+    height: 150px;
+}
+
+
+
+/* --- PIE DE PÁGINA (FOOTER) --- */
+
+/* =============================================
+   FOOTER TIERRA VIEJA — CSS
+============================================= */
+ 
+.ftv {
+  background-color: #1e1e1e;
+  color: #e8e0d5;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.7;
+  border-top: 2px solid #7a1c2e;
+}
+ 
+/* --- CABECERA "CONTACTO" --- */
+.ftv-top {
+  text-align: center;
+  padding: 32px 0 20px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+ 
+.ftv-top::after {
+  content: '—◆—';
+  display: block;
+  color: #7a1c2e;
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-top: 6px;
+}
+ 
+.ftv-contact-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #f0ece6;
+  margin: 0;
+  text-transform: uppercase;
+}
+ 
+/* --- CUERPO: LOGO + COLUMNAS --- */
+.ftv-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  padding: 36px 48px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+ 
+/* Columna logo */
+.ftv-logo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 40px;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+ 
+.ftv-logo-wrap {
+  background: #fff;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: inline-flex;
+}
+ 
+.ftv-logo-img {
+  width: 50px;
+  height: auto;
+  display: block;
+}
+ 
+.ftv-winery-name {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #b0a89e;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.5;
+}
+ 
+/* Columnas de info */
+.ftv-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-left: 48px;
+}
+ 
+.ftv-col-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #f0ece6;
+  margin: 0 0 14px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #7a1c2e;
+  letter-spacing: 0.5px;
+}
+ 
+.ftv-col p {
+  margin: 0 0 4px 0;
+  color: #b0a89e;
+  font-size: 13.5px;
+}
+ 
+.ftv-col strong {
+  color: #e8e0d5;
+  font-weight: 700;
+}
+ 
+.ftv-email-row { margin-top: 8px !important; }
+.ftv-indent    { padding-left: 48px; }
+.ftv-space-top { margin-top: 6px !important; }
+ 
+.ftv-email {
+  color: #c4937a;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ftv-email:hover { color: #f0ece6; }
+ 
+.ftv-call-label {
+  font-size: 11px !important;
+  color: #6b6460 !important;
+  letter-spacing: 1px;
+  margin-bottom: 2px !important;
+}
+ 
+.ftv-phone-num {
+  font-size: 17px !important;
+  color: #f0ece6 !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 2px !important;
+}
+ 
+/* --- REDES SOCIALES --- */
+.ftv-social {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+}
+ 
+.ftv-social-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #6b6460;
+  margin: 0;
+}
+ 
+.ftv-icons {
+  display: flex;
+  gap: 12px;
+}
+ 
+.ftv-icon-link {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #b0a89e;
+  font-size: 17px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+ 
+.ftv-icon-link:hover {
+  border-color: #7a1c2e;
+  color: #f0ece6;
+  background: rgba(122, 28, 46, 0.15);
+}
+ 
+/* Si usas las PNGs originales en lugar de Font Awesome */
+.ftv-icon-png {
+  width: 20px;
+  height: 20px;
+  filter: invert(70%) sepia(5%) saturate(300%) brightness(110%);
+  transition: filter 0.2s;
+}
+.ftv-icon-link:hover .ftv-icon-png {
+  filter: invert(100%);
+}
+ 
+/* --- PIE DE PÁGINA --- */
+.ftv-bottom-bar {
+  text-align: center;
+  padding: 10px;
+  font-size: 11px;
+  color: #4a4540;
+  letter-spacing: 1px;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.05);
+}
+ 
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .ftv-body {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+  }
+ 
+  .ftv-logo-col {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding-right: 0;
+    padding-bottom: 24px;
+    border-right: none;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+  }
+ 
+  .ftv-logo-wrap { margin-bottom: 0; }
+ 
+  .ftv-cols {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    gap: 28px;
+  }
+ 
+  .ftv-social { padding: 18px 24px; }
+}
+
+/* =========================================
+   SCROLL INDICATOR (GLOBAL)
+   ========================================= */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--gold, #c9a96e) !important;
+    border-radius: 50% !important;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--gold, #c9a96e);
+    border-radius: 2px;
+    animation: scroll-mouse 2s infinite;
+}
+
+@keyframes scroll-mouse {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 15px);
+        opacity: 0;
+    }
+}
+
+.scroll-indicator p {
+    font-family: var(--font-cuerpo, 'Montserrat', sans-serif);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold, #c9a96e);
+    margin: 0;
+}

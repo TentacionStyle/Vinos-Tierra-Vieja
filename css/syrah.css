@@ -1,0 +1,601 @@
+/* =========================================
+   SYRAH — Tierra Vieja
+   Paleta: violeta muy oscuro #0d0711 | púrpura oscuro #91578f | crema #ebdbe9
+   ========================================= */
+
+/* --- VARIABLES --- */
+:root {
+    --sy-dark: #0d0711;
+    --sy-ruby: #91578f;
+    --sy-soft: #c299c0;
+    --sy-cream: #ebdbe9;
+    --sy-text: #e6d8e4;
+    --sy-bg-card: #150c18;
+
+    --font-hero: 'Cinzel', serif;
+    --font-head: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body.syrah-page {
+    background-color: var(--sy-dark);
+    color: var(--sy-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   1. HERO
+   ========================================= */
+.syrah-hero {
+    position: relative;
+    background: url('./img/uva-syrah.png') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.syrah-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(15, 8, 20, 0.4) 0%, rgba(10, 5, 12, 0.95) 100%);
+    z-index: 1;
+}
+
+.syrah-hero .portada {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.syrah-hero h1 {
+    position: relative !important;
+    z-index: 2;
+    pointer-events: none;
+    margin: 30px auto 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.syrah-hero h1 span {
+    display: block;
+    font-family: var(--font-hero);
+    font-size: clamp(2.2rem, 7vw, 9rem);
+    letter-spacing: 10px;
+    color: #ffffff;
+    text-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+    line-height: 1.15;
+    max-width: 100%;
+}
+
+/* Línea bajo el título */
+.hero-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--sy-soft);
+    margin: 1.5rem auto 0;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.75;
+}
+
+.scroll-indicator p {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sy-soft);
+    margin: 0;
+}
+
+.mouse {
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid var(--sy-soft) !important;
+    border-radius: 50% !important;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--sy-soft);
+    border-radius: 2px;
+    animation: mouse-scroll 2s infinite;
+}
+
+@keyframes mouse-scroll {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 14px);
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.syrah-page .navbar {
+    background-color: var(--sy-cream);
+}
+
+.syrah-page .navbar li a {
+    color: #1a1a1a;
+}
+
+.syrah-page .navbar li a:hover {
+    color: var(--sy-ruby);
+}
+
+/* =========================================
+   3. SECCIÓN INTRO — Glassmorphism
+   ========================================= */
+.sy-intro {
+    padding: 120px 5%;
+    position: relative;
+    background: url('./img/Fondo_portada.jpeg') no-repeat center center;
+    background-size: cover;
+}
+
+.sy-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, var(--sy-dark) 35%, rgba(15, 8, 20, 0.75) 100%);
+    z-index: 0;
+}
+
+.sy-intro-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px !important;
+    width: 90% !important;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    background: rgba(22, 12, 26, 0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(194, 153, 192, 0.15);
+    border-radius: 28px;
+    padding: 64px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.sy-intro-text {
+    flex: 1.4;
+}
+
+.sy-eyebrow {
+    font-family: var(--font-hero);
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sy-soft);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.sy-intro-text h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.3;
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+.sy-intro-text h2 em {
+    color: var(--sy-soft);
+    font-style: italic;
+}
+
+.sy-intro-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--sy-soft);
+    margin-bottom: 28px;
+}
+
+.sy-intro-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 22px;
+}
+
+.sy-intro-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.sy-intro-image img {
+    width: 100%;
+    max-width: 350px;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+    animation: float-grape 10s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes float-grape {
+    0% {
+        transform: rotate(-2.5deg);
+    }
+
+    50% {
+        transform: rotate(2.5deg);
+    }
+
+    100% {
+        transform: rotate(-2.5deg);
+    }
+}
+
+@media (max-width: 900px) {
+    .sy-intro-inner {
+        flex-direction: column;
+        padding: 40px !important;
+        gap: 40px;
+    }
+
+    .sy-intro-text h2 {
+        text-align: center;
+    }
+
+    .sy-intro-divider {
+        margin: 0 auto 28px;
+    }
+}
+
+/* =========================================
+   4. PERFIL AROMÁTICO
+   ========================================= */
+.sy-aromas {
+    padding: 100px 5%;
+    background-color: #0b060d;
+}
+
+.sy-aromas div,
+.sy-ficha div,
+.sy-cta div,
+.sy-intro div,
+.sy-section-header {
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+.sy-section-header {
+    text-align: center !important;
+    margin-bottom: 60px !important;
+}
+
+.sy-section-header h2 {
+    font-family: var(--font-hero) !important;
+    font-size: clamp(2rem, 4vw, 3.2rem) !important;
+    letter-spacing: 8px !important;
+    font-weight: 400 !important;
+    color: #fff !important;
+    margin: 0 0 16px !important;
+    text-align: center !important;
+}
+
+.sy-section-header .sy-ruby-line {
+    display: block;
+    width: 60px !important;
+    height: 2px !important;
+    background: var(--sy-ruby) !important;
+    margin: 0 auto 18px !important;
+}
+
+.sy-section-header p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sy-aromas-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1100px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+.sy-aroma-card {
+    background: linear-gradient(145deg, #180d1a, #0d060f);
+    border: 1px solid rgba(194, 153, 192, 0.15);
+    border-radius: 20px;
+    padding: 44px 30px !important;
+    text-align: center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.sy-aroma-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    border-color: rgba(194, 153, 192, 0.5);
+}
+
+.sy-aroma-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.sy-aroma-card h3 {
+    font-family: var(--font-head);
+    font-size: 1.3rem;
+    color: var(--sy-soft);
+    margin: 0 0 12px;
+}
+
+.sy-aroma-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+}
+
+/* =========================================
+   5. FICHA TÉCNICA
+   ========================================= */
+.sy-ficha {
+    padding: 100px 5%;
+    background-color: var(--sy-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sy-ficha-inner {
+    max-width: 900px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+}
+
+.sy-ficha-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.sy-ficha-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.25s;
+}
+
+.sy-ficha-table tr:hover {
+    background: rgba(194, 153, 192, 0.04);
+}
+
+.sy-ficha-table td {
+    padding: 22px 16px;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.sy-ficha-table td:first-child {
+    font-family: var(--font-hero);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sy-soft);
+    width: 200px;
+}
+
+.sy-ficha-table td:last-child {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================
+   6. CTA FINAL
+   ========================================= */
+.sy-cta {
+    padding: 110px 5%;
+    background: linear-gradient(135deg, #1d1021, #0a050c);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.sy-cta::before {
+    content: 'SY';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-hero);
+    font-size: 25vw;
+    color: rgba(194, 153, 192, 0.04);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 20px;
+}
+
+.sy-cta h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: #fff;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.sy-cta p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.sy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--sy-ruby);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 44px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    font-family: var(--font-hero);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.sy-btn:hover {
+    background-color: #b062ad;
+    transform: scale(1.04);
+}
+
+.sy-btn .arrow {
+    transition: transform 0.3s;
+}
+
+.sy-btn:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* FOOTER HERENCIA */
+.footer-tv {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    padding: 20px 50px;
+    align-items: flex-start;
+}
+
+.logo-section {
+    flex: 0 0 250px;
+    margin-right: 50px;
+}
+
+.logo-placeholder img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.winery-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.info-group-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.info-group {
+    padding-right: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-group p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.email-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.social-section {
+    border-top: 1px solid #444;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.social-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.iconos-social {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}

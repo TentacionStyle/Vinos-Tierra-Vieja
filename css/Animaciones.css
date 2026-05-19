@@ -1,0 +1,51 @@
+/* -------------------- ANIMACIONES -------------------- */
+
+@keyframes scale-up {
+    to { scale: 1.5; }
+}
+
+@keyframes fade-away {
+    to { 
+        opacity: 0;
+        user-select: none;
+        pointer-events: none;
+        visibility: hidden;
+    }
+}
+
+@keyframes fade-in {
+    to { opacity: 1; }
+}
+
+/* Timeline basada en el scroll del hero */
+section.hero {
+    view-timeline: --scroll;
+}
+
+/* TODOS los spans y logotipo — fade simple igual que el index, sin escala */
+.hero h1 span,
+.hub-hero h1 span,
+section.hero #logotipo {
+    animation: fade-away both linear;
+    animation-timeline: --scroll;
+    animation-range: exit 0% exit 40%;
+}
+
+/* Asegurar que :last-child no sobreescriba con scale — mismo comportamiento */
+.hero h1 span:last-child,
+.hub-hero h1 span:last-child {
+    animation: fade-away both linear;
+    animation-timeline: --scroll;
+    animation-range: exit 0% exit 40%;
+}
+
+/* Reset de seguridad: las tarjetas de variedades NUNCA reciben estas animaciones */
+.variety-card *,
+.variety-content *,
+.variety-type,
+.btn-variety {
+    animation: none !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
