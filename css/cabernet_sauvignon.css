@@ -359,7 +359,6 @@ body.cabernet-page {
 .cs-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 15px;
     box-sizing: border-box;
 }
 

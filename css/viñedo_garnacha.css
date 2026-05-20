@@ -25,7 +25,6 @@
 .garnacha-page section div {
     width: auto;
     max-width: none;
-    padding: 0;
 }
 
 /* Override: restaurar dimensiones correctas para el scroll indicator */
@@ -39,7 +38,7 @@
     height: 36px !important;
     border: 2px solid var(--accent-gold) !important;
     border-radius: 50% !important;
-    padding: 0 !important;
+    padding: .garnacha-page section div;
     position: relative !important;
     display: block !important;
 }

@@ -296,7 +296,6 @@ body.syrah-page {
 .sy-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
     box-sizing: border-box;
 }
 

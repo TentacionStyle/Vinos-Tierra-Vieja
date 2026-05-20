@@ -170,7 +170,6 @@ body.tempranillo-page {
     display: flex;
     flex-direction: row;
     align-items: center;
-    max-width: 1100px !important;
     width: 90% !important;
     background: rgba(31, 13, 21, 0.6);
     backdrop-filter: blur(16px);
@@ -388,7 +387,6 @@ body.tempranillo-page {
    ========================================= */
 .section-bento {
     padding: 100px 5% 150px 5%;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
