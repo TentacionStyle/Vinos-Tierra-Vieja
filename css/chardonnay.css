@@ -228,6 +228,7 @@ body.chardonnay-page {
     height: 2px;
     background: var(--ch-gold);
     margin-bottom: 28px;
+    padding: 0 !important;
 }
 
 .ch-intro-text p {
@@ -297,7 +298,7 @@ body.chardonnay-page {
 .ch-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
+    padding: 15px;
     box-sizing: border-box;
 }
 

@@ -239,6 +239,7 @@ body.blanco-page {
     height: 2px;
     background: var(--blanco-lime);
     margin-bottom: 28px;
+    padding: 0 !important;
 }
 
 .bl-intro-text p {
@@ -327,7 +328,7 @@ body.blanco-page {
 .bl-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
+    padding: 15px;
     box-sizing: border-box;
 }
 

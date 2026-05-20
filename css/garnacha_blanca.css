@@ -228,6 +228,7 @@ body.gb-page {
     height: 2px;
     background: var(--gb-lime);
     margin-bottom: 28px;
+    padding: 0 !important;
 }
 
 .gb-intro-text p {
@@ -296,7 +297,7 @@ body.gb-page {
 .gb-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
+    padding: 15px;
     box-sizing: border-box;
 }
 
