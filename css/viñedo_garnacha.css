@@ -25,7 +25,6 @@
 .garnacha-page section div {
     width: auto;
     max-width: none;
-}
 
 /* Override: restaurar dimensiones correctas para el scroll indicator */
 .garnacha-hero .scroll-indicator {
