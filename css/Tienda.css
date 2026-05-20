@@ -78,6 +78,41 @@
     text-transform: uppercase;
 }
 
+
+
+
+/* =========================================
+   LÓGICA DE DESPLIEGUE (CERRADOS POR DEFECTO)
+   ========================================= */
+
+/* 1. Por defecto, ocultamos las listas y el slider */
+.grupo-filtro ul,
+.grupo-filtro .contenedor-precio-slider { 
+    display: none;
+}
+
+/* 2. Cuando el grupo esté ABIERTO (no tenga la clase 'colapsado'), lo mostramos */
+.grupo-filtro:not(.colapsado) ul,
+.grupo-filtro:not(.colapsado) .contenedor-precio-slider {
+    display: block;
+}
+
+/* 3. Por defecto, la flecha de la tienda apunta hacia abajo/arriba según desees. 
+   Si queremos que rote 180 grados al abrirse: */
+.titulo-filtro span {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    font-family: monospace;
+}
+
+/* Cuando el filtro NO esté colapsado (esté abierto), rotamos la flecha */
+.titulo-filtro:not(.colapsado) span {
+    transform: rotate(180deg);
+}
+
+
+
+
 .sidebar-filtros ul { list-style: none; padding: 0; margin: 0; }
 .sidebar-filtros li { margin-bottom: 8px; font-size: 14px; color: #333; }
 .sidebar-filtros label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -94,7 +129,7 @@
 }
 */
 
-.input-rango {
+/* .input-rango {
     width: 100%;
     height: 4px;
     background: linear-gradient(to right, #6f2236 0%, #6f2236 50%, #ddd 50%, #ddd 100%);
@@ -103,6 +138,20 @@
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
+}
+*/ 
+.input-rango {
+    width: 100%;
+    height: 4px;
+    background: #ddd; /* Fondo gris por defecto */
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: linear-gradient(#6f2236, #6f2236); /* Capa de color vino */
+    background-size: 50% 100%; /* Este '50%' se actualizará dinámicamente con JavaScript */
+    background-repeat: no-repeat;
 }
 
 /* Thumb — Chrome/Safari */
@@ -149,19 +198,28 @@
 
 .btn-borrar-filtros {
     width: 100%;
-    padding: 10px;
-    background-color: #efebe9;
-    border: 1px solid #000;
-    color: #000;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #6f2236; /* Borde color vino */
+    color: #6f2236; /* Texto color vino */
+    font-family: 'Cinzel', serif; /* Misma tipografía elegante de la web */
+    font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
-    transition: background 0.3s;
+    border-radius: 6px; /* Bordes ligeramente redondeados como los de "Añadir" */
+    transition: all 0.3s ease;
 }
 
-.btn-borrar-filtros:hover { background-color: #e0e0e0; }
+.btn-borrar-filtros:hover {
+    background-color: #6f2236; /* Se rellena de vino */
+    color: #ffffff; /* Texto pasa a blanco */
+    border-color: #6f2236;
+    box-shadow: 0 4px 12px rgba(111,34,54,0.15);
+}
 
 /* =========================================
    5. GRID DE PRODUCTOS

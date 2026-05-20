@@ -28,6 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (precioTagMax) precioTagMax.textContent = `€${precioMaximo}.00`;
 
+        // ACTUALIZACIÓN DE COLOR DINÁMICO DEL SLIDER
+        if (precioSlider) {
+            const min = precioSlider.min || 0;
+            const max = precioSlider.max || 21; // Basado en tu precio tope de 21.00
+            const porcentaje = ((precioMaximo - min) / (max - min)) * 100;
+            precioSlider.style.backgroundSize = `${porcentaje}% 100%`;
+        }
+
         productos.forEach(producto => {
             const marcaProd  = producto.getAttribute('data-marca');
             const tipoProd   = producto.getAttribute('data-tipo');
@@ -164,11 +172,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 8. DESPLEGAR / COLAPSAR MENÚS LATERALES (CERRADOS POR DEFECTO)
+    const titulosFiltros = document.querySelectorAll('.titulo-filtro');
+
+    titulosFiltros.forEach(titulo => {
+        const grupo = titulo.closest('.grupo-filtro');
+        
+        // Forzamos a que inicien cerrados añadiendo la clase colapsado al arrancar
+        if (grupo) {
+            grupo.classList.add('colapsado');
+            titulo.classList.add('colapsado');
+        }
+
+        // Evento de clic para abrir/cerrar
+        titulo.addEventListener('click', () => {
+            if (grupo) {
+                grupo.classList.toggle('colapsado');
+                titulo.classList.toggle('colapsado');
+            }
+        });
+    });
+
+    // EJECUCIÓN INICIAL
     filtrarProductos();
     showHTML();
 });
 
-// 8. IR A PAGAR
+// 9. IR A PAGAR
 function irAPagar() {
     const totalTexto  = document.querySelector('.total-pagar').innerText;
     const soloNumero  = totalTexto.replace('€', '').trim();

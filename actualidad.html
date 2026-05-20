@@ -249,8 +249,8 @@
                 <h2>¿No quieres perderte nada?</h2>
                 <p>Suscríbete y recibe las novedades de Tierra Vieja directamente en tu bandeja de entrada.</p>
             </div>
-            <form class="act-nl-form" onsubmit="return false;">
-                <input type="email" id="nl-email" placeholder="tu@email.com" aria-label="Correo electrónico">
+            <form class="act-nl-form" id="form-newsletter">
+                <input type="email" id="nl-email" name="email" placeholder="tu@email.com" aria-label="Correo electrónico" required>
                 <button type="submit" id="nl-submit">Suscribirse</button>
             </form>
         </div>
@@ -341,5 +341,49 @@
         });
     </script>
 </body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+<script type="text/javascript">
+    // 1. Inicializar EmailJS con tu Public Key
+    (function() {
+        emailjs.init({
+          publicKey: "qrkTSkp82bdu-5qc6", 
+        });
+    })();
+
+    // 2. Interceptar el envío del formulario
+    document.getElementById('form-newsletter').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar que la página se recargue
+
+        const btn = document.getElementById('nl-submit');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = 'Enviando...'; // Feedback visual para el usuario
+
+        // 3. Recoger el email que ha escrito el usuario
+        const parametrosTemplate = {
+            email: document.getElementById('nl-email').value
+        };
+
+        // 4. Enviar los datos a EmailJS
+        emailjs.send('service_g5xtv8s', 'template_mil567q', parametrosTemplate)
+            .then(function() {
+                // Éxito
+                btn.innerHTML = '¡Suscrito con éxito!';
+                document.getElementById('form-newsletter').reset(); // Limpiar el campo
+                
+                // Volver al estado normal tras 4 segundos
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 4000);
+                
+            }, function(error) {
+                // Error
+                console.log('Error al enviar:', error);
+                btn.innerHTML = 'Hubo un error';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 3000);
+            });
+    });
+</script>
 </html>
