@@ -237,7 +237,9 @@ body.bodega-page {
     display: block;
 }
 
-/* TIMELINE - Final Robust Architecture */
+/* =========================================
+   TIMELINE — Mockup 2026
+   ========================================= */
 .historia-section {
     position: relative;
     padding: 100px 0;
@@ -245,14 +247,11 @@ body.bodega-page {
     background: var(--crema);
 }
 
-/* Override global conflict from basic.css (line 116) */
 .historia-section .timeline-vertical {
     width: 100% !important;
-    max-width: 1200px !important;
+    max-width: 1100px !important;
     margin: 0 auto;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
     position: relative;
 }
 
@@ -260,7 +259,7 @@ body.bodega-page {
     content: '';
     position: absolute;
     width: 2px;
-    background-color: var(--vino);
+    background: var(--vino);
     top: 0;
     bottom: 0;
     left: 50%;
@@ -269,136 +268,138 @@ body.bodega-page {
 }
 
 .tl-item {
-    display: flex;
-    width: 100%;
-    margin-bottom: 60px;
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    margin-bottom: 50px;
     position: relative;
     z-index: 5;
-    opacity: 1; /* Fallback */
-}
-
-@supports (animation-timeline: view()) {
-    .tl-item {
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.8s ease forwards;
-        animation-timeline: view();
-        animation-range: entry 0% cover 20%; /* Pop in faster */
-    }
-}
-
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.tl-item.left { justify-content: flex-start; }
-.tl-item.right { justify-content: flex-end; }
-
-.tl-content-card {
-    width: 450px;
-    height: 320px;
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    gap: 15px;
-    box-sizing: border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: visible;
-}
-
-.tl-content-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(0,0,0,0.12);
-}
-
-/* Strategic Gap to avoid Dot overlap */
-.tl-item.left .tl-content-card { margin-right: 60px; }
-.tl-item.right .tl-content-card { margin-left: 60px; }
-
-/* Arrows pointing to the line (Pico) */
-.tl-content-card::after {
-    content: '';
-    position: absolute;
-    top: 37px; /* Correct vertical alignment center at 52px */
-    border: 15px solid transparent; 
-    z-index: 10;
-}
-
-.tl-item.left .tl-content-card::after {
-    right: -30px;
-    border-left-color: #ffffff;
-}
-
-.tl-item.right .tl-content-card::after {
-    left: -30px;
-    border-right-color: #ffffff;
 }
 
 .tl-dot {
-    position: absolute;
-    left: 50%;
-    top: 52px;
-    transform: translate(-50%, -50%);
+    grid-column: 2;
+    justify-self: center;
+    align-self: start;
+    margin-top: 30px;
     width: 20px;
     height: 20px;
-    background-color: var(--crema);
-    border: 5px solid var(--vino);
+    background: var(--crema);
+    border: 4px solid var(--vino);
     border-radius: 50%;
-    z-index: 20; /* Above arrows */
-    box-shadow: 0 0 0 4px var(--crema);
+    z-index: 20;
+    position: relative;
 }
 
-.tl-year-box {
-    font-family: var(--font-titulo);
-    font-size: 2.2rem;
-    color: var(--vino);
-    font-weight: 700;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.tl-year-box::after {
+.tl-dot::after {
     content: '';
-    margin-top: 10px;
-    width: 40px;
-    height: 3px;
-    background: var(--gold);
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--vino);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.tl-text {
-    width: 100%;
+.tl-item.left .tl-content-card {
+    grid-column: 1;
+    margin-right: 30px;
+}
+
+.tl-item.right .tl-content-card {
+    grid-column: 3;
+    margin-left: 30px;
+}
+
+.tl-content-card {
+    background: #fff;
+    padding: 22px 24px;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    position: relative;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tl-content-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.10);
+}
+
+/* Arrow pointing to center line */
+.tl-content-card::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    border: 10px solid transparent;
+}
+
+.tl-item.left .tl-content-card::after {
+    right: -20px;
+    border-left-color: #fff;
+}
+
+.tl-item.right .tl-content-card::after {
+    left: -20px;
+    border-right-color: #fff;
+}
+
+/* Card inner layout: icon left, body right */
+.tl-card-row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.tl-icon-col {
+    flex-shrink: 0;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
 }
 
 .tl-icon {
-    font-size: 3.5rem;
+    font-size: 2rem;
     line-height: 1;
 }
 
-.tl-desc {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #333; /* Slightly darker */
-    margin: 0;
-    width: 100%;
-    font-weight: 500; /* Slightly heavier */
+.tl-body-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.tl-desc strong {
-    color: var(--vino);
+.tl-year-badge {
+    display: inline-block;
+    background: var(--vino);
+    color: #fff;
+    font-family: var(--font-titulo);
+    font-size: 1rem;
     font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    align-self: flex-start;
+}
+
+.tl-titulo {
+    font-family: var(--font-titulo);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.tl-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+    margin: 0;
+    font-weight: 400;
 }
 
 
@@ -584,76 +585,75 @@ body.bodega-page {
 
     /* ---------- TIMELINE MOBILE ---------- */
     .timeline-vertical {
-        padding: 20px 20px 20px 50px !important;
+        padding: 20px 20px 20px 0 !important;
     }
 
     .timeline-vertical::after {
-        left: 30px;
+        left: 15px;
         transform: none;
     }
 
     .tl-item {
-        margin-bottom: 40px;
-    }
-
-    .tl-item.left,
-    .tl-item.right {
-        justify-content: flex-start;
-    }
-
-    .tl-content-card {
-        width: 100%;
-        max-width: none;
-        height: auto;
-        min-height: auto;
-        margin: 0 !important;
-        margin-left: 50px !important;
-        padding: 25px;
+        grid-template-columns: 30px 1fr;
+        gap: 0;
+        margin-bottom: 30px;
     }
 
     .tl-dot {
-        left: 30px;
-        top: 45px;
-        transform: translate(-50%, -50%);
+        grid-column: 1;
+        justify-self: center;
+        align-self: start;
+        margin-top: 22px;
+        width: 16px;
+        height: 16px;
+        border-width: 3px;
     }
 
-    .tl-item.left .tl-content-card::after,
-    .tl-item.right .tl-content-card::after {
-        left: -16px;
-        right: auto;
-        border: 10px solid transparent;
-        border-right-color: #ffffff;
-        border-left-color: transparent;
-        top: 35px;
+    .tl-dot::after {
+        width: 8px;
+        height: 8px;
     }
 
     .tl-item.left .tl-content-card,
     .tl-item.right .tl-content-card {
-        align-items: flex-start;
-        text-align: left;
+        grid-column: 2;
+        margin: 0 !important;
+        padding: 14px 16px !important;
     }
 
-    .tl-item.left .tl-text,
-    .tl-item.right .tl-text {
-        flex-direction: row;
-        align-items: flex-start;
+    .tl-item.left .tl-content-card::after,
+    .tl-item.right .tl-content-card::after {
+        left: -14px;
+        right: auto;
+        border: 8px solid transparent;
+        border-right-color: #fff;
+        border-left-color: transparent;
+        top: 20px;
     }
 
-    .tl-item.left .tl-year-box,
-    .tl-item.right .tl-year-box {
-        align-items: flex-start;
+    .tl-card-row {
+        gap: 12px;
     }
 
-    .tl-year-box {
-        font-size: 1.8rem;
+    .tl-icon-col {
+        width: 36px;
     }
 
     .tl-icon {
-        font-size: 2.5rem;
+        font-size: 1.4rem;
+    }
+
+    .tl-year-badge {
+        font-size: 0.85rem;
+        padding: 3px 12px;
+    }
+
+    .tl-titulo {
+        font-size: 0.95rem;
     }
 
     .tl-desc {
-        font-size: 0.95rem;
+        font-size: 0.82rem;
     }
 
     /* ---------- PRESENCIA MOBILE ---------- */

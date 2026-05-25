@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnBorrar.addEventListener('click', () => {
             checkboxesMarca.forEach(cb => cb.checked = false);
             checkboxesTipo.forEach(cb  => cb.checked = false);
-            precioSlider.value = 30; 
+            precioSlider.value = 15; 
             filtrarProductos();
         });
     }
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         buscador.addEventListener('input', () => {
             const termino = buscador.value.toLowerCase().trim();
             productos.forEach(p => {
-                const titulo = p.querySelector('.titulo-item')?.textContent?.toLowerCase() || '';
+                const titulo = p.querySelector('.info-producto h4')?.textContent?.toLowerCase() || '';
                 const coincide = !termino || titulo.includes(termino);
                 p.style.display = coincide ? '' : 'none';
             });

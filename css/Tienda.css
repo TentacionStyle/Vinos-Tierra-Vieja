@@ -55,18 +55,16 @@
    4. SEARCH BAR
    ========================================= */
 .barra-busqueda {
-    max-width: 1200px;
-    margin: 20px auto 0;
-    padding: 0 15px;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .input-busqueda {
     width: 100%;
-    padding: 14px 20px 14px 48px;
+    padding: 10px 14px 10px 38px;
     border: 2px solid #d4c5a9;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-family: 'Raleway', sans-serif;
     background: #fff;
     color: #2c1810;
@@ -87,7 +85,7 @@
 
 .icono-busqueda {
     position: absolute;
-    left: 32px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
     color: #a28a6e;

@@ -471,20 +471,6 @@
         padding: 10px !important;
     }
 
-    /* Search bar */
-    .barra-busqueda {
-        padding: 0 15px !important;
-    }
-
-    .input-busqueda {
-        font-size: 0.9rem !important;
-        padding: 12px 16px 12px 42px !important;
-    }
-
-    .icono-busqueda {
-        left: 30px !important;
-    }
-
     .info-producto h4 {
         font-size: 0.75rem !important;
         min-height: 30px !important;
@@ -726,6 +712,17 @@
         max-width: 100vw !important;
         padding: 0 15px !important;
         width: 100% !important;
+    }
+
+    /* Exclude timeline elements from the broad section div rule */
+    .tl-content-card,
+    .tl-dot,
+    .tl-card-row,
+    .tl-icon-col,
+    .tl-body-col {
+        max-width: none !important;
+        padding: revert !important;
+        width: auto !important;
     }
 
     /* Override the 800px div limit from basic.css on pages that need it */
