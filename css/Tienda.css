@@ -46,12 +46,56 @@
     gap: 40px;
     max-width: 1200px;
     margin: 20px auto;
+    padding: 0 15px;
     align-items: flex-start;
     position: relative;
 }
 
 /* =========================================
-   4. SIDEBAR Y FILTROS
+   4. SEARCH BAR
+   ========================================= */
+.barra-busqueda {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 15px;
+    position: relative;
+}
+
+.input-busqueda {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border: 2px solid #d4c5a9;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    background: #fff;
+    color: #2c1810;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-busqueda:focus {
+    border-color: #c9a96e;
+    box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.15);
+}
+
+.input-busqueda::placeholder {
+    color: #a28a6e;
+    opacity: 0.8;
+}
+
+.icono-busqueda {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a28a6e;
+    pointer-events: none;
+}
+
+/* =========================================
+   5. SIDEBAR Y FILTROS
    ========================================= */
 .sidebar-filtros {
     position: sticky;

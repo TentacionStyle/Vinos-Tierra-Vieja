@@ -295,8 +295,8 @@ body.bodega-page {
 .tl-item.right { justify-content: flex-end; }
 
 .tl-content-card {
-    width: 450px; /* Fixed Width */
-    height: 320px; /* SAME SIZE for all */
+    width: 450px;
+    height: 320px;
     background: #ffffff;
     padding: 40px;
     border-radius: 15px;
@@ -304,13 +304,13 @@ body.bodega-page {
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Robust centering */
-    text-align: center;  /* Robust centering */
+    align-items: center;
+    text-align: center;
     justify-content: center;
     gap: 15px;
     box-sizing: border-box;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: visible; /* CRITICAL: Must be visible to show the 'pico' arrow */
+    overflow: visible;
 }
 
 .tl-content-card:hover {
@@ -553,6 +553,7 @@ body.bodega-page {
    7. RESPONSIVE
    ========================================= */
 @media (max-width: 900px) {
+
     .proceso-item,
     .proceso-item.reversed {
         flex-direction: column;
@@ -566,10 +567,24 @@ body.bodega-page {
 
     .stats-bar {
         gap: 20px 0;
+        padding: 30px 15px;
     }
 
     .stat-separador {
         display: none;
+    }
+
+    .stat-item {
+        padding: 10px 25px;
+    }
+
+    .stat-numero {
+        font-size: 2.2rem;
+    }
+
+    /* ---------- TIMELINE MOBILE ---------- */
+    .timeline-vertical {
+        padding: 20px 20px 20px 50px !important;
     }
 
     .timeline-vertical::after {
@@ -577,9 +592,13 @@ body.bodega-page {
         transform: none;
     }
 
+    .tl-item {
+        margin-bottom: 40px;
+    }
+
     .tl-item.left,
     .tl-item.right {
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
 
     .tl-content-card {
@@ -588,19 +607,24 @@ body.bodega-page {
         height: auto;
         min-height: auto;
         margin: 0 !important;
+        margin-left: 50px !important;
+        padding: 25px;
     }
 
     .tl-dot {
         left: 30px;
+        top: 45px;
         transform: translate(-50%, -50%);
     }
 
     .tl-item.left .tl-content-card::after,
     .tl-item.right .tl-content-card::after {
-        left: -24px;
+        left: -16px;
         right: auto;
+        border: 10px solid transparent;
         border-right-color: #ffffff;
         border-left-color: transparent;
+        top: 35px;
     }
 
     .tl-item.left .tl-content-card,
@@ -612,9 +636,37 @@ body.bodega-page {
     .tl-item.left .tl-text,
     .tl-item.right .tl-text {
         flex-direction: row;
+        align-items: flex-start;
     }
 
-    .tl-item.left .tl-year-box {
+    .tl-item.left .tl-year-box,
+    .tl-item.right .tl-year-box {
         align-items: flex-start;
+    }
+
+    .tl-year-box {
+        font-size: 1.8rem;
+    }
+
+    .tl-icon {
+        font-size: 2.5rem;
+    }
+
+    .tl-desc {
+        font-size: 0.95rem;
+    }
+
+    /* ---------- PRESENCIA MOBILE ---------- */
+    .presencia-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .presencia-section {
+        padding: 60px 20px;
+    }
+
+    .pres-num {
+        font-size: 2.2rem;
     }
 }

@@ -266,6 +266,11 @@
         .gb-aromas-grid, .ml-aromas-grid, .mo-aromas-grid, .sy-aromas-grid {
             grid-template-columns: 1fr !important;
         }
+
+        /* Tienda: single column products on small phones */
+        .container-items {
+            grid-template-columns: 1fr !important;
+        }
     }
 
     /* Tech sheet tables: make scrollable horizontally */
@@ -466,6 +471,20 @@
         padding: 10px !important;
     }
 
+    /* Search bar */
+    .barra-busqueda {
+        padding: 0 15px !important;
+    }
+
+    .input-busqueda {
+        font-size: 0.9rem !important;
+        padding: 12px 16px 12px 42px !important;
+    }
+
+    .icono-busqueda {
+        left: 30px !important;
+    }
+
     .info-producto h4 {
         font-size: 0.75rem !important;
         min-height: 30px !important;
@@ -478,6 +497,12 @@
     .botonAñadir {
         font-size: 0.65rem !important;
         padding: 8px !important;
+    }
+
+    /* Grid becomes single column */
+    .contenido-principal {
+        grid-template-columns: 1fr !important;
+        padding: 0 10px !important;
     }
 
     /* Filters sidebar collapses */
@@ -606,55 +631,8 @@
     }
 
     /* ============================================================
-       10. BODEGA PAGE — TIMELINE
+       10. BODEGA PAGE — (handled in bodega.css @ 900px)
        ============================================================ */
-
-    .timeline-vertical::after {
-        left: 30px !important;
-        transform: none !important;
-    }
-
-    .tl-item.left,
-    .tl-item.right {
-        justify-content: flex-end !important;
-    }
-
-    .tl-content-card {
-        width: calc(100% - 60px) !important;
-        max-width: none !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 25px !important;
-        margin: 0 !important;
-    }
-
-    .tl-dot {
-        left: 30px !important;
-        transform: translate(-50%, -50%) !important;
-    }
-
-    .tl-item.left .tl-content-card::after,
-    .tl-item.right .tl-content-card::after {
-        left: -24px !important;
-        right: auto !important;
-        border-right-color: #ffffff !important;
-        border-left-color: transparent !important;
-    }
-
-    .tl-item.left .tl-content-card,
-    .tl-item.right .tl-content-card {
-        align-items: flex-start !important;
-        text-align: left !important;
-    }
-
-    .tl-item.left .tl-text,
-    .tl-item.right .tl-text {
-        flex-direction: row !important;
-    }
-
-    .tl-item.left .tl-year-box {
-        align-items: flex-start !important;
-    }
 
     /* Stats bar */
     .stats-bar {

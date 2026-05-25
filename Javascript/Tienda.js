@@ -217,12 +217,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 9. SEARCH BAR
+    const buscador = document.getElementById('buscador');
+    if (buscador) {
+        buscador.addEventListener('input', () => {
+            const termino = buscador.value.toLowerCase().trim();
+            productos.forEach(p => {
+                const titulo = p.querySelector('.titulo-item')?.textContent?.toLowerCase() || '';
+                const coincide = !termino || titulo.includes(termino);
+                p.style.display = coincide ? '' : 'none';
+            });
+        });
+    }
+
     // EJECUCIÓN INICIAL
     filtrarProductos();
     showHTML();
 });
 
-// 9. IR A PAGAR (CORREGIDO PARA ENLAZAR CON EL HTML DE PAGO)
+// 10. IR A PAGAR (CORREGIDO PARA ENLAZAR CON EL HTML DE PAGO)
 function irAPagar() {
     const totalTexto  = document.querySelector('.total-pagar').innerText;
     const soloNumero  = totalTexto.replace('€', '').trim();
