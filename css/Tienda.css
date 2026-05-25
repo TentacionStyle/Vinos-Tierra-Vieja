@@ -610,3 +610,114 @@ header, nav, .navbar, #hero, .portada { overflow: visible !important; }
     .precio { font-size: 16px; }
     .container-cart-products { width: 280px; right: -10px; }
 }
+
+
+
+/* =========================================
+   NOTIFICACIÓN FLOTANTE (AÑADIR PRODUCTO)
+   ========================================= */
+.notificacion-carrito {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #6f2236; /* Color vino */
+    color: #ffffff;
+    padding: 12px 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid #c9a96e; /* Borde sutil dorado */
+    z-index: 1000000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.notificacion-carrito.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   LÓGICA DE DESPLIEGUE CONTROLADA
+   ========================================= */
+
+/* Ocultar únicamente las listas de los bloques que estén colapsados */
+.grupo-filtro.colapsado ul { 
+    display: none !important;
+}
+
+/* El bloque de precio siempre se mantendrá a la vista */
+.slider-precio {
+    display: block !important;
+}
+
+/* Animación y rotación de las flechas SVG */
+.titulo-filtro svg {
+    transition: transform 0.3s ease;
+}
+
+/* Cuando el título esté colapsado, rotamos la flecha hacia abajo */
+.titulo-filtro.colapsado svg {
+    transform: rotate(180deg);
+}
+
+/* =========================================
+   CORRECCIÓN DE POSICIONAMIENTO DE LA BURBUJA
+   ========================================= */
+.numero-productos {
+    position: absolute !important;
+    top: -4px !important;
+    right: -4px !important;
+    background-color: #c9a96e !important;
+    color: #1a0a10 !important;
+    width: 22px !important;
+    height: 22px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    z-index: 99999999 !important; /* Un nivel por encima del carro fijo */
+    font-weight: 800;
+    font-size: 11px;
+    border: 2px solid #fff !important;
+}
+
+/* Ocultar el contador visualmente si el carrito está vacío */
+.numero-productos[style*="display: none"],
+.numero-productos:empty {
+    display: none !important;
+}
+
+/* =========================================
+   NOTIFICACIÓN FLOTANTE (AÑADIR PRODUCTO)
+   ========================================= */
+.notificacion-carrito {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #6f2236;
+    color: #ffffff;
+    padding: 12px 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid #c9a96e;
+    z-index: 1000000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.notificacion-carrito.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}

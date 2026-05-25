@@ -3,67 +3,1017 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra - Checkout</title>
+    <title>Pago | Tierra Vieja</title>
     <link rel="icon" href="./css/img/logo-uva.png" type="image/png">
-    <link rel="stylesheet" href="./css/basic.css">
-    <link rel="stylesheet" href="./css/pago.css">
-    <link rel="stylesheet" href="./css/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --vino:      #6f2236;
+            --vino-dark: #4e1828;
+            --vino-mid:  #7a1c2e;
+            --crema:     #f6eee3;
+            --arena:     #eee4db;
+            --arena-mid: #ddd0c4;
+            --texto:     #2a1a1f;
+            --texto-mid: #6b4f58;
+            --blanco:    #ffffff;
+            --sombra:    rgba(111,34,54,0.10);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--crema);
+            color: var(--texto);
+            min-height: 100vh;
+        }
+
+        /* ===== LOADER ===== */
+        #loader-overlay {
+            position: fixed; inset: 0;
+            background: var(--crema);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity .5s ease, visibility .5s;
+        }
+        .loader-spinner {
+            width: 44px; height: 44px;
+            border: 3px solid var(--arena);
+            border-top-color: var(--vino);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .loader-text {
+            margin-top: 14px;
+            font-family: 'Cinzel', serif;
+            font-size: .7rem;
+            letter-spacing: 3px;
+            color: var(--vino);
+            text-transform: uppercase;
+            animation: pulse-txt 1.5s infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse-txt { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+        /* ===== NAV ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 72px;
+            background: var(--crema);
+            border-bottom: 1px solid rgba(111,34,54,.12);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 48px;
+            z-index: 1000;
+        }
+        .logo_nav img { width: 190px; object-fit: contain; }
+        .navbar ul { list-style: none; display: flex; gap: 32px; }
+        .navbar ul li a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: .82rem; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: var(--texto); text-decoration: none;
+            position: relative; padding-bottom: 4px;
+            transition: color .25s;
+        }
+        .navbar ul li a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--vino);
+            transition: width .25s;
+        }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--vino); }
+        .navbar ul li a:hover::after, .navbar ul li a.active::after { width: 100%; }
+
+        .nav-badge {
+            display: flex; align-items: center; gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .75rem; font-weight: 600;
+            color: var(--vino); letter-spacing: .5px;
+        }
+        .nav-badge i { font-size: .9rem; }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb {
+            margin-top: 72px;
+            padding: 20px 64px 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--texto-mid);
+        }
+        .breadcrumb span { color: var(--vino); }
+
+        /* ===== PAGE TITLE ===== */
+        .page-header {
+            padding: 18px 64px 32px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 300;
+            color: var(--texto);
+            line-height: 1;
+        }
+        .page-header p {
+            margin-top: 8px;
+            font-size: .82rem; color: var(--texto-mid);
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+            padding: 0 64px 80px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ===== FORM CARD ===== */
+        .form-card {
+            background: var(--blanco);
+            border: 1px solid var(--arena);
+            border-radius: 12px;
+            padding: 36px 40px;
+        }
+
+        /* Step headers */
+        .step-header {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 24px;
+        }
+        .step-num {
+            width: 28px; height: 28px;
+            background: var(--vino);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .75rem; font-weight: 700;
+            color: #fff; flex-shrink: 0;
+        }
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: .95rem; font-weight: 700;
+            letter-spacing: .5px;
+            color: var(--texto);
+            text-transform: uppercase;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--arena);
+            margin: 28px 0;
+        }
+
+        /* ===== INPUTS ===== */
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .field-row.triple { grid-template-columns: 1fr 1fr 1.2fr; }
+        .field-full { margin-top: 16px; }
+
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field label {
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: .8px; text-transform: uppercase;
+            color: var(--texto-mid);
+        }
+        .field input, .field select {
+            height: 44px;
+            border: 1px solid var(--arena);
+            border-radius: 6px;
+            padding: 0 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .85rem;
+            color: var(--texto);
+            background: #fff;
+            transition: border-color .2s, box-shadow .2s;
+            -webkit-appearance: none;
+        }
+        .field input::placeholder { color: #bbb; }
+        .field input:focus, .field select:focus {
+            outline: none;
+            border-color: var(--vino);
+            box-shadow: 0 0 0 3px rgba(111,34,54,.08);
+        }
+
+        .checkbox-row {
+            display: flex; align-items: center; gap: 10px;
+            margin-top: 14px;
+        }
+        .checkbox-row input[type="checkbox"] {
+            width: 16px; height: 16px;
+            accent-color: var(--vino); cursor: pointer;
+            flex-shrink: 0;
+        }
+        .checkbox-row label {
+            font-size: .78rem; color: var(--texto-mid); cursor: pointer;
+        }
+
+        /* ===== PAYMENT OPTIONS ===== */
+        .payment-options { display: flex; flex-direction: column; gap: 10px; }
+
+        .payment-option {
+            display: flex; align-items: center;
+            border: 1.5px solid var(--arena);
+            border-radius: 8px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
+        }
+        .payment-option:hover { border-color: var(--arena-mid); }
+        .payment-option.selected {
+            border-color: var(--vino);
+            background: rgba(111,34,54,.03);
+        }
+
+        .payment-option input[type="radio"] {
+            accent-color: var(--vino);
+            width: 17px; height: 17px;
+            flex-shrink: 0;
+        }
+
+        .payment-label {
+            flex: 1;
+            padding-left: 12px;
+            font-size: .85rem; font-weight: 600;
+            color: var(--texto);
+        }
+
+        .payment-logos { display: flex; align-items: center; gap: 6px; }
+        .card-logo {
+            height: 22px; border-radius: 3px;
+            border: 1px solid #eee;
+        }
+        .bizum-logo {
+            font-size: .85rem; font-weight: 900;
+            color: #00AAAD; font-style: italic;
+        }
+        .paypal-logo { color: #003087; font-weight: 900; font-size: .9rem; }
+
+        /* Card detail fields */
+        #card-fields {
+            margin-top: 14px;
+            padding: 18px;
+            background: var(--crema);
+            border-radius: 8px;
+            display: none;
+        }
+        #card-fields.visible { display: block; }
+        .card-field-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
+
+        .ssl-note {
+            display: flex; align-items: center; gap: 7px;
+            margin-top: 16px;
+            font-size: .7rem; color: #aaa;
+        }
+        .ssl-note i { color: #6c6; }
+
+        /* ===== ORDER SUMMARY ===== */
+        .summary-card {
+            background: var(--blanco);
+            border: 1px solid var(--arena);
+            border-radius: 12px;
+            padding: 28px 28px 32px;
+            position: sticky;
+            top: 90px;
+            align-self: start;
+        }
+        .summary-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; font-weight: 600;
+            color: var(--texto);
+            margin-bottom: 24px;
+        }
+
+        .order-items { display: flex; flex-direction: column; gap: 18px; }
+
+        .order-item {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .order-item-img {
+            width: 52px; height: 64px;
+            border-radius: 4px;
+            background: var(--arena);
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            overflow: hidden;
+        }
+        .order-item-img img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .order-item-info { flex: 1; }
+        .order-item-name {
+            font-size: .83rem; font-weight: 600;
+            color: var(--texto); line-height: 1.3;
+        }
+        .order-item-qty {
+            font-size: .72rem; color: var(--texto-mid);
+            margin-top: 2px;
+        }
+        .order-item-price {
+            font-size: .9rem; font-weight: 700;
+            color: var(--texto); white-space: nowrap;
+        }
+
+        .summary-divider {
+            border: none; border-top: 1px solid var(--arena);
+            margin: 20px 0;
+        }
+
+        .summary-row {
+            display: flex; justify-content: space-between;
+            font-size: .82rem; color: var(--texto-mid);
+            margin-bottom: 8px;
+        }
+        .summary-row.total {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--texto);
+            margin-bottom: 0;
+        }
+        .summary-row.total span:last-child { color: var(--vino); }
+
+        /* ===== PAY BUTTON ===== */
+        .btn-pay {
+            width: 100%;
+            margin-top: 20px;
+            background: var(--vino);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            height: 52px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .88rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: background .25s, transform .15s;
+        }
+        .btn-pay:hover { background: var(--vino-dark); transform: translateY(-1px); }
+        .btn-pay:active { transform: translateY(0); }
+
+        .legal-note {
+            margin-top: 12px;
+            text-align: center;
+            font-size: .68rem; color: #aaa; line-height: 1.6;
+        }
+        .legal-note a { color: var(--vino); text-decoration: none; }
+        .legal-note a:hover { text-decoration: underline; }
+
+        /* ===== SUCCESS MSG ===== */
+        #success-msg {
+            display: none;
+            margin-top: 16px;
+            background: #e8f5ee;
+            border: 1px solid #c3dfc9;
+            color: #2d7a50;
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: .85rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .ftv {
+            background-color: #1e1e1e;
+            color: #e8e0d5;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            border-top: 2px solid #7a1c2e;
+        }
+        .ftv-top {
+            text-align: center;
+            padding: 28px 0 16px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .ftv-top::after {
+            content: '—◆—';
+            display: block;
+            color: var(--vino-mid);
+            font-size: 10px;
+            letter-spacing: 6px;
+            margin-top: 6px;
+        }
+        .ftv-contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px; font-weight: 400;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: #f0ece6;
+        }
+        .ftv-body {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            padding: 32px 48px;
+            gap: 32px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .ftv-logo-col { display: flex; flex-direction: column; gap: 8px; }
+        .ftv-logo-wrap { background: #fff; border-radius: 4px; padding: 5px; display: inline-flex; }
+        .ftv-logo-img { width: 60px; }
+        .ftv-winery-name { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; color: #bbb; }
+        .ftv-cols { display: flex; gap: 48px; flex-wrap: wrap; }
+        .ftv-col h3 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vino-mid); margin-bottom: 8px; font-weight: 700; }
+        .ftv-col p { color: #b0a8a0; line-height: 1.7; }
+        .ftv-email { color: #c9a87c; text-decoration: none; }
+        .ftv-social { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; }
+        .ftv-social-title { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #666; }
+        .ftv-icons { display: flex; gap: 16px; }
+        .ftv-icon-link { color: #888; font-size: 1.1rem; transition: color .2s; }
+        .ftv-icon-link:hover { color: var(--vino-mid); }
+        .ftv-bottom-bar { text-align: center; padding: 14px; font-size: 11px; color: #555; border-top: 1px solid rgba(255,255,255,.05); }
+
+        /* ===== VALUES STRIP (from mockup bottom) ===== */
+        .values-strip {
+            background: var(--vino-dark);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .value-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 28px 32px;
+            border-right: 1px solid rgba(255,255,255,.1);
+        }
+        .value-item:last-child { border-right: none; }
+        .value-icon {
+            width: 48px; height: 48px; flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,.35);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.8);
+            font-size: 1.1rem;
+        }
+        .value-name {
+            font-family: 'Cinzel', serif;
+            font-size: .75rem; letter-spacing: 2px;
+            text-transform: uppercase; color: #f0ece6;
+            margin-bottom: 4px;
+        }
+        .value-desc { font-size: .72rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .checkout-layout { grid-template-columns: 1fr; padding: 0 24px 64px; }
+            .summary-card { position: static; }
+            .page-header, .breadcrumb { padding-left: 24px; padding-right: 24px; }
+            .values-strip { grid-template-columns: 1fr 1fr; }
+            .navbar { padding: 0 24px; }
+            .navbar ul { display: none; }
+        }
+    </style>
 </head>
-<script src="./Javascript/Hamburger.js"></script>
-<body class="bg-gray-50">
+<body>
 
-    <div id="loader-overlay">
-        <div class="loader-spinner"></div>
-        <div class="loader-text flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            Pago Seguro
-        </div>
+<!-- LOADER -->
+<div id="loader-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text"><i class="fa-solid fa-lock" style="margin-right:6px;font-size:.75rem"></i>Pago Seguro</div>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+    <div class="logo_nav">
+        <a href="index.html"><img src="./css/img/Logo-alargado.png" alt="Vinos Tierra Vieja"></a>
     </div>
-
-    <div class="min-h-screen flex items-center justify-center p-6">
-
-        <div class="checkout-container max-w-md w-full p-10 shadow-lg">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800 tracking-tighter text-center">
-        Finalizar Compra
-    </h2>
-    
-    <div class="resumen-pago text-center mb-6">
-        <h3 class="text-gray-500 uppercase text-[10px] font-bold tracking-widest mb-1">Resumen de tu pedido</h3>
-        <p id="total-final-pago" class="text-3xl font-black" style="color: #6f2236;">
-            0.00€
-        </p>
+    <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Tienda.html">Tienda</a></li>
+        <li><a href="bodega.html">Nosotros</a></li>
+        <li><a href="#">Experiencias</a></li>
+        <li><a href="#">Contacto</a></li>
+    </ul>
+    <div class="nav-badge">
+        <i class="fa-solid fa-lock"></i> Pago seguro
     </div>
+</nav>
 
-    <div class="space-y-6">
-        <div class="relative flex py-2 items-center">
-            <div class="flex-grow border-t border-gray-200"></div>
-            <span class="flex-shrink mx-4 text-gray-400 text-[9px] uppercase font-bold tracking-widest">Otras opciones</span>
-            <div class="flex-grow border-t border-gray-200"></div>
+<!-- BREADCRUMB -->
+<div class="breadcrumb">03. <span>Pago</span></div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <h1>Finaliza tu compra</h1>
+    <p>Completa tus datos y elige tu método de pago.</p>
+</div>
+
+<!-- CHECKOUT LAYOUT -->
+<div class="checkout-layout">
+
+    <!-- ===== LEFT: FORM ===== -->
+    <div class="form-card">
+
+        <!-- STEP 1: Contacto -->
+        <div class="step-header">
+            <div class="step-num">1</div>
+            <div class="step-title">Información de contacto</div>
         </div>
 
-        <button class="w-full bg-[#00AAAD] text-white font-bold py-4 rounded-xl flex items-center justify-center shadow-sm hover:opacity-90 transition">
-            <span class="italic font-black mr-2 text-xl">bizum</span> Pagar
+        <div class="field-row">
+            <div class="field">
+                <label>Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Ej. Juan Pérez">
+            </div>
+            <div class="field">
+                <label>Correo electrónico</label>
+                <input type="email" id="email" placeholder="Ej. juan@correo.com">
+            </div>
+        </div>
+        <div class="field-full field" style="margin-top:16px">
+            <label>Teléfono <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+            <input type="tel" id="telefono" placeholder="Ej. +34 600 123 456">
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- STEP 2: Envío -->
+        <div class="step-header">
+            <div class="step-num">2</div>
+            <div class="step-title">Dirección de envío</div>
+        </div>
+
+        <div class="field">
+            <label>Dirección</label>
+            <input type="text" id="direccion" placeholder="Ej. Calle Mayor 12">
+        </div>
+
+        <div class="field-row triple" style="margin-top:16px">
+            <div class="field">
+                <label>Código postal</label>
+                <input type="text" id="cp" placeholder="Ej. 28001">
+            </div>
+            <div class="field">
+                <label>Ciudad</label>
+                <input type="text" id="ciudad" placeholder="Ej. Madrid">
+            </div>
+            <div class="field">
+                <label>País</label>
+                <select id="pais">
+                    <option value="es" selected>España</option>
+                    <option value="pt">Portugal</option>
+                    <option value="fr">Francia</option>
+                    <option value="de">Alemania</option>
+                    <option value="it">Italia</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="checkbox-row">
+            <input type="checkbox" id="dir-diferente">
+            <label for="dir-diferente">Enviar a una dirección diferente</label>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- STEP 3: Pago -->
+        <div class="step-header">
+            <div class="step-num">3</div>
+            <div class="step-title">Método de pago</div>
+        </div>
+
+        <div class="payment-options">
+            <!-- Tarjeta -->
+            <label class="payment-option selected" id="opt-card">
+                <input type="radio" name="pago" value="card" checked onchange="selectPayment('card')">
+                <span class="payment-label">Tarjeta de crédito / débito</span>
+                <div class="payment-logos">
+                    <!-- VISA SVG inline -->
+                    <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
+                        <rect width="780" height="500" rx="40" fill="#1A1F71"/>
+                        <path d="M293 348.3L321.8 152H364l-28.9 196.3H293zm152.8-198.2c-15.3-5.8-39.2-12-69.1-12-76.2 0-129.8 38.6-130.1 93.8-.4 40.8 38.1 63.5 67.2 77.1 29.8 13.9 39.8 22.8 39.7 35.2-.2 19-23.9 27.7-46 27.7-30.7 0-47-4.3-72.3-14.9l-9.9-4.5-10.8 63.4c17.9 7.9 51 14.8 85.4 15.2 80.6 0 132.9-38 133.4-97 .2-32.3-20.1-56.9-64.2-77.2-26.7-13.1-43.1-21.9-42.9-35.2.1-11.8 13.8-24.3 43.7-24.3 24.9-.4 42.9 5 56.9 10.7l6.8 3.2 10.2-59.2zm198.7-1.1H604c-13.8 0-24 3.8-30.1 17.7L473 348.3h80.6s13.2-34.8 16.2-42.4c8.8 0 87.3.1 98.4.1 2.3 9.8 9.3 42.3 9.3 42.3h71.3l-62.2-196.3h-12zm-94.4 130.7c6.3-16.2 30.5-79 30.5-79-.4.7 6.3-16.3 10.1-26.9l5.2 24.3s14.7 67.6 17.8 81.6H550.1z" fill="#fff"/>
+                    </svg>
+                    <!-- Mastercard SVG inline -->
+                    <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
+                        <rect width="780" height="500" rx="40" fill="#252525"/>
+                        <circle cx="295" cy="250" r="145" fill="#EB001B"/>
+                        <circle cx="485" cy="250" r="145" fill="#F79E1B"/>
+                        <path d="M390 141.8c35.6 27.1 58.7 68.9 58.7 113.2s-23.1 86.1-58.7 113.2c-35.6-27.1-58.7-68.9-58.7-113.2s23.1-86.1 58.7-113.2z" fill="#FF5F00"/>
+                    </svg>
+                    <!-- Amex simplified -->
+                    <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
+                        <rect width="780" height="500" rx="40" fill="#2557D6"/>
+                        <text x="390" y="290" font-family="Arial" font-size="110" font-weight="bold" fill="white" text-anchor="middle">AMEX</text>
+                    </svg>
+                </div>
+            </label>
+
+            <!-- Card fields -->
+            <div id="card-fields" class="visible">
+                <div class="card-field-row">
+                    <div class="field">
+                        <label>Número de tarjeta</label>
+                        <input type="text" id="card-num" placeholder="•••• •••• •••• ••••" maxlength="19">
+                    </div>
+                    <div class="field">
+                        <label>Caducidad</label>
+                        <input type="text" id="card-date" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="field">
+                        <label>CVV</label>
+                        <input type="text" id="card-cvv" placeholder="•••" maxlength="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PayPal -->
+            <label class="payment-option" id="opt-paypal">
+                <input type="radio" name="pago" value="paypal" onchange="selectPayment('paypal')">
+                <span class="payment-label">PayPal</span>
+                <div class="payment-logos">
+                    <span class="paypal-logo"><span style="color:#009cde">Pay</span><span style="color:#003087">Pal</span></span>
+                </div>
+            </label>
+
+            <!-- Bizum -->
+            <label class="payment-option" id="opt-bizum">
+                <input type="radio" name="pago" value="bizum" onchange="selectPayment('bizum')">
+                <span class="payment-label">Bizum</span>
+                <div class="payment-logos">
+                    <span class="bizum-logo">bizum</span>
+                </div>
+            </label>
+        </div>
+
+        <!-- PayPal container (hidden by default) -->
+        <div id="paypal-button-container" style="margin-top:14px; display:none;"></div>
+
+        <!-- Bizum container (hidden by default) -->
+        <div id="bizum-fields" style="display:none; margin-top:14px;">
+            <div style="background:var(--crema); border-radius:8px; padding:18px;">
+                <div class="field">
+                    <label>Teléfono Bizum</label>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <select id="bizum-prefix" style="width:90px; height:44px; border:1px solid var(--arena); border-radius:6px; padding:0 8px; font-family:'Montserrat',sans-serif; font-size:.85rem; background:#fff; flex-shrink:0;">
+                            <option value="+34">🇪🇸 +34</option>
+                            <option value="+351">🇵🇹 +351</option>
+                        </select>
+                        <input type="tel" id="bizum-phone" placeholder="600 123 456" maxlength="9"
+                            style="flex:1; height:44px; border:1px solid var(--arena); border-radius:6px; padding:0 14px; font-family:'Montserrat',sans-serif; font-size:.85rem; transition:border-color .2s, box-shadow .2s;">
+                    </div>
+                    <span id="bizum-phone-error" style="display:none; color:#c0392b; font-size:.7rem; margin-top:4px;">Introduce un número de teléfono válido (9 dígitos).</span>
+                </div>
+                <p style="margin-top:10px; font-size:.7rem; color:var(--texto-mid); line-height:1.6;">
+                    <i class="fa-solid fa-circle-info" style="color:var(--vino);margin-right:4px;"></i>
+                    Recibirás una notificación en tu app bancaria para confirmar el pago de <strong id="bizum-total-label">—</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="ssl-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            Tus datos están protegidos con cifrado SSL.
+        </div>
+
+        <div id="success-msg">
+            ✅ ¡Operación válida! Tu pedido está en camino.
+        </div>
+
+    </div><!-- /form-card -->
+
+    <!-- ===== RIGHT: SUMMARY ===== -->
+    <aside class="summary-card">
+        <div class="summary-title">Resumen del pedido</div>
+
+        <div class="order-items" id="order-items">
+            <!-- Rellenado dinámicamente desde localStorage (carritoItems) -->
+        </div>
+
+        <hr class="summary-divider">
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">52,40 €</span>
+        </div>
+        <div class="summary-row">
+            <span>Envío</span>
+            <span>4,90 €</span>
+        </div>
+
+        <hr class="summary-divider" style="margin:14px 0">
+
+        <div class="summary-row total">
+            <span>Total</span>
+            <span id="total-display">57,30 €</span>
+        </div>
+
+        <button class="btn-pay" id="btn-pago" onclick="procesarPago()">
+            <i class="fa-solid fa-lock"></i>
+            Pagar <span id="total-btn">57,30 €</span>
         </button>
 
-        <div class="pt-2">
-            <div id="paypal-button-container" style="min-height: 50px;" class="w-full"></div>
-            <p class="text-[10px] text-center text-gray-500 mt-2">La forma rápida y segura de pagar</p>
-        </div>
+        <p class="legal-note">
+            Al realizar el pago aceptas nuestros<br>
+            <a href="#">Términos y condiciones</a> y <a href="#">Política de privacidad</a>
+        </p>
+    </aside>
 
-        <div id="success-msg" class="hidden msg-valido p-4 rounded-2xl text-center font-bold animate-pulse">
-            ✅ ¡Operación válida!
+</div><!-- /checkout-layout -->
+
+<!-- VALUES STRIP -->
+<div class="values-strip">
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div>
+            <div class="value-name">Tradición</div>
+            <div class="value-desc">Raíces que nos definen.</div>
+        </div>
+    </div>
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-flask"></i></div>
+        <div>
+            <div class="value-name">Innovación</div>
+            <div class="value-desc">Miramos al futuro sin olvidar el origen.</div>
+        </div>
+    </div>
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-medal"></i></div>
+        <div>
+            <div class="value-name">Calidad</div>
+            <div class="value-desc">Comprometidos con la excelencia en cada detalle.</div>
+        </div>
+    </div>
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-heart"></i></div>
+        <div>
+            <div class="value-name">Pasión</div>
+            <div class="value-desc">Lo que hacemos, lo hacemos con alma.</div>
         </div>
     </div>
 </div>
+
+<!-- FOOTER -->
+<footer class="ftv">
+    <div class="ftv-top">
+        <h2 class="ftv-contact-title">Contacto</h2>
     </div>
-    <script src="./Javascript/Pago.js"></script>
-    </body>
+    <div class="ftv-body">
+        <div class="ftv-logo-col">
+            <div class="ftv-logo-wrap">
+                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+            </div>
+            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
+        </div>
+        <div class="ftv-cols">
+            <div class="ftv-col">
+                <h3>Oficina</h3>
+                <p>Ctra. N-330, km 450, 50400</p>
+                <p>Cariñena, Zaragoza</p>
+                <p><a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a></p>
+            </div>
+            <div class="ftv-col">
+                <h3>Horario</h3>
+                <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
+                <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
+            </div>
+            <div class="ftv-col">
+                <h3>Teléfono</h3>
+                <p style="color:#999;font-size:11px;letter-spacing:1px">Llámanos</p>
+                <p style="font-size:1rem;font-weight:600;color:#e0d4c8">+34 634 44 55 46</p>
+            </div>
+        </div>
+    </div>
+    <div class="ftv-social">
+        <p class="ftv-social-title">Redes Sociales</p>
+        <div class="ftv-icons">
+            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ftv-bottom-bar">© 2025 Vinos Tierra Vieja · Cariñena, Zaragoza</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* --- LOADER --- */
+    setTimeout(() => {
+        const l = document.getElementById('loader-overlay');
+        if (l) { l.style.opacity = '0'; l.style.visibility = 'hidden'; }
+    }, 900);
+
+    /* --- CARGAR CARRITO DESDE localStorage --- */
+    const orderItemsContainer = document.getElementById('order-items');
+    const subtotalEl  = document.getElementById('subtotal');
+    const totalDisplay = document.getElementById('total-display');
+    const totalBtn    = document.getElementById('total-btn');
+
+    const ENVIO = 4.90;
+
+    let items = [];
+    try {
+        const raw = localStorage.getItem('carritoItems');
+        if (raw) items = JSON.parse(raw);
+    } catch(e) { items = []; }
+
+    if (items.length > 0) {
+        orderItemsContainer.innerHTML = '';
+        let subtotal = 0;
+
+        items.forEach(item => {
+            const precioUnit = parseFloat(item.precio.replace('€','').replace(',','.')) || 0;
+            const precioTotal = (precioUnit * item.cantidad).toFixed(2).replace('.',',');
+            subtotal += precioUnit * item.cantidad;
+
+            const div = document.createElement('div');
+            div.className = 'order-item';
+
+            const imgContent = item.imagen
+                ? `<img src="${item.imagen}" alt="${item.titulo}">`
+                : '🍷';
+
+            div.innerHTML = `
+                <div class="order-item-img">${imgContent}</div>
+                <div class="order-item-info">
+                    <div class="order-item-name">${item.titulo}</div>
+                    <div class="order-item-qty">Cantidad: ${item.cantidad}</div>
+                </div>
+                <div class="order-item-price">${precioTotal} €</div>
+            `;
+            orderItemsContainer.appendChild(div);
+        });
+
+        const total = (subtotal + ENVIO).toFixed(2);
+        const fmt = (n) => n.toFixed(2).replace('.',',') + ' €';
+
+        if (subtotalEl)   subtotalEl.textContent  = fmt(subtotal);
+        if (totalDisplay) totalDisplay.textContent = fmt(parseFloat(total));
+        if (totalBtn)     totalBtn.textContent     = fmt(parseFloat(total));
+
+    } else {
+        /* carrito vacío: mostrar aviso */
+        orderItemsContainer.innerHTML = `
+            <p style="color:var(--texto-mid);font-size:.82rem;text-align:center;padding:16px 0">
+                Tu carrito está vacío.<br>
+                <a href="Tienda.html" style="color:var(--vino);font-weight:600">Volver a la tienda</a>
+            </p>`;
+
+        /* Si al menos hay el total guardado, mostrarlo */
+        const totalGuardado = localStorage.getItem('totalCompra');
+        if (totalGuardado) {
+            const fmt = parseFloat(totalGuardado).toFixed(2).replace('.',',') + ' €';
+            if (totalDisplay) totalDisplay.textContent = fmt;
+            if (totalBtn)     totalBtn.textContent     = fmt;
+        }
+    }
+
+    /* --- CARD NUMBER mask --- */
+    const cardNum = document.getElementById('card-num');
+    if (cardNum) {
+        cardNum.addEventListener('input', e => {
+            let v = e.target.value.replace(/\s+/g,'').replace(/\D/g,'');
+            let parts = [];
+            for (let i = 0; i < v.length; i += 4) parts.push(v.substring(i, i+4));
+            e.target.value = parts.join(' ');
+        });
+    }
+
+    /* --- CARD DATE mask --- */
+    const cardDate = document.getElementById('card-date');
+    if (cardDate) {
+        cardDate.addEventListener('input', e => {
+            let v = e.target.value.replace(/\D/g,'');
+            if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+            e.target.value = v;
+        });
+    }
+
+    /* --- CVV only digits --- */
+    const cardCvv = document.getElementById('card-cvv');
+    if (cardCvv) {
+        cardCvv.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g,'');
+        });
+    }
+
+    /* --- PAYPAL --- */
+    const paypalContainer = document.getElementById('paypal-button-container');
+    if (paypalContainer && typeof paypal !== 'undefined') {
+        paypal.Buttons({
+            style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+            createOrder: (data, actions) => {
+                const total = localStorage.getItem('totalCompra') || '57.30';
+                return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
+            }
+        }).render('#paypal-button-container');
+    }
+});
+
+/* --- SELECT PAYMENT METHOD --- */
+function selectPayment(method) {
+    document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('opt-' + method).classList.add('selected');
+
+    const cardFields      = document.getElementById('card-fields');
+    const paypalContainer = document.getElementById('paypal-button-container');
+    const bizumFields     = document.getElementById('bizum-fields');
+
+    cardFields.style.display      = method === 'card'   ? 'block' : 'none';
+    paypalContainer.style.display = method === 'paypal' ? 'block' : 'none';
+    bizumFields.style.display     = method === 'bizum'  ? 'block' : 'none';
+
+    // Actualiza el importe mostrado en el aviso de Bizum
+    if (method === 'bizum') {
+        const totalLabel = document.getElementById('bizum-total-label');
+        if (totalLabel) totalLabel.textContent = document.getElementById('total-display').textContent;
+    }
+}
+
+/* --- BIZUM: solo dígitos y formato --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const bizumPhone = document.getElementById('bizum-phone');
+    if (bizumPhone) {
+        bizumPhone.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        bizumPhone.addEventListener('focus', e => {
+            e.target.style.borderColor = 'var(--vino)';
+            e.target.style.boxShadow   = '0 0 0 3px rgba(111,34,54,.08)';
+        });
+        bizumPhone.addEventListener('blur', e => {
+            e.target.style.borderColor = '';
+            e.target.style.boxShadow   = '';
+        });
+    }
+});
+
+/* --- PROCESS PAYMENT --- */
+function procesarPago() {
+    const method  = document.querySelector('input[name="pago"]:checked').value;
+    const btn     = document.getElementById('btn-pago');
+    const success = document.getElementById('success-msg');
+
+    // Validación campos comunes
+    const nombre = document.getElementById('nombre').value.trim();
+    const email  = document.getElementById('email').value.trim();
+    const dir    = document.getElementById('direccion').value.trim();
+
+    if (!nombre || !email || !dir) {
+        alert('Por favor, completa todos los campos obligatorios.');
+        return;
+    }
+
+    // Validación específica por método
+    if (method === 'card') {
+        const num = document.getElementById('card-num').value;
+        if (num.replace(/\s/g,'').length < 16) {
+            alert('Introduce un número de tarjeta válido.');
+            return;
+        }
+    }
+
+    if (method === 'bizum') {
+        const phone     = document.getElementById('bizum-phone').value.trim();
+        const errorEl   = document.getElementById('bizum-phone-error');
+        const phoneEl   = document.getElementById('bizum-phone');
+
+        if (phone.length !== 9 || !/^[6789]\d{8}$/.test(phone)) {
+            errorEl.style.display = 'block';
+            phoneEl.style.borderColor = '#c0392b';
+            phoneEl.focus();
+            return;
+        }
+        errorEl.style.display = 'none';
+        phoneEl.style.borderColor = '';
+
+        // Flujo Bizum: esperar confirmación simulada
+        const prefix = document.getElementById('bizum-prefix').value;
+        const total  = document.getElementById('total-display').textContent;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Esperando confirmación Bizum...';
+        btn.disabled = true;
+
+        // En producción: aquí llamarías a tu backend/TPV para iniciar el cobro Bizum
+        // bizumPagar({ telefono: prefix + phone, importe: total });
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Pago completado';
+            success.style.display = 'block';
+            localStorage.removeItem('totalCompra');
+            localStorage.removeItem('carritoItems');
+        }, 2200);
+        return;
+    }
+
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Pago completado';
+        success.style.display = 'block';
+        localStorage.removeItem('totalCompra');
+        localStorage.removeItem('carritoItems');
+    }, 1500);
+}
+</script>
+
+</body>
 </html>

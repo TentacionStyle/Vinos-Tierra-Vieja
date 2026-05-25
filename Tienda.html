@@ -49,93 +49,89 @@
     </nav>
 
     <div class="div-tienda">
-        <header>
-            <h2>Tienda</h2>
-            <div id="container-carrito" class="container-carrito">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="icono-carrito">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
+    <header>
+        <h2>Tienda</h2>
+        <div id="container-carrito" class="container-carrito">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="icono-carrito">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
 
-                <div class="container-cart-products hidden-cart">
-                    <div class="row-product">
-                        <p class="cart-empty">El carrito está vacío</p>
-                    </div>
+            <span id="contador-productos" class="numero-productos">0</span>
 
-                    <div class="cart-total">
-                        <h3>Total:</h3>
-                        <span class="total-pagar">$0</span>
-                    </div>
-
-                    <a href="Pago"><button class="btn-pagar">Finalizar Compra</button></a>
+            <div class="container-cart-products hidden-cart">
+                <div class="row-product">
+                    <p class="cart-empty">El carrito está vacío</p>
                 </div>
 
+                <div class="cart-total">
+                    <h3>Total:</h3>
+                    <span class="total-pagar">0€</span>
+                </div>
 
+                <button class="btn-pagar" onclick="irAPagar()">Finalizar Compra</button>
             </div>
-    </div>
+        </div>
     </header>
+    </div>
     <div class="contenido-principal">
 
         <aside class="sidebar-filtros">
 
-            <div class="grupo-filtro">
-                <div class="titulo-filtro">
-                    <h3>MARCA</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                    </svg>
-                </div>
-                <ul>
-                    <li><label><input type="checkbox"> 8.0.1</label></li>
-                    <li><label><input type="checkbox"> Castillo Ducay</label></li>
-                    <li><label><input type="checkbox"> Celebrities</label></li>
-                    <li><label><input type="checkbox"> Gran Ducay</label></li>
-                    <li><label><input type="checkbox"> Julietta</label></li>
-                    <li><label><input type="checkbox"> Marqués de Tosos</label></li>
-                    <li><label><input type="checkbox"> Particular</label></li>
-                </ul>
+        <div class="grupo-filtro colapsado">
+            <div class="titulo-filtro colapsado">
+                <h3>MARCA</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                </svg>
             </div>
+            <ul>
+                <li><label><input type="checkbox"> 8.0.1</label></li>
+                <li><label><input type="checkbox"> Castillo Ducay</label></li>
+                <li><label><input type="checkbox"> Celebrities</label></li>
+                <li><label><input type="checkbox"> Gran Ducay</label></li>
+                <li><label><input type="checkbox"> Julietta</label></li>
+                <li><label><input type="checkbox"> Marqués de Tosos</label></li>
+                <li><label><input type="checkbox"> Particular</label></li>
+            </ul>
+        </div>
 
-            <div class="grupo-filtro">
-                <div class="titulo-filtro">
-                    <h3>TIPO DE VINO</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                    </svg>
-                </div>
-                <ul>
-                    <li><label><input type="checkbox"> Blanco</label></li>
-                    <li><label><input type="checkbox"> Cava</label></li>
-                    <li><label><input type="checkbox"> Crianza</label></li>
-                    <li><label><input type="checkbox"> Reserva</label></li>
-                    <li><label><input type="checkbox"> Roble</label></li>
-                    <li><label><input type="checkbox"> Rosado</label></li>
-                    <li><label><input type="checkbox"> Tinto</label></li>
-                    <li><label><input type="checkbox"> Vinos de autor</label></li>
-                </ul>
+        <div class="grupo-filtro colapsado">
+            <div class="titulo-filtro colapsado">
+                <h3>TIPO DE VINO</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                </svg>
             </div>
+            <ul>
+                <li><label><input type="checkbox"> Blanco</label></li>
+                <li><label><input type="checkbox"> Cava</label></li>
+                <li><label><input type="checkbox"> Crianza</label></li>
+                <li><label><input type="checkbox"> Reserva</label></li>
+                <li><label><input type="checkbox"> Roble</label></li>
+                <li><label><input type="checkbox"> Rosado</label></li>
+                <li><label><input type="checkbox"> Tinto</label></li>
+                <li><label><input type="checkbox"> Vinos de autor</label></li>
+            </ul>
+        </div>
 
-            <div class="grupo-filtro">
-                <div class="titulo-filtro">
-                    <h3>PRECIO</h3>
-                </div>
-                <div class="slider-precio">
-                    <input type="range" min="0" max="30" class="input-rango">
-                    <div class="etiquetas-precio">
-                        <span class="precio-tag">€0.00</span>
-                        <span class="precio-tag">€30.00</span>
-                    </div>
+        <div class="grupo-filtro">
+            <div class="titulo-filtro">
+                <h3>PRECIO</h3>
+            </div>
+            <div class="slider-precio">
+                <input type="range" min="0" max="30" class="input-rango" value="30">
+                <div class="etiquetas-precio">
+                    <span class="precio-tag">€0.00</span>
+                    <span class="precio-tag">€30.00</span>
                 </div>
             </div>
+        </div>
 
-            <button class="btn-borrar-filtros">BORRAR FILTROS</button>
+        <button class="btn-borrar-filtros">BORRAR FILTROS</button>
 
-        </aside>
+    </aside>
         <div class="container-items">
             <div class="item" data-marca="8.0.1" data-tipo="Tinto" data-precio="16.00">
                 <figure>
