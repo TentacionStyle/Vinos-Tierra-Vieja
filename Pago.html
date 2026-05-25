@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/Animaciones.css">
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="./Javascript/Hamburger.js"></script>
     <style>
         /* ===== RESET & BASE ===== */
@@ -379,60 +381,175 @@
             border: 1px solid #c3dfc9;
             color: #2d7a50;
             border-radius: 8px;
-            padding: 14px;
+            padding: 18px;
             text-align: center;
-            font-weight: 600;
             font-size: .85rem;
         }
-
-        /* ===== FOOTER ===== */
-        .ftv {
-            background-color: #1e1e1e;
-            color: #e8e0d5;
+        #success-msg i { font-size: 1.4rem; }
+        #success-msg .factura-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem; font-weight: 700; color: var(--vino);
+            margin: 8px 0 4px;
+        }
+        #success-msg .factura-detalle {
+            font-size: .75rem; color: #3a7d55; line-height: 1.6;
+        }
+        #success-msg .factura-detalle strong { color: #2d7a50; }
+        .btn-descargar {
+            display: inline-block;
+            margin-top: 14px;
+            background: var(--vino);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 24px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            border-top: 2px solid #7a1c2e;
+            font-size: .78rem; font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background .25s;
+        }
+        .btn-descargar:hover { background: var(--vino-dark); }
+        .btn-descargar i { margin-right: 6px; }
+
+        /* ===== FOOTER (copiado de basic.css) ===== */
+        .ftv {
+          background-color: #1e1e1e;
+          color: #e8e0d5;
+          font-family: 'Lato', Arial, sans-serif;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 1.7;
+          border-top: 2px solid #7a1c2e;
         }
         .ftv-top {
-            text-align: center;
-            padding: 28px 0 16px;
-            border-bottom: 1px solid rgba(255,255,255,.06);
+          text-align: center;
+          padding: 32px 0 20px;
+          border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+          position: relative;
         }
         .ftv-top::after {
-            content: '—◆—';
-            display: block;
-            color: var(--vino-mid);
-            font-size: 10px;
-            letter-spacing: 6px;
-            margin-top: 6px;
+          content: '—◆—';
+          display: block;
+          color: #7a1c2e;
+          font-size: 11px;
+          letter-spacing: 6px;
+          margin-top: 6px;
         }
         .ftv-contact-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px; font-weight: 400;
-            letter-spacing: 3px; text-transform: uppercase;
-            color: #f0ece6;
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 26px;
+          font-weight: 400;
+          letter-spacing: 3px;
+          color: #f0ece6;
+          margin: 0;
+          text-transform: uppercase;
         }
         .ftv-body {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            padding: 32px 48px;
-            gap: 32px;
-            border-bottom: 1px solid rgba(255,255,255,.06);
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          padding: 36px 48px;
+          border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
         }
-        .ftv-logo-col { display: flex; flex-direction: column; gap: 8px; }
-        .ftv-logo-wrap { background: #fff; border-radius: 4px; padding: 5px; display: inline-flex; }
-        .ftv-logo-img { width: 60px; }
-        .ftv-winery-name { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; color: #bbb; }
-        .ftv-cols { display: flex; gap: 48px; flex-wrap: wrap; }
-        .ftv-col h3 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vino-mid); margin-bottom: 8px; font-weight: 700; }
-        .ftv-col p { color: #b0a8a0; line-height: 1.7; }
-        .ftv-email { color: #c9a87c; text-decoration: none; }
-        .ftv-social { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; }
-        .ftv-social-title { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #666; }
-        .ftv-icons { display: flex; gap: 16px; }
-        .ftv-icon-link { color: #888; font-size: 1.1rem; transition: color .2s; }
-        .ftv-icon-link:hover { color: var(--vino-mid); }
-        .ftv-bottom-bar { text-align: center; padding: 14px; font-size: 11px; color: #555; border-top: 1px solid rgba(255,255,255,.05); }
+        .ftv-logo-col {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding-right: 40px;
+          border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .ftv-logo-wrap {
+          background: #fff;
+          border-radius: 4px;
+          padding: 5px;
+          margin-bottom: 10px;
+          display: inline-flex;
+        }
+        .ftv-logo-img {
+          width: 50px;
+          height: auto;
+          display: block;
+        }
+        .ftv-winery-name {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          color: #b0a89e;
+          text-transform: uppercase;
+          margin: 0;
+          line-height: 1.5;
+        }
+        .ftv-cols {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          padding-left: 48px;
+        }
+        .ftv-col-title {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 15px;
+          font-weight: 500;
+          color: #f0ece6;
+          margin: 0 0 14px 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #7a1c2e;
+          letter-spacing: 0.5px;
+        }
+        .ftv-col p {
+          margin: 0 0 4px 0;
+          color: #b0a89e;
+        }
+        .ftv-email {
+          color: #c9a87c;
+          text-decoration: none;
+          font-weight: 600;
+          transition: color 0.2s;
+        }
+        .ftv-email:hover { color: #f0ece6; }
+        .ftv-call-label {
+          font-size: 11px;
+          letter-spacing: 1px;
+          color: #777;
+          margin: 0 0 2px 0;
+        }
+        .ftv-phone-num {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #e0d4c8;
+          margin: 0;
+        }
+        .ftv-social {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          padding: 24px 20px 20px;
+        }
+        .ftv-social-title {
+          font-family: 'Lato', Arial, sans-serif;
+          font-size: 10px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: #777;
+        }
+        .ftv-icons {
+          display: flex;
+          gap: 20px;
+        }
+        .ftv-icon-link {
+          color: #888;
+          font-size: 1.3rem;
+          transition: color 0.2s;
+          line-height: 1;
+        }
+        .ftv-icon-link:hover { color: #7a1c2e; }
+        .ftv-bottom-bar {
+          text-align: center;
+          padding: 18px;
+          font-size: 11px;
+          color: #555;
+          border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+        }
 
         /* ===== VALUES STRIP (from mockup bottom) ===== */
         .values-strip {
@@ -462,7 +579,15 @@
         }
         .value-desc { font-size: .72rem; color: rgba(255,255,255,.55); line-height: 1.5; }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== PRINT / PDF ===== */
+        @media print {
+            body * { visibility: hidden; }
+            #invoice-template, #invoice-template * { visibility: visible; }
+            #invoice-template { display: block !important; position: absolute; left: 0; top: 0; }
+            #invoice-content { width: 100%; padding: 30px; }
+        }
+
+/* ===== RESPONSIVE ===== */
         @media (max-width: 960px) {
             .checkout-layout { grid-template-columns: 1fr; padding: 0 24px 64px; }
             .summary-card { position: static; }
@@ -486,6 +611,41 @@
             .form-card { padding: 24px 20px; }
             .checkout-layout { padding: 0 12px 40px; }
             .page-header, .breadcrumb { padding-left: 12px; padding-right: 12px; }
+            .nav-badge { font-size: .65rem; }
+            .navbar { padding: 0 16px; }
+            .ftv-body { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+            .ftv-cols { justify-content: center; }
+            .ftv-logo-col { align-items: center; }
+            .field input, .field select { font-size: 16px; }
+            .btn-pay { height: 48px; font-size: .82rem; }
+        }
+        @media (max-width: 480px) {
+            .checkout-layout { padding: 0 8px 30px; }
+            .page-header { padding: 12px 8px 20px; }
+            .breadcrumb { padding: 14px 8px 0; font-size: .6rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .page-header p { font-size: .75rem; }
+            .form-card { padding: 16px 12px; border-radius: 8px; }
+            .summary-card { padding: 16px; }
+            .step-title { font-size: .8rem; }
+            .step-num { width: 24px; height: 24px; font-size: .65rem; }
+            .payment-label { font-size: .78rem; }
+            .card-logo { height: 16px; }
+            .bizum-logo { font-size: .75rem; }
+            .paypal-logo { font-size: .8rem; }
+            .order-item-name { font-size: .75rem; }
+            .order-item-qty { font-size: .65rem; }
+            .order-item-price { font-size: .8rem; }
+            .summary-title { font-size: 1.1rem; }
+            .summary-row.total { font-size: 1rem; }
+            .legal-note { font-size: .6rem; }
+            #card-fields { padding: 12px; }
+            .ftv-body { padding: 24px 16px; gap: 20px; }
+            .ftv-cols { gap: 24px; }
+            .value-item { padding: 14px; }
+            .value-icon { width: 36px; height: 36px; font-size: .9rem; }
+            .value-name { font-size: .65rem; }
+            .value-desc { font-size: .65rem; }
         }
     </style>
 </head>
@@ -691,7 +851,14 @@
         </div>
 
         <div id="success-msg">
-            ✅ ¡Operación válida! Tu pedido está en camino.
+            <div>✅</div>
+            <div class="factura-num" id="factura-num">FACTURA #—</div>
+            <div class="factura-detalle" id="factura-detalle">
+                Gracias por tu compra. Te enviaremos un email con los detalles.
+            </div>
+            <button class="btn-descargar" id="btn-descargar" onclick="descargarPDF()">
+                <i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)
+            </button>
         </div>
 
     </div><!-- /form-card -->
@@ -767,50 +934,118 @@
     </div>
 </div>
 
+<!-- HIDDEN INVOICE TEMPLATE (off-screen so html2canvas can render it) -->
+<div id="invoice-template" style="position:fixed; left:-9999px; top:0; opacity:0; pointer-events:none; z-index:-1;">
+    <div id="invoice-content" style="width:700px; padding:50px 60px; font-family:'Montserrat',sans-serif; color:#1a1a1a; background:#fff;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #6f2236; padding-bottom:20px;">
+            <div>
+                <img src="./css/img/logotipo.png" style="width:60px;">
+                <div style="font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:2px; color:#6f2236; margin-top:4px;">TIERRA VIEJA</div>
+            </div>
+            <div style="text-align:right;">
+                <div style="font-family:'Cinzel',serif; font-size:1.4rem; color:#6f2236; letter-spacing:3px;">FACTURA</div>
+                <div id="pdf-numero" style="font-size:0.8rem; color:#888; margin-top:2px;"></div>
+                <div id="pdf-fecha" style="font-size:0.8rem; color:#888;"></div>
+            </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin:28px 0;">
+            <div>
+                <div style="font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#888; margin-bottom:4px;">Cliente</div>
+                <div id="pdf-cliente-nombre" style="font-size:0.95rem; font-weight:600;"></div>
+                <div id="pdf-cliente-email" style="font-size:0.8rem; color:#555;"></div>
+                <div id="pdf-cliente-tlf" style="font-size:0.8rem; color:#555;"></div>
+            </div>
+            <div style="text-align:right;">
+                <div style="font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#888; margin-bottom:4px;">Envío</div>
+                <div id="pdf-envio-dir" style="font-size:0.9rem; font-weight:600;"></div>
+                <div id="pdf-envio-ciudad" style="font-size:0.8rem; color:#555;"></div>
+                <div id="pdf-envio-pais" style="font-size:0.8rem; color:#555;"></div>
+            </div>
+        </div>
+        <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+            <thead>
+                <tr style="background:#6f2236; color:#fff;">
+                    <th style="padding:10px 12px; text-align:left; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Producto</th>
+                    <th style="padding:10px 12px; text-align:center; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Cant.</th>
+                    <th style="padding:10px 12px; text-align:right; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Precio</th>
+                    <th style="padding:10px 12px; text-align:right; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Total</th>
+                </tr>
+            </thead>
+            <tbody id="pdf-articulos"></tbody>
+        </table>
+        <div style="border-top:1px solid #ddd; padding-top:16px; margin-top:8px;">
+            <div style="display:flex; justify-content:flex-end; gap:60px;">
+                <div>
+                    <div style="display:flex; justify-content:space-between; gap:40px; font-size:0.85rem; color:#555; margin-bottom:4px;"><span>Subtotal</span><span id="pdf-subtotal"></span></div>
+                    <div style="display:flex; justify-content:space-between; gap:40px; font-size:0.85rem; color:#555; margin-bottom:4px;"><span>Envío</span><span id="pdf-envio"></span></div>
+                    <div style="display:flex; justify-content:space-between; gap:40px; font-size:1.1rem; font-weight:700; color:#6f2236; border-top:2px solid #6f2236; padding-top:8px; margin-top:4px;"><span>Total</span><span id="pdf-total"></span></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:30px; padding-top:16px; border-top:1px solid #ddd; text-align:center; font-size:0.68rem; color:#aaa;">
+            <div style="font-family:'Cinzel',serif; color:#6f2236; letter-spacing:2px; margin-bottom:4px;">VINOS TIERRA VIEJA</div>
+            <div>Ctra. N-330, km 450, 50400 Cariñena, Zaragoza · info@vinostierravieja.com · +34 634 44 55 46</div>
+            <div style="margin-top:4px;">Método de pago: <span id="pdf-metodo-pago"></span></div>
+        </div>
+    </div>
+</div>
+
 <!-- FOOTER -->
-<footer class="ftv">
-    <div class="ftv-top">
-        <h2 class="ftv-contact-title">Contacto</h2>
-    </div>
-    <div class="ftv-body">
-        <div class="ftv-logo-col">
-            <div class="ftv-logo-wrap">
-                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
-            </div>
-            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
+    <footer class="ftv">
+        <div class="ftv-top">
+            <h2 class="ftv-contact-title">Contacto</h2>
         </div>
-        <div class="ftv-cols">
-            <div class="ftv-col">
-                <h3>Oficina</h3>
-                <p>Ctra. N-330, km 450, 50400</p>
-                <p>Cariñena, Zaragoza</p>
-                <p><a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a></p>
+
+        <div class="ftv-body">
+            <div class="ftv-logo-col">
+                <div class="ftv-logo-wrap">
+                    <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+                </div>
+                <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
             </div>
-            <div class="ftv-col">
-                <h3>Horario</h3>
-                <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
-                <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
-            </div>
-            <div class="ftv-col">
-                <h3>Teléfono</h3>
-                <p style="color:#999;font-size:11px;letter-spacing:1px">Llámanos</p>
-                <p style="font-size:1rem;font-weight:600;color:#e0d4c8">+34 634 44 55 46</p>
+
+            <div class="ftv-cols">
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Oficina</h3>
+                    <p>Ctra. N-330, km 450, 50400</p>
+                    <p>Cariñena, Zaragoza</p>
+                    <p class="ftv-email-row">
+                        <a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a>
+                    </p>
+                </div>
+
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Horario</h3>
+                    <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
+                    <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
+                    </h3>
+                </div>
+
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Teléfono</h3>
+                    <p class="ftv-call-label">Llámanos</p>
+                    <p class="ftv-phone-num">+34 634 44 55 46</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="ftv-social">
-        <p class="ftv-social-title">Redes Sociales</p>
-        <div class="ftv-icons">
-            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
+
+        <div class="ftv-social">
+            <p class="ftv-social-title">Redes Sociales</p>
+            <div class="ftv-icons">
+                <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link"
+                    aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="ftv-bottom-bar">© 2025 Vinos Tierra Vieja · Cariñena, Zaragoza</div>
-</footer>
+
+        <div class="ftv-bottom-bar">
+            © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
+        </div>
+    </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -966,13 +1201,89 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/* --- GENERAR FACTURA --- */
+function generarFactura(method) {
+    const items = (() => {
+        try { return JSON.parse(localStorage.getItem('carritoItems')) || []; }
+        catch { return []; }
+    })();
+
+    const subtotal = items.reduce((s, it) => {
+        const pu = parseFloat(it.precio.replace('€','').replace(',','.')) || 0;
+        return s + pu * it.cantidad;
+    }, 0);
+    const envio = 4.90;
+    const total = subtotal + envio;
+
+    const ahora = new Date();
+    const numFactura = 'TV-' + ahora.getFullYear()
+        + String(ahora.getMonth()+1).padStart(2,'0')
+        + String(ahora.getDate()).padStart(2,'0')
+        + '-' + String(Math.floor(Math.random()*9000)+1000);
+
+    const telefono   = document.getElementById('telefono').value.trim();
+    const cp         = document.getElementById('cp').value.trim();
+    const ciudad     = document.getElementById('ciudad').value.trim();
+    const pais       = document.getElementById('pais').value;
+
+    return {
+        numero: numFactura,
+        fecha: ahora.toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' }),
+        cliente: {
+            nombre: document.getElementById('nombre').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            telefono: telefono || '—'
+        },
+        envio: {
+            direccion: document.getElementById('direccion').value.trim(),
+            cp: cp || '—',
+            ciudad: ciudad || '—',
+            pais: pais === 'es' ? 'España' : pais === 'pt' ? 'Portugal' : pais === 'fr' ? 'Francia' : pais === 'de' ? 'Alemania' : 'Italia'
+        },
+        pago: { metodo: method },
+        articulos: items.map(it => ({
+            titulo: it.titulo,
+            cantidad: it.cantidad,
+            precioUnitario: it.precio,
+            total: (parseFloat(it.precio.replace('€','').replace(',','.')) * it.cantidad).toFixed(2)
+        })),
+        subtotal: subtotal.toFixed(2),
+        envio: envio.toFixed(2),
+        total: total.toFixed(2)
+    };
+}
+
+/* --- EMAILJS INIT (misma cuenta que actualidad) --- */
+(function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init({ publicKey: "qrkTSkp82bdu-5qc6" });
+    }
+})();
+
+/* --- ENVIAR FACTURA POR EMAIL --- */
+function enviarFacturaEmail(factura) {
+    if (typeof emailjs === 'undefined') return;
+    const params = {
+        email:       factura.cliente.email,
+        nombre:      factura.cliente.nombre,
+        factura_num: factura.numero,
+        factura_fecha: factura.fecha,
+        direccion:   factura.envio.direccion + ', ' + factura.envio.cp + ' ' + factura.envio.ciudad + ', ' + factura.envio.pais,
+        total:       factura.total.replace('.',',') + ' €',
+        articulos:   factura.articulos.map(a => a.cantidad + 'x ' + a.titulo + ' — ' + a.total.replace('.',',') + ' €').join(' | ')
+    };
+    emailjs.send('service_g5xtv8s', 'template_mil567q', params)
+        .catch(e => console.log('EmailJS error (no crítico):', e));
+}
+
 /* --- PROCESS PAYMENT --- */
 function procesarPago() {
     const method  = document.querySelector('input[name="pago"]:checked').value;
     const btn     = document.getElementById('btn-pago');
     const success = document.getElementById('success-msg');
+    const facturaNum = document.getElementById('factura-num');
+    const facturaDet = document.getElementById('factura-detalle');
 
-    // Validación campos comunes
     const nombre = document.getElementById('nombre').value.trim();
     const email  = document.getElementById('email').value.trim();
     const dir    = document.getElementById('direccion').value.trim();
@@ -982,7 +1293,6 @@ function procesarPago() {
         return;
     }
 
-    // Validación específica por método
     if (method === 'card') {
         const num = document.getElementById('card-num').value;
         if (num.replace(/\s/g,'').length < 16) {
@@ -991,10 +1301,27 @@ function procesarPago() {
         }
     }
 
+    const finalizar = () => {
+        const factura = generarFactura(method);
+        localStorage.setItem('ultimaFactura', JSON.stringify(factura));
+        localStorage.removeItem('carritoItems');
+        localStorage.removeItem('totalCompra');
+
+        enviarFacturaEmail(factura);
+
+        facturaNum.textContent = 'FACTURA ' + factura.numero;
+        facturaDet.innerHTML = 'Gracias, <strong>' + factura.cliente.nombre + '</strong>. '
+            + 'Hemos registrado tu pedido por importe de <strong>' + factura.total.replace('.',',') + ' €</strong>. '
+            + 'Recibirás un email con la factura en <strong>' + factura.cliente.email + '</strong>.';
+
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Pago completado';
+        success.style.display = 'block';
+    };
+
     if (method === 'bizum') {
-        const phone     = document.getElementById('bizum-phone').value.trim();
-        const errorEl   = document.getElementById('bizum-phone-error');
-        const phoneEl   = document.getElementById('bizum-phone');
+        const phone   = document.getElementById('bizum-phone').value.trim();
+        const errorEl = document.getElementById('bizum-phone-error');
+        const phoneEl = document.getElementById('bizum-phone');
 
         if (phone.length !== 9 || !/^[6789]\d{8}$/.test(phone)) {
             errorEl.style.display = 'block';
@@ -1005,32 +1332,83 @@ function procesarPago() {
         errorEl.style.display = 'none';
         phoneEl.style.borderColor = '';
 
-        // Flujo Bizum: esperar confirmación simulada
-        const prefix = document.getElementById('bizum-prefix').value;
-        const total  = document.getElementById('total-display').textContent;
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Esperando confirmación Bizum...';
         btn.disabled = true;
-
-        // En producción: aquí llamarías a tu backend/TPV para iniciar el cobro Bizum
-        // bizumPagar({ telefono: prefix + phone, importe: total });
-        setTimeout(() => {
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Pago completado';
-            success.style.display = 'block';
-            localStorage.removeItem('totalCompra');
-            localStorage.removeItem('carritoItems');
-        }, 2200);
+        setTimeout(finalizar, 2200);
         return;
     }
 
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...';
     btn.disabled = true;
+    setTimeout(finalizar, 1500);
+}
 
-    setTimeout(() => {
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Pago completado';
-        success.style.display = 'block';
-        localStorage.removeItem('totalCompra');
-        localStorage.removeItem('carritoItems');
-    }, 1500);
+/* --- DESCARGAR PDF --- */
+function descargarPDF() {
+    const factura = (() => {
+        try { return JSON.parse(localStorage.getItem('ultimaFactura')); }
+        catch { return null; }
+    })();
+    if (!factura) { alert('No se encuentra la factura.'); return; }
+
+    const btn = document.getElementById('btn-descargar');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generando PDF...';
+
+    const plantilla = document.getElementById('invoice-content');
+    const clone = plantilla.cloneNode(true);
+    clone.id = 'invoice-content-clone';
+    clone.style.cssText = 'width:700px; padding:50px 60px; font-family:Montserrat,sans-serif; color:#1a1a1a; background:#fff; position:fixed; top:0; left:0; z-index:9999;';
+    document.body.appendChild(clone);
+
+    clone.querySelector('#pdf-numero').textContent         = factura.numero;
+    clone.querySelector('#pdf-fecha').textContent          = factura.fecha;
+    clone.querySelector('#pdf-cliente-nombre').textContent = factura.cliente.nombre;
+    clone.querySelector('#pdf-cliente-email').textContent  = factura.cliente.email;
+    clone.querySelector('#pdf-cliente-tlf').textContent    = 'Tel: ' + factura.cliente.telefono;
+    clone.querySelector('#pdf-envio-dir').textContent      = factura.envio.direccion;
+    clone.querySelector('#pdf-envio-ciudad').textContent   = factura.envio.cp + ', ' + factura.envio.ciudad;
+    clone.querySelector('#pdf-envio-pais').textContent     = factura.envio.pais;
+
+    const tbody = clone.querySelector('#pdf-articulos');
+    tbody.innerHTML = '';
+    factura.articulos.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #eee';
+        tr.innerHTML = `
+            <td style="padding:10px 12px; font-size:0.85rem;">${a.titulo}</td>
+            <td style="padding:10px 12px; text-align:center; font-size:0.85rem;">${a.cantidad}</td>
+            <td style="padding:10px 12px; text-align:right; font-size:0.85rem;">${a.precioUnitario}</td>
+            <td style="padding:10px 12px; text-align:right; font-size:0.85rem; font-weight:600;">${a.total.replace('.',',')} €</td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    clone.querySelector('#pdf-subtotal').textContent = factura.subtotal.replace('.',',') + ' €';
+    clone.querySelector('#pdf-envio').textContent    = factura.envio.replace('.',',') + ' €';
+    clone.querySelector('#pdf-total').textContent    = factura.total.replace('.',',') + ' €';
+
+    const metodoLabel = { card: 'Tarjeta crédito/débito', paypal: 'PayPal', bizum: 'Bizum' };
+    clone.querySelector('#pdf-metodo-pago').textContent = metodoLabel[factura.pago.metodo] || factura.pago.metodo;
+
+    const opt = {
+        margin:       [0.5, 0.5, 0.5, 0.5],
+        filename:     'Factura_' + factura.numero + '.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, allowTaint: false },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(clone).save().then(() => {
+        document.body.removeChild(clone);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
+    }).catch(() => {
+        document.body.removeChild(clone);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
+        alert('Error al generar el PDF. Inténtalo de nuevo.');
+    });
 }
 </script>
 
