@@ -1,11 +1,17 @@
 /* ============================================================
-   RESPONSIVE.CSS - NAVBAR Y MENÚ DEFINITIVOS
+   RESPONSIVE.CSS — Comprehensive mobile rules for ALL pages
    ============================================================ */
 
+/* ============================================================
+   1. NAVBAR — MOBILE (applies to all page types)
+   ============================================================ */
 @media (max-width: 768px) {
-    
-    /* 1. FORZAR NAVBAR SIEMPRE VISIBLE */
-    .navbar, .noticia4-navbar, .noticia1-navbar, .noticia9-navbar, .noticia-navbar, .noticia-eno-navbar, .noticia3-navbar {
+
+    /* Force navbar always visible on mobile */
+    .navbar,
+    .noticia-navbar, .noticia1-navbar, .noticia2-navbar, .noticia3-navbar,
+    .noticia4-navbar, .noticia5-navbar, .noticia6-navbar, .noticia7-navbar,
+    .noticia8-navbar, .noticia9-navbar, .noticia-eno-navbar {
         animation: none !important;
         transition: none !important;
         opacity: 1 !important;
@@ -22,34 +28,32 @@
         display: flex !important;
     }
 
-    /* 2. LOGO CENTRADO (MÉTODO INFALIBLE CON BACKGROUND) */
+    /* Logo centered on mobile */
     .logo_nav {
         position: absolute !important;
         left: 50% !important;
         top: 50% !important;
-        transform: translate(-50%, -50%) !important; /* Centrado matemático */
+        transform: translate(-50%, -50%) !important;
         margin: 0 !important;
         padding: 0 !important;
         z-index: 10030 !important;
     }
 
-    /* Escondemos el logo cuadrado original de HTML */
     .logo_nav img {
-        display: none !important; 
+        display: none !important;
     }
 
-    /* Mostramos el logo alargado como fondo del enlace <a> */
     .logo_nav a {
         display: block !important;
-        width: 200px !important; /* Ancho del logo alargado */
-        height: 69px !important; /* Alto del logo alargado */
+        width: 200px !important;
+        height: 69px !important;
         background-image: url('./img/Logo-alargado.png') !important;
-        background-size: contain !important; /* Evita que se corte */
+        background-size: contain !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
     }
 
-    /* 3. BOTÓN HAMBURGUESA */
+    /* Hamburger button */
     .hamburger {
         position: absolute !important;
         left: 20px !important;
@@ -70,7 +74,7 @@
     .hamburger span {
         width: 100% !important;
         height: 3px !important;
-        background-color: #6f2236 !important; /* Color vino */
+        background-color: #6f2236 !important;
         border-radius: 10px !important;
         transition: all 0.3s linear !important;
         display: block !important;
@@ -81,7 +85,7 @@
     .hamburger.active span:nth-child(2) { opacity: 0 !important; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) !important; }
 
-    /* 4. MENÚ DESPLEGABLE */
+    /* Mobile menu dropdown */
     .navbar ul {
         display: none !important;
         flex-direction: column !important;
@@ -110,16 +114,68 @@
         font-weight: 600 !important;
         display: block !important;
     }
+
     /* ============================================================
-       6. CENTRADO EXTREMO DE FOOTERS EN MÓVIL
+       2. HERO — FIX LOGO/TITLE POSITION ON MOBILE
        ============================================================ */
-    
-    /* Envolvemos todo el footer y forzamos el centrado de texto */
+
+    /* Override the fixed-position logo from basic.css on all inner pages */
+    .hero #logotipo {
+        position: static !important;
+        translate: none !important;
+        top: auto !important;
+        left: auto !important;
+        height: 120px !important;
+        width: 120px !important;
+        margin: 0 auto 10px !important;
+        display: block !important;
+    }
+
+    /* Override fixed h1 from basic.css on mobile inner pages */
+    .hero h1 {
+        position: static !important;
+        translate: none !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+    }
+
+    .hero h1 span {
+        font-size: clamp(2rem, 10vw, 4rem) !important;
+        letter-spacing: 4px !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero .portada {
+        z-index: 2 !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Disable parallax on all heroes */
+    .hero,
+    .bodega-hero, .tienda-hero, .hub-hero,
+    .actualidad-hero, .sostenibilidad-hero,
+    .blanco-hero, .cabernet-hero, .chardonnay-hero,
+    .gb-hero, .merlot-hero, .mo-hero, .syrah-hero,
+    .garnacha-hero, .tempranillo-hero,
+    .banner-section {
+        background-attachment: scroll !important;
+    }
+
+    /* ============================================================
+       3. FOOTER — CENTERING ON MOBILE
+       ============================================================ */
     .ftv, .footer-tv {
         text-align: center !important;
     }
 
-    /* Columnas principales y contenedores pasan a ser bloques verticales centrados */
     .ftv-body, .footer-content {
         display: flex !important;
         flex-direction: column !important;
@@ -130,7 +186,6 @@
         width: 100% !important;
     }
 
-    /* El logotipo del footer */
     .ftv-logo-col, .logo-section {
         display: flex !important;
         flex-direction: column !important;
@@ -143,13 +198,12 @@
         margin: 0 auto !important;
     }
 
-    /* Agrupaciones de información (Oficina, Horario, Teléfono) */
     .ftv-cols, .info-group-container {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         width: 100% !important;
-        gap: 35px !important; /* Separación respirable entre secciones */
+        gap: 35px !important;
     }
 
     .ftv-col, .info-group {
@@ -161,7 +215,6 @@
         margin: 0 !important;
     }
 
-    /* Forzamos a que todos los párrafos, títulos y enlaces se centren matemáticamente */
     .ftv-col p, .ftv-col h3, .ftv-col a, .info-group p, .info-title {
         text-align: center !important;
         margin-left: auto !important;
@@ -169,7 +222,6 @@
         display: block !important;
     }
 
-    /* Sección de Redes Sociales */
     .ftv-social, .social-section {
         display: flex !important;
         flex-direction: column !important;
@@ -178,89 +230,554 @@
         width: 100% !important;
     }
 
-    /* Los iconos de Instagram/WhatsApp los mantenemos en fila horizontal (uno al lado del otro) */
     .ftv-icons, .social-icons {
         display: flex !important;
-        flex-direction: row !important; 
+        flex-direction: row !important;
         justify-content: center !important;
         align-items: center !important;
         gap: 25px !important;
         width: 100% !important;
         margin-top: 15px !important;
     }
-    /* HERO BODEGA */
-.bodega-hero {
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    height: 100vh !important;
-    width: 100vw !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
 
-.bodega-hero .portada {
-    position: relative !important;
-    z-index: 10 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    padding: 0 20px !important;
-    box-sizing: border-box !important;
-}
+    /* ============================================================
+       4. VINE DETAIL PAGES — INTRO, AROMAS, TABLE, CTA
+       ============================================================ */
 
-.bodega-hero .portada #logotipo {
-    display: block !important;
-    max-width: 150px !important;
-    margin: 0 auto 20px auto !important;
-}
+    /* Intro sections: stack vertically */
+    .bl-intro-inner, .cs-intro-inner, .ch-intro-inner,
+    .gb-intro-inner, .ml-intro-inner, .mo-intro-inner, .sy-intro-inner,
+    .glass-card, .glass-card-tempranillo {
+        flex-direction: column !important;
+        gap: 30px !important;
+        padding: 0 15px !important;
+    }
 
-.bodega-hero h1 {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    z-index: 10 !important;
-}
+    /* Intro images: don't overflow */
+    .bl-intro-image img, .cs-intro-image img, .ch-intro-image img,
+    .gb-intro-image img, .ml-intro-image img, .mo-intro-image img, .sy-intro-image img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
 
-.bodega-hero h1 span {
-    font-size: clamp(2rem, 10vw, 4rem) !important;
-    letter-spacing: 6px !important;
-    text-align: center !important;
-    color: #ffffff !important;
-}
+    /* Aroma cards: force single column on small phones */
+    @media (max-width: 480px) {
+        .bl-aromas-grid, .cs-aromas-grid, .ch-aromas-grid,
+        .gb-aromas-grid, .ml-aromas-grid, .mo-aromas-grid, .sy-aromas-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
 
-.bodega-hero::after {
-    z-index: 2 !important;
-}
-
-.bodega-hero .portada,
-.bodega-hero h1 {
-    z-index: 5 !important;
-}
-
-.bodega-hero .scroll-indicator {
-    z-index: 5 !important;
-    position: absolute !important;
-    bottom: 40px !important;
-}
-}
-
-@media (max-width: 768px) {
-    .bodega-hero {
-        background-attachment: scroll !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        min-height: 100vh !important;
+    /* Tech sheet tables: make scrollable horizontally */
+    .bl-ficha-table, .cs-ficha-table, .ch-ficha-table,
+    .gb-ficha-table, .ml-ficha-table, .mo-ficha-table, .sy-ficha-table,
+    .garnacha-ficha-table, .tempranillo-ficha-table {
+        font-size: 0.85rem !important;
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: normal !important;
         width: 100% !important;
     }
 
-    .bodega-hero .portada {
-        width: 100% !important;
-        padding: 0 20px !important;
-        box-sizing: border-box !important;
+    .bl-ficha-table td, .cs-ficha-table td, .ch-ficha-table td,
+    .gb-ficha-table td, .ml-ficha-table td, .mo-ficha-table td, .sy-ficha-table td {
+        padding: 10px 8px !important;
+        word-break: break-word !important;
     }
+
+    /* CTA sections */
+    .bl-cta, .cs-cta, .ch-cta, .gb-cta, .ml-cta, .mo-cta, .sy-cta {
+        padding: 60px 20px !important;
+    }
+
+    .bl-cta h2, .cs-cta h2, .ch-cta h2, .gb-cta h2, .ml-cta h2, .mo-cta h2, .sy-cta h2 {
+        font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    }
+
+    /* Section headers */
+    .bl-section-header, .cs-section-header, .ch-section-header,
+    .gb-section-header, .ml-section-header, .mo-section-header, .sy-section-header {
+        padding: 0 15px !important;
+    }
+
+    /* ============================================================
+       5. NEWS ARTICLE PAGES
+       ============================================================ */
+
+    /* Hero height reduction */
+    .noticia-hero, .noticia1-hero, .noticia-eno-hero,
+    .noticia3-hero, .noticia4-hero, .noticia5-hero,
+    .noticia6-hero, .noticia7-hero, .noticia8-hero, .noticia9-hero {
+        height: 70vh !important;
+        min-height: 400px !important;
+    }
+
+    /* Hero content padding */
+    .noticia-hero-content, .noticia1-hero-content, .noticia-eno-hero-content,
+    .noticia3-hero-content, .noticia4-hero-content, .noticia5-hero-content,
+    .noticia6-hero-content, .noticia7-hero-content, .noticia8-hero-content,
+    .noticia9-hero-content {
+        padding: 20px !important;
+    }
+
+    .noticia-hero-content h1, .noticia1-hero-content h1,
+    .noticia-eno-hero-content h1, .noticia3-hero-content h1,
+    .noticia4-hero-content h1, .noticia5-hero-content h1,
+    .noticia6-hero-content h1, .noticia7-hero-content h1,
+    .noticia8-hero-content h1, .noticia9-hero-content h1 {
+        font-size: clamp(1.3rem, 5vw, 2rem) !important;
+    }
+
+    /* Container padding */
+    .noticia-container, .noticia1-container, .noticia-eno-container,
+    .noticia3-container, .noticia4-container, .noticia5-container,
+    .noticia6-container, .noticia7-container, .noticia8-container,
+    .noticia9-container {
+        padding: 0 15px !important;
+    }
+
+    /* Data cards: single column */
+    .noticia-datos, .noticia1-datos, .noticia-eno-datos,
+    .noticia3-datos, .noticia4-datos, .noticia5-datos,
+    .noticia6-datos, .noticia7-datos, .noticia8-datos, .noticia9-datos {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Related articles: single column */
+    .relacionados-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Quote blocks */
+    .noticia-quote, .noticia1-quote, .noticia-eno-quote,
+    .noticia3-quote, .noticia4-quote, .noticia5-quote,
+    .noticia6-quote, .noticia7-quote, .noticia8-quote, .noticia9-quote {
+        padding: 25px 20px !important;
+        margin: 30px 0 !important;
+        font-size: 1rem !important;
+    }
+
+    /* Lead paragraph */
+    .noticia-lead, .noticia1-lead, .noticia-eno-lead,
+    .noticia3-lead, .noticia4-lead, .noticia5-lead,
+    .noticia6-lead, .noticia7-lead, .noticia8-lead, .noticia9-lead {
+        font-size: 1.05rem !important;
+    }
+
+    /* Main content */
+    .noticia-main, .noticia1-main, .noticia-eno-main,
+    .noticia3-main, .noticia4-main, .noticia5-main,
+    .noticia6-main, .noticia7-main, .noticia8-main, .noticia9-main {
+        padding: 40px 0 !important;
+    }
+
+    /* Tags */
+    .noticia-tags, .noticia1-tags, .noticia-eno-tags,
+    .noticia3-tags, .noticia4-tags, .noticia5-tags,
+    .noticia6-tags, .noticia7-tags, .noticia8-tags, .noticia9-tags {
+        gap: 8px !important;
+    }
+
+    .noticia-tags span, .noticia1-tags span, .noticia-eno-tags span,
+    .noticia3-tags span, .noticia4-tags span, .noticia5-tags span,
+    .noticia6-tags span, .noticia7-tags span, .noticia8-tags span, .noticia9-tags span {
+        font-size: 0.7rem !important;
+        padding: 5px 10px !important;
+    }
+
+    /* Related articles section */
+    .noticia-relacionados, .noticia1-relacionados, .noticia-eno-relacionados,
+    .noticia3-relacionados, .noticia4-relacionados, .noticia5-relacionados,
+    .noticia6-relacionados, .noticia7-relacionados, .noticia8-relacionados,
+    .noticia9-relacionados {
+        padding: 40px 0 !important;
+    }
+
+    /* Meta info */
+    .noticia-meta, .noticia1-meta, .noticia-eno-meta,
+    .noticia3-meta, .noticia4-meta, .noticia5-meta,
+    .noticia6-meta, .noticia7-meta, .noticia8-meta, .noticia9-meta {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* Back button */
+    .noticia-back, .noticia1-back, .noticia-eno-back,
+    .noticia3-back, .noticia4-back, .noticia5-back,
+    .noticia6-back, .noticia7-back, .noticia8-back, .noticia9-back {
+        font-size: 0.75rem !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Figure/images */
+    .noticia-figure, .noticia1-figure, .noticia-eno-figure,
+    .noticia3-figure, .noticia4-figure, .noticia5-figure,
+    .noticia6-figure, .noticia7-figure, .noticia8-figure, .noticia9-figure {
+        margin: 30px 0 !important;
+    }
+
+    /* Inline banner (noticia4 specific) */
+    .noticia4-inline-banner {
+        flex-direction: column !important;
+    }
+
+    .banner-content-col, .banner-image-col {
+        width: 100% !important;
+    }
+
+    .banner-image-col {
+        height: 250px !important;
+    }
+
+    /* ============================================================
+       6. TIENDA — MOBILE
+       ============================================================ */
+
+    /* Cart icon position on mobile */
+    .container-carrito {
+        top: 15px !important;
+        right: 15px !important;
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .div-tienda header {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .div-tienda header h2 {
+        font-size: 1.5rem !important;
+    }
+
+    /* Product grid: 2 columns on mobile */
+    .container-items {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .item figure {
+        height: 180px !important;
+    }
+
+    .item {
+        padding: 10px !important;
+    }
+
+    .info-producto h4 {
+        font-size: 0.75rem !important;
+        min-height: 30px !important;
+    }
+
+    .precio {
+        font-size: 0.9rem !important;
+    }
+
+    .botonAñadir {
+        font-size: 0.65rem !important;
+        padding: 8px !important;
+    }
+
+    /* Filters sidebar collapses */
+    .sidebar-filtros {
+        position: relative !important;
+        top: 0 !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+    }
+
+    /* Notification position */
+    .notificacion-carrito {
+        left: 15px !important;
+        bottom: 15px !important;
+        font-size: 0.75rem !important;
+        padding: 10px 16px !important;
+    }
+
+    /* ============================================================
+       7. VIÑEDOS HUB PAGE
+       ============================================================ */
+
+    .hub-title {
+        font-size: 2rem !important;
+    }
+
+    .section-hub-viñedos {
+        padding: 60px 15px !important;
+    }
+
+    .hub-intro {
+        margin-bottom: 40px !important;
+    }
+
+    .hub-intro p {
+        font-size: 1rem !important;
+        padding: 0 15px !important;
+    }
+
+    /* ============================================================
+       8. ACTUALIDAD PAGE
+       ============================================================ */
+
+    .act-featured-card {
+        flex-direction: column !important;
+        margin: 0 !important;
+        border-radius: 16px !important;
+    }
+
+    .act-featured-img {
+        min-height: 220px !important;
+        width: 100% !important;
+    }
+
+    .act-featured-text {
+        padding: 20px !important;
+    }
+
+    .act-featured-text h2 {
+        font-size: 1.3rem !important;
+    }
+
+    .act-destacada {
+        padding: 60px 0 30px !important;
+    }
+
+    .act-scroll-wrapper {
+        padding: 10px 0 !important;
+    }
+
+    .act-grid {
+        gap: 15px !important;
+    }
+
+    .act-card {
+        flex: 0 0 260px !important;
+    }
+
+    .act-newsletter {
+        padding: 50px 15px !important;
+    }
+
+    .act-nl-form {
+        flex-direction: column !important;
+    }
+
+    .act-nl-form button {
+        white-space: normal !important;
+    }
+
+    .act-categories-centered {
+        gap: 8px !important;
+    }
+
+    .act-cat-btn {
+        font-size: 0.6rem !important;
+        padding: 8px 14px !important;
+    }
+
+    /* ============================================================
+       9. SOSTENIBILIDAD PAGE
+       ============================================================ */
+
+    .sost-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .sost-manifesto {
+        padding: 50px 20px !important;
+    }
+
+    .sost-manifesto h3 {
+        font-size: 1.5rem !important;
+    }
+
+    .trivia-container {
+        padding: 30px 20px !important;
+    }
+
+    .trivia-container h1 {
+        font-size: 1.8rem !important;
+    }
+
+    #pregunta {
+        font-size: 1.3rem !important;
+    }
+
+    /* ============================================================
+       10. BODEGA PAGE — TIMELINE
+       ============================================================ */
+
+    .timeline-vertical::after {
+        left: 30px !important;
+        transform: none !important;
+    }
+
+    .tl-item.left,
+    .tl-item.right {
+        justify-content: flex-end !important;
+    }
+
+    .tl-content-card {
+        width: calc(100% - 60px) !important;
+        max-width: none !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 25px !important;
+        margin: 0 !important;
+    }
+
+    .tl-dot {
+        left: 30px !important;
+        transform: translate(-50%, -50%) !important;
+    }
+
+    .tl-item.left .tl-content-card::after,
+    .tl-item.right .tl-content-card::after {
+        left: -24px !important;
+        right: auto !important;
+        border-right-color: #ffffff !important;
+        border-left-color: transparent !important;
+    }
+
+    .tl-item.left .tl-content-card,
+    .tl-item.right .tl-content-card {
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    .tl-item.left .tl-text,
+    .tl-item.right .tl-text {
+        flex-direction: row !important;
+    }
+
+    .tl-item.left .tl-year-box {
+        align-items: flex-start !important;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+        gap: 20px !important;
+        padding: 30px 15px !important;
+    }
+
+    .stat-separador {
+        display: none !important;
+    }
+
+    .stat-item {
+        padding: 10px 20px !important;
+        min-width: 120px !important;
+    }
+
+    .stat-numero {
+        font-size: 2rem !important;
+    }
+
+    /* Presencia grid */
+    .presencia-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+
+    .presencia-section {
+        padding: 60px 20px !important;
+    }
+
+    /* Vision section */
+    .vision-section {
+        padding: 50px 20px !important;
+    }
+
+    .nueva-gen-section {
+        padding: 60px 20px !important;
+    }
+
+    /* ============================================================
+       11. VINEYARD SPECIFIC (GARNACHA / TEMPRANILLO)
+       ============================================================ */
+
+    .grid-atributos {
+        flex-direction: column !important;
+        overflow-x: hidden !important;
+        gap: 20px !important;
+    }
+
+    .card-atributo {
+        flex: none !important;
+        width: 100% !important;
+    }
+
+    .section-timeline::before {
+        display: none !important;
+    }
+
+    .timeline-block {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .t-image::after {
+        display: none !important;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .bento-large {
+        grid-row: auto !important;
+    }
+
+    .img-flotante {
+        max-width: 250px !important;
+    }
+
+    /* ============================================================
+       12. GENERAL CONTENT FIXES
+       ============================================================ */
+
+    /* Prevent overflow on any container */
+    body {
+        overflow-x: hidden !important;
+    }
+
+    /* Fix for basic.css section div width limit */
+    section div {
+        max-width: 100vw !important;
+        padding: 0 15px !important;
+        width: 100% !important;
+    }
+
+    /* Override the 800px div limit from basic.css on pages that need it */
+    .trivia-container div,
+    .act-inner,
+    .intro-inner,
+    .presencia-inner,
+    .nueva-gen-inner,
+    .vision-inner {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Fix scroll indicator on mobile */
+    .scroll-indicator {
+        bottom: 30px !important;
+    }
+
+    .scroll-indicator p {
+        font-size: 0.65rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    /* Fix hero h1 on vine and news pages that have position:fixed from basic.css */
+    .blanco-hero h1, .cabernet-hero h1, .chardonnay-hero h1,
+    .gb-hero h1, .merlot-hero h1, .mo-hero h1, .syrah-hero h1,
+    .garnacha-hero h1, .tempranillo-hero h1,
+    .actualidad-hero h1, .sostenibilidad-hero h1 {
+        position: static !important;
+        translate: none !important;
+    }
+
 }

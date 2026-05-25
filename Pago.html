@@ -9,7 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/Animaciones.css">
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
+    <script src="./Javascript/Hamburger.js"></script>
     <style>
         /* ===== RESET & BASE ===== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -467,6 +470,22 @@
             .values-strip { grid-template-columns: 1fr 1fr; }
             .navbar { padding: 0 24px; }
             .navbar ul { display: none; }
+            .hamburger { display: flex; }
+        }
+        @media (max-width: 768px) {
+            .values-strip { grid-template-columns: 1fr; }
+            .value-item { padding: 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+            .value-item:last-child { border-bottom: none; }
+            .page-header h1 { font-size: 2rem; }
+            .field-row { grid-template-columns: 1fr; }
+            .field-row.triple { grid-template-columns: 1fr; }
+            .card-field-row { grid-template-columns: 1fr; }
+            .payment-option { padding: 12px 14px; }
+            .order-item-img { width: 42px; height: 52px; }
+            .summary-card { padding: 20px; }
+            .form-card { padding: 24px 20px; }
+            .checkout-layout { padding: 0 12px 40px; }
+            .page-header, .breadcrumb { padding-left: 12px; padding-right: 12px; }
         }
     </style>
 </head>
