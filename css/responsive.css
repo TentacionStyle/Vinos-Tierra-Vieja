@@ -188,4 +188,79 @@
         width: 100% !important;
         margin-top: 15px !important;
     }
+    /* HERO BODEGA */
+.bodega-hero {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.bodega-hero .portada {
+    position: relative !important;
+    z-index: 10 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+}
+
+.bodega-hero .portada #logotipo {
+    display: block !important;
+    max-width: 150px !important;
+    margin: 0 auto 20px auto !important;
+}
+
+.bodega-hero h1 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    z-index: 10 !important;
+}
+
+.bodega-hero h1 span {
+    font-size: clamp(2rem, 10vw, 4rem) !important;
+    letter-spacing: 6px !important;
+    text-align: center !important;
+    color: #ffffff !important;
+}
+
+.bodega-hero::after {
+    z-index: 2 !important;
+}
+
+.bodega-hero .portada,
+.bodega-hero h1 {
+    z-index: 5 !important;
+}
+
+.bodega-hero .scroll-indicator {
+    z-index: 5 !important;
+    position: absolute !important;
+    bottom: 40px !important;
+}
+}
+
+@media (max-width: 768px) {
+    .bodega-hero {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        min-height: 100vh !important;
+        width: 100% !important;
+    }
+
+    .bodega-hero .portada {
+        width: 100% !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+    }
 }
