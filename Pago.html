@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/Animaciones.css">
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="./Javascript/Hamburger.js"></script>
     <style>
@@ -412,7 +412,7 @@
         .btn-descargar:hover { background: var(--vino-dark); }
         .btn-descargar i { margin-right: 6px; }
 
-        /* ===== FOOTER (copiado de basic.css) ===== */
+        /* ===== FOOTER ===== */
         .ftv {
           background-color: #1e1e1e;
           color: #e8e0d5;
@@ -551,7 +551,7 @@
           border-top: 0.5px solid rgba(255, 255, 255, 0.06);
         }
 
-        /* ===== VALUES STRIP (from mockup bottom) ===== */
+        /* ===== VALUES STRIP ===== */
         .values-strip {
             background: var(--vino-dark);
             display: grid;
@@ -579,15 +579,7 @@
         }
         .value-desc { font-size: .72rem; color: rgba(255,255,255,.55); line-height: 1.5; }
 
-        /* ===== PRINT / PDF ===== */
-        @media print {
-            body * { visibility: hidden; }
-            #invoice-template, #invoice-template * { visibility: visible; }
-            #invoice-template { display: block !important; position: absolute; left: 0; top: 0; }
-            #invoice-content { width: 100%; padding: 30px; }
-        }
-
-/* ===== RESPONSIVE ===== */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 960px) {
             .checkout-layout { grid-template-columns: 1fr; padding: 0 24px 64px; }
             .summary-card { position: static; }
@@ -647,17 +639,16 @@
             .value-name { font-size: .65rem; }
             .value-desc { font-size: .65rem; }
         }
+
     </style>
 </head>
 <body>
 
-<!-- LOADER -->
 <div id="loader-overlay">
     <div class="loader-spinner"></div>
     <div class="loader-text"><i class="fa-solid fa-lock" style="margin-right:6px;font-size:.75rem"></i>Pago Seguro</div>
 </div>
 
-<!-- NAV -->
 <nav class="navbar">
     <div class="logo_nav">
         <a href="index.html"><img src="./css/img/Logo-alargado.png" alt="Vinos Tierra Vieja"></a>
@@ -674,22 +665,17 @@
     </div>
 </nav>
 
-<!-- BREADCRUMB -->
 <div class="breadcrumb">03. <span>Pago</span></div>
 
-<!-- PAGE HEADER -->
 <div class="page-header">
     <h1>Finaliza tu compra</h1>
     <p>Completa tus datos y elige tu método de pago.</p>
 </div>
 
-<!-- CHECKOUT LAYOUT -->
 <div class="checkout-layout">
 
-    <!-- ===== LEFT: FORM ===== -->
     <div class="form-card">
 
-        <!-- STEP 1: Contacto -->
         <div class="step-header">
             <div class="step-num">1</div>
             <div class="step-title">Información de contacto</div>
@@ -706,13 +692,16 @@
             </div>
         </div>
         <div class="field-full field" style="margin-top:16px">
+            <label>CIF / NIF <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+            <input type="text" id="cif" placeholder="Ej. 12345678Z">
+        </div>
+        <div class="field-full field" style="margin-top:16px">
             <label>Teléfono <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
             <input type="tel" id="telefono" placeholder="Ej. +34 600 123 456">
         </div>
 
         <hr class="section-divider">
 
-        <!-- STEP 2: Envío -->
         <div class="step-header">
             <div class="step-num">2</div>
             <div class="step-title">Dirección de envío</div>
@@ -751,31 +740,26 @@
 
         <hr class="section-divider">
 
-        <!-- STEP 3: Pago -->
         <div class="step-header">
             <div class="step-num">3</div>
             <div class="step-title">Método de pago</div>
         </div>
 
         <div class="payment-options">
-            <!-- Tarjeta -->
             <label class="payment-option selected" id="opt-card">
                 <input type="radio" name="pago" value="card" checked onchange="selectPayment('card')">
                 <span class="payment-label">Tarjeta de crédito / débito</span>
                 <div class="payment-logos">
-                    <!-- VISA SVG inline -->
                     <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
                         <rect width="780" height="500" rx="40" fill="#1A1F71"/>
                         <path d="M293 348.3L321.8 152H364l-28.9 196.3H293zm152.8-198.2c-15.3-5.8-39.2-12-69.1-12-76.2 0-129.8 38.6-130.1 93.8-.4 40.8 38.1 63.5 67.2 77.1 29.8 13.9 39.8 22.8 39.7 35.2-.2 19-23.9 27.7-46 27.7-30.7 0-47-4.3-72.3-14.9l-9.9-4.5-10.8 63.4c17.9 7.9 51 14.8 85.4 15.2 80.6 0 132.9-38 133.4-97 .2-32.3-20.1-56.9-64.2-77.2-26.7-13.1-43.1-21.9-42.9-35.2.1-11.8 13.8-24.3 43.7-24.3 24.9-.4 42.9 5 56.9 10.7l6.8 3.2 10.2-59.2zm198.7-1.1H604c-13.8 0-24 3.8-30.1 17.7L473 348.3h80.6s13.2-34.8 16.2-42.4c8.8 0 87.3.1 98.4.1 2.3 9.8 9.3 42.3 9.3 42.3h71.3l-62.2-196.3h-12zm-94.4 130.7c6.3-16.2 30.5-79 30.5-79-.4.7 6.3-16.3 10.1-26.9l5.2 24.3s14.7 67.6 17.8 81.6H550.1z" fill="#fff"/>
                     </svg>
-                    <!-- Mastercard SVG inline -->
                     <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
                         <rect width="780" height="500" rx="40" fill="#252525"/>
                         <circle cx="295" cy="250" r="145" fill="#EB001B"/>
                         <circle cx="485" cy="250" r="145" fill="#F79E1B"/>
                         <path d="M390 141.8c35.6 27.1 58.7 68.9 58.7 113.2s-23.1 86.1-58.7 113.2c-35.6-27.1-58.7-68.9-58.7-113.2s23.1-86.1 58.7-113.2z" fill="#FF5F00"/>
                     </svg>
-                    <!-- Amex simplified -->
                     <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
                         <rect width="780" height="500" rx="40" fill="#2557D6"/>
                         <text x="390" y="290" font-family="Arial" font-size="110" font-weight="bold" fill="white" text-anchor="middle">AMEX</text>
@@ -783,7 +767,6 @@
                 </div>
             </label>
 
-            <!-- Card fields -->
             <div id="card-fields" class="visible">
                 <div class="card-field-row">
                     <div class="field">
@@ -801,7 +784,6 @@
                 </div>
             </div>
 
-            <!-- PayPal -->
             <label class="payment-option" id="opt-paypal">
                 <input type="radio" name="pago" value="paypal" onchange="selectPayment('paypal')">
                 <span class="payment-label">PayPal</span>
@@ -810,7 +792,6 @@
                 </div>
             </label>
 
-            <!-- Bizum -->
             <label class="payment-option" id="opt-bizum">
                 <input type="radio" name="pago" value="bizum" onchange="selectPayment('bizum')">
                 <span class="payment-label">Bizum</span>
@@ -820,10 +801,8 @@
             </label>
         </div>
 
-        <!-- PayPal container (hidden by default) -->
         <div id="paypal-button-container" style="margin-top:14px; display:none;"></div>
 
-        <!-- Bizum container (hidden by default) -->
         <div id="bizum-fields" style="display:none; margin-top:14px;">
             <div style="background:var(--crema); border-radius:8px; padding:18px;">
                 <div class="field">
@@ -833,8 +812,7 @@
                             <option value="+34">🇪🇸 +34</option>
                             <option value="+351">🇵🇹 +351</option>
                         </select>
-                        <input type="tel" id="bizum-phone" placeholder="600 123 456" maxlength="9"
-                            style="flex:1; height:44px; border:1px solid var(--arena); border-radius:6px; padding:0 14px; font-family:'Montserrat',sans-serif; font-size:.85rem; transition:border-color .2s, box-shadow .2s;">
+                        <input type="tel" id="bizum-phone" placeholder="600 123 456" maxlength="9" style="flex:1; height:44px; border:1px solid var(--arena); border-radius:6px; padding:0 14px; font-family:'Montserrat',sans-serif; font-size:.85rem; transition:border-color .2s, box-shadow .2s;">
                     </div>
                     <span id="bizum-phone-error" style="display:none; color:#c0392b; font-size:.7rem; margin-top:4px;">Introduce un número de teléfono válido (9 dígitos).</span>
                 </div>
@@ -861,15 +839,11 @@
             </button>
         </div>
 
-    </div><!-- /form-card -->
-
-    <!-- ===== RIGHT: SUMMARY ===== -->
-    <aside class="summary-card">
+    </div><aside class="summary-card">
         <div class="summary-title">Resumen del pedido</div>
 
         <div class="order-items" id="order-items">
-            <!-- Rellenado dinámicamente desde localStorage (carritoItems) -->
-        </div>
+            </div>
 
         <hr class="summary-divider">
 
@@ -900,10 +874,7 @@
         </p>
     </aside>
 
-</div><!-- /checkout-layout -->
-
-<!-- VALUES STRIP -->
-<div class="values-strip">
+</div><div class="values-strip">
     <div class="value-item">
         <div class="value-icon"><i class="fa-solid fa-seedling"></i></div>
         <div>
@@ -934,118 +905,110 @@
     </div>
 </div>
 
-<!-- HIDDEN INVOICE TEMPLATE (off-screen so html2canvas can render it) -->
-<div id="invoice-template" style="position:fixed; left:-9999px; top:0; opacity:0; pointer-events:none; z-index:-1;">
-    <div id="invoice-content" style="width:700px; padding:50px 60px; font-family:'Montserrat',sans-serif; color:#1a1a1a; background:#fff;">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #6f2236; padding-bottom:20px;">
-            <div>
-                <img src="./css/img/logotipo.png" style="width:60px;">
-                <div style="font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:2px; color:#6f2236; margin-top:4px;">TIERRA VIEJA</div>
+<div id="invoice-template" style="display: none;">
+    <div id="invoice-content" style="width: 800px; background-color: #fdfbf7; color: #333; font-family: 'Montserrat', sans-serif; padding: 40px; box-sizing: border-box;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+            <div style="flex: 1;">
+                <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 38px; color: #6f2236; margin: 0 0 10px 0; letter-spacing: 2px;">FACTURA</h1>
+                <div style="font-size: 14px; font-weight: 700; color: #6f2236; margin-bottom: 20px;" class="target-numero">Nº —</div>
+                
+                <table style="font-size: 11px; color: #333; line-height: 1.8;">
+                    <tr><td style="width: 130px; font-weight: 600;">Fecha de emisión:</td><td class="target-fecha">—</td></tr>
+                    <tr><td style="font-weight: 600;">Forma de pago:</td><td class="target-pago">—</td></tr>
+                    <tr><td style="font-weight: 600;">Moneda:</td><td>EUR (€)</td></tr>
+                </table>
             </div>
-            <div style="text-align:right;">
-                <div style="font-family:'Cinzel',serif; font-size:1.4rem; color:#6f2236; letter-spacing:3px;">FACTURA</div>
-                <div id="pdf-numero" style="font-size:0.8rem; color:#888; margin-top:2px;"></div>
-                <div id="pdf-fecha" style="font-size:0.8rem; color:#888;"></div>
+            
+            <div style="flex: 1; text-align: center; padding-top: 10px;">
+                <img src="https://www.vinostierravieja.com/css/img/logotipo.png" alt="Logo" style="width: 55px; margin-bottom: 10px;">
+                <div style="font-family: 'Cinzel', serif; font-size: 22px; color: #6f2236; line-height: 1.1; letter-spacing: 2px;">TIERRA<br>VIEJA</div>
+                <div style="margin-top: 15px; font-size: 11px; color: #666; border-top: 1px solid #d4c5b9; padding-top: 10px; width: 60%; margin-left: auto; margin-right: auto;">
+                    Tradición que perdura,<br>calidad que se disfruta.
+                </div>
             </div>
+            <div style="flex: 1;"></div>
         </div>
-        <div style="display:flex; justify-content:space-between; margin:28px 0;">
-            <div>
-                <div style="font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#888; margin-bottom:4px;">Cliente</div>
-                <div id="pdf-cliente-nombre" style="font-size:0.95rem; font-weight:600;"></div>
-                <div id="pdf-cliente-email" style="font-size:0.8rem; color:#555;"></div>
-                <div id="pdf-cliente-tlf" style="font-size:0.8rem; color:#555;"></div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 30px; gap: 20px;">
+            <div style="flex: 1; display: flex; gap: 15px;">
+                <div style="width: 40px; height: 40px; border: 1.5px solid #6f2236; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #6f2236; font-size: 18px;">
+                    <span style="font-family: serif; font-weight: bold;">W</span>
+                </div>
+                <div style="font-size: 11px; line-height: 1.6; color: #444;">
+                    <div style="font-size: 10px; letter-spacing: 1px; color: #6f2236; font-weight: 700; margin-bottom: 4px;">EMISOR</div>
+                    <strong style="font-size: 13px; color: #222;">Vinos Tierra Vieja, S.L.</strong><br>
+                    CIF: B12345678<br>
+                    Ctra. N-330, km 450<br>
+                    50400 Cariñena, Zaragoza (España)<br>
+                    info@vinostierravieja.com<br>
+                    +34 634 44 55 46
+                </div>
             </div>
-            <div style="text-align:right;">
-                <div style="font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#888; margin-bottom:4px;">Envío</div>
-                <div id="pdf-envio-dir" style="font-size:0.9rem; font-weight:600;"></div>
-                <div id="pdf-envio-ciudad" style="font-size:0.8rem; color:#555;"></div>
-                <div id="pdf-envio-pais" style="font-size:0.8rem; color:#555;"></div>
-            </div>
-        </div>
-        <table style="width:100%; border-collapse:collapse; margin:20px 0;">
-            <thead>
-                <tr style="background:#6f2236; color:#fff;">
-                    <th style="padding:10px 12px; text-align:left; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Producto</th>
-                    <th style="padding:10px 12px; text-align:center; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Cant.</th>
-                    <th style="padding:10px 12px; text-align:right; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Precio</th>
-                    <th style="padding:10px 12px; text-align:right; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Total</th>
-                </tr>
-            </thead>
-            <tbody id="pdf-articulos"></tbody>
-        </table>
-        <div style="border-top:1px solid #ddd; padding-top:16px; margin-top:8px;">
-            <div style="display:flex; justify-content:flex-end; gap:60px;">
-                <div>
-                    <div style="display:flex; justify-content:space-between; gap:40px; font-size:0.85rem; color:#555; margin-bottom:4px;"><span>Subtotal</span><span id="pdf-subtotal"></span></div>
-                    <div style="display:flex; justify-content:space-between; gap:40px; font-size:0.85rem; color:#555; margin-bottom:4px;"><span>Envío</span><span id="pdf-envio"></span></div>
-                    <div style="display:flex; justify-content:space-between; gap:40px; font-size:1.1rem; font-weight:700; color:#6f2236; border-top:2px solid #6f2236; padding-top:8px; margin-top:4px;"><span>Total</span><span id="pdf-total"></span></div>
+            
+            <div style="flex: 1; display: flex; gap: 15px;">
+                <div style="width: 40px; height: 40px; border: 1.5px solid #6f2236; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #6f2236; font-size: 18px;">
+                    <span style="font-family: serif; font-weight: bold;">U</span>
+                </div>
+                <div style="font-size: 11px; line-height: 1.6; color: #444;">
+                    <div style="font-size: 10px; letter-spacing: 1px; color: #6f2236; font-weight: 700; margin-bottom: 4px;">CLIENTE</div>
+                    <strong style="font-size: 13px; color: #222;" class="target-cliente-nombre">—</strong><br>
+                    <span class="target-envio-dir">—</span><br>
+                    <span class="target-envio-ciudad">—</span><br>
+                    <span class="target-envio-pais">—</span><br>
+                    <span class="target-cliente-email">—</span>
                 </div>
             </div>
         </div>
-        <div style="margin-top:30px; padding-top:16px; border-top:1px solid #ddd; text-align:center; font-size:0.68rem; color:#aaa;">
-            <div style="font-family:'Cinzel',serif; color:#6f2236; letter-spacing:2px; margin-bottom:4px;">VINOS TIERRA VIEJA</div>
-            <div>Ctra. N-330, km 450, 50400 Cariñena, Zaragoza · info@vinostierravieja.com · +34 634 44 55 46</div>
-            <div style="margin-top:4px;">Método de pago: <span id="pdf-metodo-pago"></span></div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+                <tr style="background-color: #6f2236; color: #fff; font-size: 10px; letter-spacing: 1px; text-transform: uppercase;">
+                    <th style="padding: 12px 15px; text-align: left;">Descripción</th>
+                    <th style="padding: 12px 15px; text-align: center;">Cantidad</th>
+                    <th style="padding: 12px 15px; text-align: right;">Precio Unitario</th>
+                    <th style="padding: 12px 15px; text-align: right;">Importe</th>
+                </tr>
+            </thead>
+            <tbody class="target-articulos"></tbody>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+            <div style="width: 45%;">
+                <div style="border: 1px solid #e0d4c8; padding: 15px; border-radius: 6px; font-size: 11px; color: #555; background-color: #fff; margin-bottom: 15px;">
+                    <div style="color: #6f2236; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px;">INFORMACIÓN DEL PAGO</div>
+                    El pago de esta factura ha sido procesado correctamente mediante el método seleccionado. No es necesaria ninguna acción adicional.
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; color: #6f2236; font-size: 11px; font-style: italic;">
+                    <span>🍷</span>
+                    <div>Gracias por confiar en nuestros vinos.<br>Cada botella cuenta una historia.</div>
+                </div>
+            </div>
+            
+            <div style="width: 45%; font-size: 12px; color: #333;">
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                    <span>Subtotal (Productos)</span><span class="target-subtotal">—</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                    <span>Gastos de Envío</span><span class="target-envio">—</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 2px solid #e0d4c8;">
+                    <span>Impuestos (21% IVA incl.)</span><span>Incluidos</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 15px 0 5px 0; font-size: 18px; font-weight: 700; color: #6f2236;">
+                    <span>TOTAL</span><span class="target-total">—</span>
+                </div>
+                <div style="text-align: right; font-size: 10px; color: #888;">Importe con impuestos incluidos.</div>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #d4c5b9; padding-top: 20px; display: flex; justify-content: space-between; font-size: 10px; color: #666;">
+            <div>www.vinostierravieja.com<br>info@vinostierravieja.com</div>
+            <div>Cariñena, Zaragoza<br>España</div>
+            <div>Elaboramos vinos con pasión,<br>comprometidos con la tierra.</div>
         </div>
     </div>
 </div>
-
-<!-- FOOTER -->
-    <footer class="ftv">
-        <div class="ftv-top">
-            <h2 class="ftv-contact-title">Contacto</h2>
-        </div>
-
-        <div class="ftv-body">
-            <div class="ftv-logo-col">
-                <div class="ftv-logo-wrap">
-                    <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
-                </div>
-                <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
-            </div>
-
-            <div class="ftv-cols">
-                <div class="ftv-col">
-                    <h3 class="ftv-col-title">Oficina</h3>
-                    <p>Ctra. N-330, km 450, 50400</p>
-                    <p>Cariñena, Zaragoza</p>
-                    <p class="ftv-email-row">
-                        <a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a>
-                    </p>
-                </div>
-
-                <div class="ftv-col">
-                    <h3 class="ftv-col-title">Horario</h3>
-                    <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
-                    <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
-                    </h3>
-                </div>
-
-                <div class="ftv-col">
-                    <h3 class="ftv-col-title">Teléfono</h3>
-                    <p class="ftv-call-label">Llámanos</p>
-                    <p class="ftv-phone-num">+34 634 44 55 46</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="ftv-social">
-            <p class="ftv-social-title">Redes Sociales</p>
-            <div class="ftv-icons">
-                <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link"
-                    aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="ftv-bottom-bar">
-            © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
-        </div>
-    </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1105,14 +1068,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalBtn)     totalBtn.textContent     = fmt(parseFloat(total));
 
     } else {
-        /* carrito vacío: mostrar aviso */
         orderItemsContainer.innerHTML = `
             <p style="color:var(--texto-mid);font-size:.82rem;text-align:center;padding:16px 0">
                 Tu carrito está vacío.<br>
                 <a href="Tienda.html" style="color:var(--vino);font-weight:600">Volver a la tienda</a>
             </p>`;
 
-        /* Si al menos hay el total guardado, mostrarlo */
         const totalGuardado = localStorage.getItem('totalCompra');
         if (totalGuardado) {
             const fmt = parseFloat(totalGuardado).toFixed(2).replace('.',',') + ' €';
@@ -1121,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /* --- CARD NUMBER mask --- */
+    /* --- COORDENADAS MÁSCARAS TARJETA --- */
     const cardNum = document.getElementById('card-num');
     if (cardNum) {
         cardNum.addEventListener('input', e => {
@@ -1132,7 +1093,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- CARD DATE mask --- */
     const cardDate = document.getElementById('card-date');
     if (cardDate) {
         cardDate.addEventListener('input', e => {
@@ -1142,7 +1102,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- CVV only digits --- */
     const cardCvv = document.getElementById('card-cvv');
     if (cardCvv) {
         cardCvv.addEventListener('input', e => {
@@ -1150,7 +1109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- PAYPAL --- */
+    /* --- PAYPAL CONTAINER --- */
     const paypalContainer = document.getElementById('paypal-button-container');
     if (paypalContainer && typeof paypal !== 'undefined') {
         paypal.Buttons({
@@ -1163,7 +1122,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* --- SELECT PAYMENT METHOD --- */
 function selectPayment(method) {
     document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
     document.getElementById('opt-' + method).classList.add('selected');
@@ -1176,32 +1134,22 @@ function selectPayment(method) {
     paypalContainer.style.display = method === 'paypal' ? 'block' : 'none';
     bizumFields.style.display     = method === 'bizum'  ? 'block' : 'none';
 
-    // Actualiza el importe mostrado en el aviso de Bizum
     if (method === 'bizum') {
         const totalLabel = document.getElementById('bizum-total-label');
         if (totalLabel) totalLabel.textContent = document.getElementById('total-display').textContent;
     }
 }
 
-/* --- BIZUM: solo dígitos y formato --- */
 document.addEventListener('DOMContentLoaded', () => {
     const bizumPhone = document.getElementById('bizum-phone');
     if (bizumPhone) {
         bizumPhone.addEventListener('input', e => {
             e.target.value = e.target.value.replace(/\D/g, '');
         });
-        bizumPhone.addEventListener('focus', e => {
-            e.target.style.borderColor = 'var(--vino)';
-            e.target.style.boxShadow   = '0 0 0 3px rgba(111,34,54,.08)';
-        });
-        bizumPhone.addEventListener('blur', e => {
-            e.target.style.borderColor = '';
-            e.target.style.boxShadow   = '';
-        });
     }
 });
 
-/* --- GENERAR FACTURA --- */
+/* --- OPERACIÓN DE GENERACIÓN DE FACTURA --- */
 function generarFactura(method) {
     const items = (() => {
         try { return JSON.parse(localStorage.getItem('carritoItems')) || []; }
@@ -1229,10 +1177,12 @@ function generarFactura(method) {
     return {
         numero: numFactura,
         fecha: ahora.toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' }),
+        fechaVenc: (()=>{ const v=new Date(ahora); v.setDate(v.getDate()+14); return v.toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' }); })(),
         cliente: {
             nombre: document.getElementById('nombre').value.trim(),
             email: document.getElementById('email').value.trim(),
-            telefono: telefono || '—'
+            telefono: telefono || '—',
+            cif: document.getElementById('cif').value.trim()
         },
         envio: {
             direccion: document.getElementById('direccion').value.trim(),
@@ -1245,7 +1195,8 @@ function generarFactura(method) {
             titulo: it.titulo,
             cantidad: it.cantidad,
             precioUnitario: it.precio,
-            total: (parseFloat(it.precio.replace('€','').replace(',','.')) * it.cantidad).toFixed(2)
+            total: (parseFloat(it.precio.replace('€','').replace(',','.')) * it.cantidad).toFixed(2),
+            imagen: it.imagen // <--- ¡NUEVO! Vital para que el PDF sepa qué foto cargar
         })),
         subtotal: subtotal.toFixed(2),
         envio: envio.toFixed(2),
@@ -1253,30 +1204,38 @@ function generarFactura(method) {
     };
 }
 
-/* --- EMAILJS INIT (misma cuenta que actualidad) --- */
+/* --- LOG DE INICIALIZACIÓN DE EMAILJS --- */
 (function() {
     if (typeof emailjs !== 'undefined') {
         emailjs.init({ publicKey: "qrkTSkp82bdu-5qc6" });
     }
 })();
 
-/* --- ENVIAR FACTURA POR EMAIL --- */
 function enviarFacturaEmail(factura) {
     if (typeof emailjs === 'undefined') return;
+    
+    let direccionCompleta = "No especificada";
+    if (factura.cliente && factura.cliente.direccion) {
+        direccionCompleta = factura.cliente.direccion;
+    } else if (factura.envio && factura.envio.direccion) {
+        direccionCompleta = factura.envio.direccion;
+    }
+
     const params = {
-        email:       factura.cliente.email,
-        nombre:      factura.cliente.nombre,
-        factura_num: factura.numero,
-        factura_fecha: factura.fecha,
-        direccion:   factura.envio.direccion + ', ' + factura.envio.cp + ' ' + factura.envio.ciudad + ', ' + factura.envio.pais,
-        total:       factura.total.replace('.',',') + ' €',
-        articulos:   factura.articulos.map(a => a.cantidad + 'x ' + a.titulo + ' — ' + a.total.replace('.',',') + ' €').join(' | ')
+        email:         factura.cliente?.email || '',
+        nombre:        factura.cliente?.nombre || 'Cliente',
+        factura_num:   factura.numero || '',
+        factura_fecha: factura.fecha || '',
+        direccion:     direccionCompleta,
+        total:         (factura.total ? factura.total.toString().replace('.', ',') : '0') + ' €',
+        articulos:     factura.articulos ? factura.articulos.map(a => `${a.cantidad}x ${a.titulo} — ${(a.total || 0).toString().replace('.', ',')} €`).join('\n') : ''
     };
-    emailjs.send('service_g5xtv8s', 'template_mil567q', params)
-        .catch(e => console.log('EmailJS error (no crítico):', e));
+    
+    emailjs.send('service_g5xtv8s', 'template_2fnwjjr', params)
+        .then(() => { console.log('Correo enviado correctamente.'); })
+        .catch(e => console.error('Error en EmailJS:', e));
 }
 
-/* --- PROCESS PAYMENT --- */
 function procesarPago() {
     const method  = document.querySelector('input[name="pago"]:checked').value;
     const btn     = document.getElementById('btn-pago');
@@ -1343,72 +1302,353 @@ function procesarPago() {
     setTimeout(finalizar, 1500);
 }
 
-/* --- DESCARGAR PDF --- */
-function descargarPDF() {
+
+/* --- DESCARGAR PDF (jsPDF) ASÍNCRONO CON IMÁGENES PROPORCIONALES --- */
+
+// Función Helper MEJORADA: Ahora devuelve la imagen y sus dimensiones originales
+function getBase64ImageFromUrl(imageUrl) {
+    return new Promise((resolve) => {
+        if (!imageUrl) { resolve(null); return; }
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            resolve({
+                dataUrl: canvas.toDataURL('image/png'),
+                width: img.width,
+                height: img.height
+            });
+        };
+        img.onerror = () => resolve(null); // Si falla, ignora la foto para no romper el PDF
+        img.src = imageUrl;
+    });
+}
+
+async function descargarPDF() {
     const factura = (() => {
         try { return JSON.parse(localStorage.getItem('ultimaFactura')); }
         catch { return null; }
     })();
-    if (!factura) { alert('No se encuentra la factura.'); return; }
+    if (!factura) { alert('No se encuentra la factura de compra.'); return; }
 
     const btn = document.getElementById('btn-descargar');
     btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generando PDF...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cargando imágenes...';
 
-    const plantilla = document.getElementById('invoice-content');
-    const clone = plantilla.cloneNode(true);
-    clone.id = 'invoice-content-clone';
-    clone.style.cssText = 'width:700px; padding:50px 60px; font-family:Montserrat,sans-serif; color:#1a1a1a; background:#fff; position:fixed; top:0; left:0; z-index:9999;';
-    document.body.appendChild(clone);
+    const pestana = window.open('', '_blank');
+    if (pestana) {
+        pestana.document.write('<html lang="es"><head><title>Generando factura...</title></head><body style="font-family:sans-serif;text-align:center;padding-top:50px;">Generando tu factura en PDF, por favor espera...</body></html>');
+    }
 
-    clone.querySelector('#pdf-numero').textContent         = factura.numero;
-    clone.querySelector('#pdf-fecha').textContent          = factura.fecha;
-    clone.querySelector('#pdf-cliente-nombre').textContent = factura.cliente.nombre;
-    clone.querySelector('#pdf-cliente-email').textContent  = factura.cliente.email;
-    clone.querySelector('#pdf-cliente-tlf').textContent    = 'Tel: ' + factura.cliente.telefono;
-    clone.querySelector('#pdf-envio-dir').textContent      = factura.envio.direccion;
-    clone.querySelector('#pdf-envio-ciudad').textContent   = factura.envio.cp + ', ' + factura.envio.ciudad;
-    clone.querySelector('#pdf-envio-pais').textContent     = factura.envio.pais;
-
-    const tbody = clone.querySelector('#pdf-articulos');
-    tbody.innerHTML = '';
-    factura.articulos.forEach(a => {
-        const tr = document.createElement('tr');
-        tr.style.borderBottom = '1px solid #eee';
-        tr.innerHTML = `
-            <td style="padding:10px 12px; font-size:0.85rem;">${a.titulo}</td>
-            <td style="padding:10px 12px; text-align:center; font-size:0.85rem;">${a.cantidad}</td>
-            <td style="padding:10px 12px; text-align:right; font-size:0.85rem;">${a.precioUnitario}</td>
-            <td style="padding:10px 12px; text-align:right; font-size:0.85rem; font-weight:600;">${a.total.replace('.',',')} €</td>
-        `;
-        tbody.appendChild(tr);
-    });
-
-    clone.querySelector('#pdf-subtotal').textContent = factura.subtotal.replace('.',',') + ' €';
-    clone.querySelector('#pdf-envio').textContent    = factura.envio.replace('.',',') + ' €';
-    clone.querySelector('#pdf-total').textContent    = factura.total.replace('.',',') + ' €';
-
-    const metodoLabel = { card: 'Tarjeta crédito/débito', paypal: 'PayPal', bizum: 'Bizum' };
-    clone.querySelector('#pdf-metodo-pago').textContent = metodoLabel[factura.pago.metodo] || factura.pago.metodo;
-
-    const opt = {
-        margin:       [0.5, 0.5, 0.5, 0.5],
-        filename:     'Factura_' + factura.numero + '.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, allowTaint: false },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(clone).save().then(() => {
-        document.body.removeChild(clone);
+    if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF !== 'function') {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
-    }).catch(() => {
-        document.body.removeChild(clone);
+        alert('Error al cargar la librería PDF. Comprueba tu conexión e intenta de nuevo.');
+        if (pestana) pestana.close();
+        return;
+    }
+
+    try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pgW = pdf.internal.pageSize.getWidth();
+        const pH = pdf.internal.pageSize.getHeight();
+        const M = 15; 
+        const cW = pgW - 2 * M;
+        let y = M + 5;
+
+        // Paleta y utilidades
+        const V = [88,17,36], O = [194,155,104], D = [51,51,51], G = [100,100,100], CREMA = [253,251,247];
+        const S = { bod: 'bold', nor: 'normal', ita: 'italic' };
+        function L(text, x, y2) { pdf.text(String(text), x, y2); }
+        function R(text, rx, y2) { const w = pdf.getTextWidth(String(text)); pdf.text(String(text), rx-w, y2); }
+        function C(text, cx, y2) { const w = pdf.getTextWidth(String(text)); pdf.text(String(text), cx-w/2, y2); }
+        function setF(f, s) { pdf.setFont(f, s); }
+        function setS(s) { pdf.setFontSize(s); }
+        function setC(c) { pdf.setTextColor(c[0],c[1],c[2]); }
+        function setFC(c) { pdf.setFillColor(c[0],c[1],c[2]); }
+        function setDC(c) { pdf.setDrawColor(c[0],c[1],c[2]); }
+        
+        function fmtPrecio(val) { 
+            if (!val) return '0,00 \u20AC';
+            const n = parseFloat(String(val).replace(/€/g,'').replace(',','.').trim()); 
+            if (isNaN(n)) return String(val);
+            let parts = n.toFixed(2).split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return parts.join(',') + ' \u20AC'; 
+        }
+
+        function fmtCant(val) { 
+            const c = parseInt(val) || 0; 
+            return c + ' ' + (c === 1 ? 'botella' : 'botellas'); 
+        }
+
+        // --- PRECARGA DE IMÁGENES (Avanzada) ---
+        const logoObj = await getBase64ImageFromUrl('./css/img/logo-uva.png'); 
+        const logoMain = logoObj ? logoObj.dataUrl : null;
+
+        for (let item of factura.articulos) {
+            if (item.imagen) {
+                const imgObj = await getBase64ImageFromUrl(item.imagen);
+                if (imgObj) {
+                    item.base64 = imgObj.dataUrl;
+                    item.imgW = imgObj.width;
+                    item.imgH = imgObj.height;
+                }
+            }
+        }
+        
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Dibujando PDF...';
+
+        // Fondo base Pag 1
+        setFC(CREMA); pdf.rect(0, 0, pgW, pH, 'F');
+
+        // ===================== CABECERA =====================
+        const cxMid = pgW / 2;
+
+        setF('times', S.bod); setS(24); setC(V);
+        L('FACTURA', M, y); y += 2;
+
+        const lineY = y + 1;
+        setDC(O); pdf.setLineWidth(0.3);
+        pdf.line(M, lineY, M+35, lineY); pdf.line(M+39, lineY, M+44, lineY);
+        setFC(O);
+        pdf.triangle(M+37, lineY-1, M+38.5, lineY, M+37, lineY+1, 'F');
+        pdf.triangle(M+37, lineY-1, M+35.5, lineY, M+37, lineY+1, 'F');
+        y += 6;
+
+        setF('helvetica', S.bod); setS(9); setC(V); L('N\u00BA ' + factura.numero, M, y); y += 4;
+        
+        const ml = { card:'Tarjeta de cr\xE9dito/d\xE9bito', paypal:'PayPal', bizum:'Bizum' };
+        setF('helvetica', S.nor); setS(7); setC(D);
+        L('Fecha de emisi\xF3n:', M, y); L(factura.fecha, M+30, y); y += 4;
+        L('Fecha de vencimiento:', M, y); L(factura.fechaVenc || factura.fecha, M+30, y); y += 4;
+        L('Forma de pago:', M, y); L(ml[factura.pago.metodo]||'Transferencia', M+30, y); y += 4;
+        L('Moneda:', M, y); L('EUR (\u20AC)', M+30, y);
+
+        let ycHead = M + 2;
+        if (logoMain) {
+            pdf.addImage(logoMain, 'PNG', cxMid - 6, ycHead, 12, 12);
+            ycHead += 15;
+        } else {
+            setFC(O); setDC(O);
+            pdf.triangle(cxMid-1.5, ycHead+5, cxMid, ycHead+6.5, cxMid+1.5, ycHead+5, 'F');
+            pdf.triangle(cxMid-1.5, ycHead+8, cxMid, ycHead+6.5, cxMid+1.5, ycHead+8, 'F');
+            ycHead += 12;
+        }
+
+        setC(V); setF('times', S.bod); setS(16);
+        C('TIERRA', cxMid, ycHead);
+        C('VIEJA', cxMid, ycHead+6);
+
+        setC(G); setF('helvetica', S.ita); setS(7);
+        C('Tradici\xF3n que perdura,', cxMid, ycHead+11); 
+        C('calidad que se disfruta.', cxMid, ycHead+15);
+        
+        y = Math.max(y + 4, ycHead + 20);
+
+        setDC([230,220,210]); pdf.setLineWidth(0.3);
+        pdf.line(M, y, M+cW, y); y += 6;
+
+        // ===================== EMISOR / CLIENTE =====================
+        const divX = pgW / 2;
+        const emY = y;
+
+        setF('helvetica', S.bod); setS(6); setC(V); L('EMISOR', M+10, emY);
+        setF('helvetica', S.bod); setS(8); setC(D); L('Vinos Tierra Vieja, S.L.', M+10, emY+5);
+        setF('helvetica', S.nor); setS(7); setC(G);
+        L('CIF: B12345678', M+10, emY+9);
+        L('Ctra. N-330, km 450', M+10, emY+13);
+        L('50400 Cari\xF1ena, Zaragoza (Espa\xF1a)', M+10, emY+17);
+        L('info@vinostierravieja.com', M+10, emY+21);
+        L('+34 634 44 55 46', M+10, emY+25);
+
+        const cX = divX + 8;
+        let cY = emY;
+        setF('helvetica', S.bod); setS(6); setC(V); L('CLIENTE', cX+10, cY); cY += 5;
+        setF('helvetica', S.bod); setS(8); setC(D); L(factura.cliente.nombre || 'Cliente', cX+10, cY); cY += 4;
+        
+        setF('helvetica', S.nor); setS(7); setC(G);
+        const cifVal = factura.cliente.cif && factura.cliente.cif !== '—' ? factura.cliente.cif : '';
+        if (cifVal) { L('CIF/NIF: ' + cifVal, cX+10, cY); cY += 4; }
+        
+        const dirVal = factura.envio.direccion && factura.envio.direccion !== '—' ? factura.envio.direccion : '';
+        if (dirVal) { L('Direcci\xF3n: ' + dirVal, cX+10, cY); cY += 4; }
+        
+        if (factura.envio.ciudad && factura.envio.ciudad !== '—') { L('Ciudad: ' + factura.envio.ciudad, cX+10, cY); cY += 4; }
+        L('Pa\xEDs: ' + (factura.envio.pais && factura.envio.pais !== '—' ? factura.envio.pais : 'España'), cX+10, cY); cY += 4;
+        if (factura.cliente.email && factura.cliente.email !== '—') { L('Email: ' + factura.cliente.email, cX+10, cY); }
+
+        setDC([230,220,210]); pdf.setLineWidth(0.2); pdf.line(divX, emY-2, divX, emY+28);
+        y = emY + 34;
+
+        // ===================== TABLA DE PRODUCTOS =====================
+        const colDescX = M + 2;
+        const colCanCenter = M + cW * 0.55;
+        const colPriceRight = M + cW * 0.78;
+        const colImpX = M + cW - 2;
+
+        function dibujarCabeceraTabla() {
+            setFC(V); pdf.rect(M, y, cW, 6.5, 'F');
+            setC([255,255,255]); setF('helvetica', S.bod); setS(6);
+            L('DESCRIPCI\xD3N', colDescX + 10, y+4.2); // Más margen para la botella
+            C('CANTIDAD', colCanCenter, y+4.2);
+            R('PRECIO UNITARIO', colPriceRight, y+4.2);
+            R('IMPORTE', colImpX, y+4.2);
+            y += 7;
+        }
+
+        function comprobarPaginacion(espacioReq) {
+            if (y + espacioReq > pH - 40) {
+                pdf.addPage();
+                setFC(CREMA); pdf.rect(0, 0, pgW, pH, 'F'); 
+                y = M + 5;
+                return true;
+            }
+            return false;
+        }
+
+        dibujarCabeceraTabla();
+
+        const rowH = 9; // Alto de cada fila
+
+        factura.articulos.forEach((a, i) => {
+            if (comprobarPaginacion(rowH + 1)) { dibujarCabeceraTabla(); }
+
+            if (i%2===0) { setFC([255,255,255]); pdf.rect(M, y, cW, rowH, 'F'); } 
+            
+            // DIBUJADO PROPORCIONAL DE LA BOTELLA
+            if (a.base64 && a.imgW && a.imgH) {
+                try {
+                    // Calculamos la caja máxima que le permitimos a la botella (ej: 6mm de ancho, 7.5mm de alto)
+                    const maxW = 6;
+                    const maxH = 7.5;
+                    
+                    // Calculamos el ratio para que no se deforme
+                    const ratio = Math.min(maxW / a.imgW, maxH / a.imgH);
+                    const finalW = a.imgW * ratio;
+                    const finalH = a.imgH * ratio;
+
+                    // Centramos la botella en su "columna" virtual
+                    const imgX = colDescX + (maxW - finalW) / 2 + 1; 
+                    const imgY = y + (rowH - finalH) / 2; // Centrado vertical
+
+                    pdf.addImage(a.base64, 'PNG', imgX, imgY, finalW, finalH);
+                } catch(e) { console.warn("Error dibujando botella proporcionada"); }
+            } else {
+                // Si no hay foto, un pequeño guión
+                setC(G); setF('helvetica', S.bod); setS(6); L('-', colDescX + 3, y+5.5);
+            }
+
+            setC(D); setF('helvetica', S.bod); setS(7.5);
+            L(a.titulo, colDescX + 10, y + 5.5);
+
+            setF('helvetica', S.nor);
+            C(fmtCant(a.cantidad), colCanCenter, y + 5.5);
+            R(fmtPrecio(a.precioUnitario), colPriceRight, y + 5.5);
+
+            setF('helvetica', S.bod); setC(V);
+            R(fmtPrecio(a.total), colImpX, y + 5.5);
+
+            setDC([230,220,210]); pdf.setLineWidth(0.15);
+            pdf.line(M, y + rowH, M + cW, y + rowH);
+            y += rowH;
+        });
+
+        y += 8;
+
+        comprobarPaginacion(55);
+
+        // ===================== DATOS BANCARIOS + TOTALES =====================
+        const bankW = 85, totalsW = 75, totalsX = M + cW - totalsW;
+
+        setFC([255,255,255]); setDC([230,220,210]); pdf.setLineWidth(0.3);
+        pdf.roundedRect(M, y, bankW, 28, 2, 2, 'FD');
+        setF('helvetica', S.bod); setS(6.5); setC(V); L('DATOS BANCARIOS', M+12, y+5);
+        setF('helvetica', S.nor); setS(7); setC(D);
+        L('Banco:      Banco Santander', M+6, y+11);
+        L('Titular:      Vinos Tierra Vieja S.L.', M+6, y+16);
+        L('IBAN:         ES23 0049 1234 56 1234567890', M+6, y+21);
+        
+        setFC([248,241,234]); pdf.roundedRect(M, y+32, bankW, 12, 2, 2, 'F');
+        setF('helvetica', S.ita); setS(6.5); setC(G);
+        L('Gracias por confiar en nuestros vinos.', M+6, y+37);
+        L('Cada botella cuenta una historia.', M+6, y+41);
+
+        let totY = y + 2;
+        const ivaRate = 0.21;
+        const totalNum = parseFloat(factura.total.replace(',', '.')) || 0;
+        const baseNum = totalNum / (1 + ivaRate);
+        const ivaNum = totalNum - baseNum;
+
+        function totalRow(label, value, yPos, bold) {
+            setF('helvetica', bold ? S.bod : S.nor); setS(bold ? 8 : 7.5);
+            setC(D); L(label, totalsX, yPos); R(value, totalsX+totalsW, yPos);
+        }
+
+        totalRow('Subtotal', fmtPrecio(baseNum), totY, false); totY+=5;
+        totalRow('Descuento', '-0,00 \u20AC', totY, false); totY+=5;
+        totalRow('Base imponible', fmtPrecio(baseNum), totY, false); totY+=5;
+        totalRow('IVA (21%)', fmtPrecio(ivaNum), totY, false); totY+=5;
+
+        setDC([230,220,210]); pdf.setLineWidth(0.3);
+        pdf.line(totalsX, totY, totalsX+totalsW, totY); totY += 3;
+
+        setFC([243,235,223]); pdf.rect(totalsX, totY, totalsW, 10, 'F');
+        setF('helvetica', S.bod); setS(11); setC(V); L('TOTAL', totalsX+4, totY+7);
+        setS(14); R(fmtPrecio(totalNum), totalsX+totalsW-2, totY+7);
+        
+        setF('helvetica', S.ita); setS(6); setC(V);
+        L('*Importe con impuestos incluidos.', totalsX, totY+14);
+
+        // ===================== FOOTER GLOBAL (Multipágina) =====================
+        const totalPages = pdf.internal.getNumberOfPages();
+        const footY = pH - 25; 
+
+        for (let i = 1; i <= totalPages; i++) {
+            pdf.setPage(i);
+            
+            setDC([230,220,210]); pdf.setLineWidth(0.3);
+            pdf.line(M, footY, M+cW, footY); 
+            
+            const colW = (cW - 20) / 3;
+            const cols = [
+                { label:'Vinos Tierra Vieja', line1:'www.vinostierravieja.com', line2:'info@vinostierravieja.com' },
+                { label:'Ctra. N-330, km 450', line1:'50400 Cari\xF1ena, Zaragoza', line2:'Espa\xF1a' },
+                { label:'Elaboramos vinos con pasi\xF3n,', line1:'comprometidos con la tierra', line2:'y con quienes los disfrutan.' }
+            ];
+
+            cols.forEach((col, idx) => {
+                const cx = M + idx * (colW + 10) + colW/2;
+                setC(V); setF('helvetica', S.bod); setS(6.5); C(col.label, cx, footY + 6);
+                setC(G); setF('helvetica', S.nor); setS(6); C(col.line1, cx, footY + 10); C(col.line2, cx, footY + 14);
+            });
+
+            setC(G); setF('helvetica', S.nor); setS(6);
+            R(`Pág. ${i} / ${totalPages}`, M+cW, footY + 18);
+        }
+
+        // ===================== DESCARGA =====================
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
-        alert('Error al generar el PDF. Inténtalo de nuevo.');
-    });
+
+        if (pestana) {
+            pestana.location.href = pdf.output('bloburl');
+        } else {
+            pdf.save('Factura_' + factura.numero + '.pdf');
+        }
+
+    } catch (e) {
+        console.error('Error generando PDF:', e);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
+        if (pestana) pestana.close();
+        alert('Error al generar el PDF: ' + e.message);
+    }
 }
 </script>
 
