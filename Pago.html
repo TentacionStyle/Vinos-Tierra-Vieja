@@ -67,46 +67,34 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes pulse-txt { 0%,100% { opacity:1; } 50% { opacity:.4; } }
 
-        /* ===== NAV ===== */
-        .navbar {
-            position: fixed; top: 0; left: 0; right: 0;
-            height: 72px;
+        /* ===== TOP BAR (replaces old navbar) ===== */
+        .pago-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 48px;
             background: var(--crema);
             border-bottom: 1px solid rgba(111,34,54,.12);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 48px;
-            z-index: 1000;
         }
-        .logo_nav img { width: 190px; object-fit: contain; }
-        .navbar ul { list-style: none; display: flex; gap: 32px; }
-        .navbar ul li a {
+        .pago-back {
             font-family: 'Montserrat', sans-serif;
-            font-size: .82rem; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase;
-            color: var(--texto); text-decoration: none;
-            position: relative; padding-bottom: 4px;
-            transition: color .25s;
+            font-size: .78rem; font-weight: 600;
+            color: var(--vino); text-decoration: none;
+            letter-spacing: .5px;
+            transition: opacity .2s;
         }
-        .navbar ul li a::after {
-            content: ''; position: absolute; bottom: 0; left: 0;
-            width: 0; height: 1.5px;
-            background: var(--vino);
-            transition: width .25s;
-        }
-        .navbar ul li a:hover, .navbar ul li a.active { color: var(--vino); }
-        .navbar ul li a:hover::after, .navbar ul li a.active::after { width: 100%; }
-
-        .nav-badge {
+        .pago-back i { margin-right: 6px; }
+        .pago-back:hover { opacity: .7; }
+        .pago-badge {
             display: flex; align-items: center; gap: 6px;
             font-family: 'Montserrat', sans-serif;
             font-size: .75rem; font-weight: 600;
             color: var(--vino); letter-spacing: .5px;
         }
-        .nav-badge i { font-size: .9rem; }
+        .pago-badge i { font-size: .9rem; }
 
         /* ===== BREADCRUMB ===== */
         .breadcrumb {
-            margin-top: 72px;
             padding: 20px 64px 0;
             font-family: 'Montserrat', sans-serif;
             font-size: .7rem; font-weight: 600;
@@ -585,9 +573,7 @@
             .summary-card { position: static; }
             .page-header, .breadcrumb { padding-left: 24px; padding-right: 24px; }
             .values-strip { grid-template-columns: 1fr 1fr; }
-            .navbar { padding: 0 24px; }
-            .navbar ul { display: none; }
-            .hamburger { display: flex; }
+            .pago-topbar { padding: 12px 24px; }
         }
         @media (max-width: 768px) {
             .values-strip { grid-template-columns: 1fr; }
@@ -603,8 +589,9 @@
             .form-card { padding: 24px 20px; }
             .checkout-layout { padding: 0 12px 40px; }
             .page-header, .breadcrumb { padding-left: 12px; padding-right: 12px; }
-            .nav-badge { font-size: .65rem; }
-            .navbar { padding: 0 16px; }
+            .pago-topbar { padding: 10px 16px; }
+            .pago-back { font-size: .72rem; }
+            .pago-badge { font-size: .65rem; }
             .ftv-body { grid-template-columns: 1fr; text-align: center; justify-items: center; }
             .ftv-cols { justify-content: center; }
             .ftv-logo-col { align-items: center; }
@@ -612,6 +599,11 @@
             .btn-pay { height: 48px; font-size: .82rem; }
         }
         @media (max-width: 480px) {
+            .pago-topbar {
+                flex-direction: column;
+                gap: 6px;
+                padding: 10px 8px;
+            }
             .checkout-layout { padding: 0 8px 30px; }
             .page-header { padding: 12px 8px 20px; }
             .breadcrumb { padding: 14px 8px 0; font-size: .6rem; }
@@ -649,21 +641,10 @@
     <div class="loader-text"><i class="fa-solid fa-lock" style="margin-right:6px;font-size:.75rem"></i>Pago Seguro</div>
 </div>
 
-<nav class="navbar">
-    <div class="logo_nav">
-        <a href="index.html"><img src="./css/img/Logo-alargado.png" alt="Vinos Tierra Vieja"></a>
-    </div>
-    <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="Tienda.html">Tienda</a></li>
-        <li><a href="bodega.html">Nosotros</a></li>
-        <li><a href="#">Experiencias</a></li>
-        <li><a href="#">Contacto</a></li>
-    </ul>
-    <div class="nav-badge">
-        <i class="fa-solid fa-lock"></i> Pago seguro
-    </div>
-</nav>
+<div class="pago-topbar">
+    <a href="Tienda.html" class="pago-back"><i class="fa-solid fa-arrow-left"></i> Volver a la tienda</a>
+    <div class="pago-badge"><i class="fa-solid fa-lock"></i> Pago seguro</div>
+</div>
 
 <div class="breadcrumb">03. <span>Pago</span></div>
 
