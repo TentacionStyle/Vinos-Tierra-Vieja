@@ -28,12 +28,12 @@
         display: flex !important;
     }
 
-    /* Logo centered on mobile */
+    /* Logo on the left on mobile */
     .logo_nav {
         position: absolute !important;
-        left: 50% !important;
+        left: 15px !important;
         top: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        transform: translateY(-50%) !important;
         margin: 0 !important;
         padding: 0 !important;
         z-index: 10030 !important;
@@ -53,10 +53,10 @@
         background-repeat: no-repeat !important;
     }
 
-    /* Hamburger button */
+    /* Hamburger button on the right */
     .hamburger {
         position: absolute !important;
-        left: 20px !important;
+        right: 15px !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
         display: flex !important;
@@ -439,10 +439,10 @@
        6. TIENDA — MOBILE
        ============================================================ */
 
-    /* Cart icon position on mobile */
+    /* Cart icon position on mobile — shifted left to avoid hamburger */
     .container-carrito {
         top: 15px !important;
-        right: 15px !important;
+        right: 55px !important;
         width: 48px !important;
         height: 48px !important;
     }
