@@ -164,22 +164,6 @@ section div {
     z-index: 1000;
     /* Un número muy alto para asegurar que NADA se ponga por encima del menú */
     background-color: #f6eee3;
-    opacity: 0;
-    /* Empieza totalmente transparente (invisible) */
-
-    /* Configuración de animación ligada al scroll */
-    animation: fade-in forwards;
-    /* Ejecuta la animación "fade-in" y se queda en su estado final (forwards) */
-    animation-timeline: --scroll;
-    /* Conecta esta animación al scroll del body que definiste arriba */
-    animation-range: exit 80% exit 100%;
-    /* Define en qué punto exacto del scroll ocurre la animación */
-}
-
-/* Fallback/Fix para Scroll.js */
-.navbar.scrolled {
-    opacity: 1 !important;
-    visibility: visible !important;
 }
 
 /* Estilos para la lista del menú */

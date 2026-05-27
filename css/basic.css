@@ -163,16 +163,6 @@ section div {
     background-color: #f6eee3;
     box-sizing: border-box;
     border-bottom: 1px solid rgba(111, 34, 54, 0.1);
-    opacity: 0;
-    animation: fade-in forwards;
-    animation-timeline: --scroll;
-    animation-range: exit 80% exit 100%;
-}
-
-/* Fallback/Fix para Scroll.js */
-.navbar.scrolled {
-    opacity: 1 !important;
-    visibility: visible !important;
 }
 
 /* Logo + nombre de marca */

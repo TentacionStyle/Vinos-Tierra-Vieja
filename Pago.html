@@ -81,6 +81,8 @@
             font-size: .78rem; font-weight: 600;
             color: var(--vino); text-decoration: none;
             letter-spacing: .5px;
+            user-select: none;
+            -webkit-user-select: none;
             transition: opacity .2s;
         }
         .pago-back i { margin-right: 6px; }
@@ -205,6 +207,7 @@
         }
         .checkbox-row label {
             font-size: .78rem; color: var(--texto-mid); cursor: pointer;
+            user-select: none; -webkit-user-select: none;
         }
 
         /* ===== PAYMENT OPTIONS ===== */
@@ -216,6 +219,8 @@
             border-radius: 8px;
             padding: 14px 18px;
             cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
             transition: border-color .2s, background .2s;
         }
         .payment-option:hover { border-color: var(--arena-mid); }
@@ -336,19 +341,24 @@
 
         /* ===== PAY BUTTON ===== */
         .btn-pay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
-            margin-top: 20px;
+            height: 52px;
             background: var(--vino);
             color: #fff;
             border: none;
             border-radius: 8px;
-            height: 52px;
             font-family: 'Montserrat', sans-serif;
-            font-size: .88rem; font-weight: 700;
-            letter-spacing: 1px; text-transform: uppercase;
+            font-size: .9rem; font-weight: 600;
+            letter-spacing: .5px;
             cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: background .25s, transform .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: background .2s, opacity .2s;
+            margin-top: 10px;
         }
         .btn-pay:hover { background: var(--vino-dark); transform: translateY(-1px); }
         .btn-pay:active { transform: translateY(0); }
@@ -392,6 +402,8 @@
             border-radius: 6px;
             padding: 10px 24px;
             font-family: 'Montserrat', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
             font-size: .78rem; font-weight: 600;
             letter-spacing: 1px;
             cursor: pointer;

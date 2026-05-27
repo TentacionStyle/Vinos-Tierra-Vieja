@@ -2,6 +2,16 @@
    RESPONSIVE.CSS — Comprehensive mobile rules for ALL pages
    ============================================================ */
 
+/* Prevent text selection on interactive elements across all pages */
+label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
+.payment-option, .nav-badge, .pago-back, .btn-pay, .btn-descargar,
+.ftv-social a, .footer-column a, .submenu-toggle, .search-toggle,
+.carrito-icon {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* ============================================================
    1. NAVBAR — MOBILE (applies to all page types)
    ============================================================ */

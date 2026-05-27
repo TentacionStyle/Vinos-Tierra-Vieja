@@ -360,21 +360,12 @@
     align-items: center !important;
     box-shadow: 0 4px 20px rgba(111,34,54,0.4) !important;
     cursor: pointer;
-    opacity: 0;
-    animation: fade-in forwards;
-    animation-timeline: --scroll;
-    animation-range: exit 80% exit 100%;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .container-carrito:hover {
     transform: scale(1.08) !important;
     box-shadow: 0 8px 28px rgba(111,34,54,0.5) !important;
-}
-
-.container-carrito.scrolled {
-    opacity: 1 !important;
-    visibility: visible !important;
 }
 
 .icono-carrito {
