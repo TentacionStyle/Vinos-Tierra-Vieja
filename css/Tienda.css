@@ -46,16 +46,58 @@
     gap: 40px;
     max-width: 1200px;
     margin: 20px auto;
+    padding: 0 15px;
     align-items: flex-start;
     position: relative;
 }
 
 /* =========================================
-   4. SIDEBAR Y FILTROS
+   4. SEARCH BAR
+   ========================================= */
+.barra-busqueda {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-busqueda {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border: 2px solid #d4c5a9;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-family: 'Raleway', sans-serif;
+    background: #fff;
+    color: #2c1810;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-busqueda:focus {
+    border-color: #c9a96e;
+    box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.15);
+}
+
+.input-busqueda::placeholder {
+    color: #a28a6e;
+    opacity: 0.8;
+}
+
+.icono-busqueda {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a28a6e;
+    pointer-events: none;
+}
+
+/* =========================================
+   5. SIDEBAR Y FILTROS
    ========================================= */
 .sidebar-filtros {
     position: sticky;
-    top: 20px;
+    top: 100px;
     z-index: 100;
     max-height: 90vh;
     overflow-y: auto;
@@ -78,6 +120,41 @@
     text-transform: uppercase;
 }
 
+
+
+
+/* =========================================
+   LÓGICA DE DESPLIEGUE (CERRADOS POR DEFECTO)
+   ========================================= */
+
+/* 1. Por defecto, ocultamos las listas y el slider */
+.grupo-filtro ul,
+.grupo-filtro .contenedor-precio-slider { 
+    display: none;
+}
+
+/* 2. Cuando el grupo esté ABIERTO (no tenga la clase 'colapsado'), lo mostramos */
+.grupo-filtro:not(.colapsado) ul,
+.grupo-filtro:not(.colapsado) .contenedor-precio-slider {
+    display: block;
+}
+
+/* 3. Por defecto, la flecha de la tienda apunta hacia abajo/arriba según desees. 
+   Si queremos que rote 180 grados al abrirse: */
+.titulo-filtro span {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    font-family: monospace;
+}
+
+/* Cuando el filtro NO esté colapsado (esté abierto), rotamos la flecha */
+.titulo-filtro:not(.colapsado) span {
+    transform: rotate(180deg);
+}
+
+
+
+
 .sidebar-filtros ul { list-style: none; padding: 0; margin: 0; }
 .sidebar-filtros li { margin-bottom: 8px; font-size: 14px; color: #333; }
 .sidebar-filtros label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -94,7 +171,7 @@
 }
 */
 
-.input-rango {
+/* .input-rango {
     width: 100%;
     height: 4px;
     background: linear-gradient(to right, #6f2236 0%, #6f2236 50%, #ddd 50%, #ddd 100%);
@@ -103,6 +180,20 @@
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
+}
+*/ 
+.input-rango {
+    width: 100%;
+    height: 4px;
+    background: #ddd; /* Fondo gris por defecto */
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: linear-gradient(#6f2236, #6f2236); /* Capa de color vino */
+    background-size: 50% 100%; /* Este '50%' se actualizará dinámicamente con JavaScript */
+    background-repeat: no-repeat;
 }
 
 /* Thumb — Chrome/Safari */
@@ -149,19 +240,28 @@
 
 .btn-borrar-filtros {
     width: 100%;
-    padding: 10px;
-    background-color: #efebe9;
-    border: 1px solid #000;
-    color: #000;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #6f2236; /* Borde color vino */
+    color: #6f2236; /* Texto color vino */
+    font-family: 'Cinzel', serif; /* Misma tipografía elegante de la web */
+    font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
-    transition: background 0.3s;
+    border-radius: 6px; /* Bordes ligeramente redondeados como los de "Añadir" */
+    transition: all 0.3s ease;
 }
 
-.btn-borrar-filtros:hover { background-color: #e0e0e0; }
+.btn-borrar-filtros:hover {
+    background-color: #6f2236; /* Se rellena de vino */
+    color: #ffffff; /* Texto pasa a blanco */
+    border-color: #6f2236;
+    box-shadow: 0 4px 12px rgba(111,34,54,0.15);
+}
 
 /* =========================================
    5. GRID DE PRODUCTOS
@@ -551,4 +651,115 @@ header, nav, .navbar, #hero, .portada { overflow: visible !important; }
     .item figure { height: 200px; }
     .precio { font-size: 16px; }
     .container-cart-products { width: 280px; right: -10px; }
+}
+
+
+
+/* =========================================
+   NOTIFICACIÓN FLOTANTE (AÑADIR PRODUCTO)
+   ========================================= */
+.notificacion-carrito {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #6f2236; /* Color vino */
+    color: #ffffff;
+    padding: 12px 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid #c9a96e; /* Borde sutil dorado */
+    z-index: 1000000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.notificacion-carrito.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   LÓGICA DE DESPLIEGUE CONTROLADA
+   ========================================= */
+
+/* Ocultar únicamente las listas de los bloques que estén colapsados */
+.grupo-filtro.colapsado ul { 
+    display: none !important;
+}
+
+/* El bloque de precio siempre se mantendrá a la vista */
+.slider-precio {
+    display: block !important;
+}
+
+/* Animación y rotación de las flechas SVG */
+.titulo-filtro svg {
+    transition: transform 0.3s ease;
+}
+
+/* Cuando el título esté colapsado, rotamos la flecha hacia abajo */
+.titulo-filtro.colapsado svg {
+    transform: rotate(180deg);
+}
+
+/* =========================================
+   CORRECCIÓN DE POSICIONAMIENTO DE LA BURBUJA
+   ========================================= */
+.numero-productos {
+    position: absolute !important;
+    top: -4px !important;
+    right: -4px !important;
+    background-color: #c9a96e !important;
+    color: #1a0a10 !important;
+    width: 22px !important;
+    height: 22px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    z-index: 99999999 !important; /* Un nivel por encima del carro fijo */
+    font-weight: 800;
+    font-size: 11px;
+    border: 2px solid #fff !important;
+}
+
+/* Ocultar el contador visualmente si el carrito está vacío */
+.numero-productos[style*="display: none"],
+.numero-productos:empty {
+    display: none !important;
+}
+
+/* =========================================
+   NOTIFICACIÓN FLOTANTE (AÑADIR PRODUCTO)
+   ========================================= */
+.notificacion-carrito {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #6f2236;
+    color: #ffffff;
+    padding: 12px 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid #c9a96e;
+    z-index: 1000000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.notificacion-carrito.mostrar {
+    opacity: 1;
+    transform: translateY(0);
 }

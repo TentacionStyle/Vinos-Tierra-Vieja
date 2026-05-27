@@ -250,6 +250,7 @@ body.cabernet-page {
     height: 2px;
     background: var(--cs-gold);
     margin-bottom: 28px;
+    padding: 0 !important;
 }
 
 .cs-intro-text p {
@@ -358,7 +359,6 @@ body.cabernet-page {
 .cs-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
     box-sizing: border-box;
 }
 

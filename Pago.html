@@ -3,67 +3,1654 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra - Checkout</title>
+    <title>Pago | Tierra Vieja</title>
     <link rel="icon" href="./css/img/logo-uva.png" type="image/png">
-    <link rel="stylesheet" href="./css/basic.css">
-    <link rel="stylesheet" href="./css/pago.css">
-    <link rel="stylesheet" href="./css/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/Animaciones.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="./Javascript/Hamburger.js"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --vino:      #6f2236;
+            --vino-dark: #4e1828;
+            --vino-mid:  #7a1c2e;
+            --crema:     #f6eee3;
+            --arena:     #eee4db;
+            --arena-mid: #ddd0c4;
+            --texto:     #2a1a1f;
+            --texto-mid: #6b4f58;
+            --blanco:    #ffffff;
+            --sombra:    rgba(111,34,54,0.10);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--crema);
+            color: var(--texto);
+            min-height: 100vh;
+        }
+
+        /* ===== LOADER ===== */
+        #loader-overlay {
+            position: fixed; inset: 0;
+            background: var(--crema);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity .5s ease, visibility .5s;
+        }
+        .loader-spinner {
+            width: 44px; height: 44px;
+            border: 3px solid var(--arena);
+            border-top-color: var(--vino);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .loader-text {
+            margin-top: 14px;
+            font-family: 'Cinzel', serif;
+            font-size: .7rem;
+            letter-spacing: 3px;
+            color: var(--vino);
+            text-transform: uppercase;
+            animation: pulse-txt 1.5s infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse-txt { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+        /* ===== NAV ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 72px;
+            background: var(--crema);
+            border-bottom: 1px solid rgba(111,34,54,.12);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 48px;
+            z-index: 1000;
+        }
+        .logo_nav img { width: 190px; object-fit: contain; }
+        .navbar ul { list-style: none; display: flex; gap: 32px; }
+        .navbar ul li a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: .82rem; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: var(--texto); text-decoration: none;
+            position: relative; padding-bottom: 4px;
+            transition: color .25s;
+        }
+        .navbar ul li a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--vino);
+            transition: width .25s;
+        }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--vino); }
+        .navbar ul li a:hover::after, .navbar ul li a.active::after { width: 100%; }
+
+        .nav-badge {
+            display: flex; align-items: center; gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .75rem; font-weight: 600;
+            color: var(--vino); letter-spacing: .5px;
+        }
+        .nav-badge i { font-size: .9rem; }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb {
+            margin-top: 72px;
+            padding: 20px 64px 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--texto-mid);
+        }
+        .breadcrumb span { color: var(--vino); }
+
+        /* ===== PAGE TITLE ===== */
+        .page-header {
+            padding: 18px 64px 32px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 300;
+            color: var(--texto);
+            line-height: 1;
+        }
+        .page-header p {
+            margin-top: 8px;
+            font-size: .82rem; color: var(--texto-mid);
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+            padding: 0 64px 80px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ===== FORM CARD ===== */
+        .form-card {
+            background: var(--blanco);
+            border: 1px solid var(--arena);
+            border-radius: 12px;
+            padding: 36px 40px;
+        }
+
+        /* Step headers */
+        .step-header {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 24px;
+        }
+        .step-num {
+            width: 28px; height: 28px;
+            background: var(--vino);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .75rem; font-weight: 700;
+            color: #fff; flex-shrink: 0;
+        }
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: .95rem; font-weight: 700;
+            letter-spacing: .5px;
+            color: var(--texto);
+            text-transform: uppercase;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--arena);
+            margin: 28px 0;
+        }
+
+        /* ===== INPUTS ===== */
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .field-row.triple { grid-template-columns: 1fr 1fr 1.2fr; }
+        .field-full { margin-top: 16px; }
+
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field label {
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: .8px; text-transform: uppercase;
+            color: var(--texto-mid);
+        }
+        .field input, .field select {
+            height: 44px;
+            border: 1px solid var(--arena);
+            border-radius: 6px;
+            padding: 0 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .85rem;
+            color: var(--texto);
+            background: #fff;
+            transition: border-color .2s, box-shadow .2s;
+            -webkit-appearance: none;
+        }
+        .field input::placeholder { color: #bbb; }
+        .field input:focus, .field select:focus {
+            outline: none;
+            border-color: var(--vino);
+            box-shadow: 0 0 0 3px rgba(111,34,54,.08);
+        }
+
+        .checkbox-row {
+            display: flex; align-items: center; gap: 10px;
+            margin-top: 14px;
+        }
+        .checkbox-row input[type="checkbox"] {
+            width: 16px; height: 16px;
+            accent-color: var(--vino); cursor: pointer;
+            flex-shrink: 0;
+        }
+        .checkbox-row label {
+            font-size: .78rem; color: var(--texto-mid); cursor: pointer;
+        }
+
+        /* ===== PAYMENT OPTIONS ===== */
+        .payment-options { display: flex; flex-direction: column; gap: 10px; }
+
+        .payment-option {
+            display: flex; align-items: center;
+            border: 1.5px solid var(--arena);
+            border-radius: 8px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
+        }
+        .payment-option:hover { border-color: var(--arena-mid); }
+        .payment-option.selected {
+            border-color: var(--vino);
+            background: rgba(111,34,54,.03);
+        }
+
+        .payment-option input[type="radio"] {
+            accent-color: var(--vino);
+            width: 17px; height: 17px;
+            flex-shrink: 0;
+        }
+
+        .payment-label {
+            flex: 1;
+            padding-left: 12px;
+            font-size: .85rem; font-weight: 600;
+            color: var(--texto);
+        }
+
+        .payment-logos { display: flex; align-items: center; gap: 6px; }
+        .card-logo {
+            height: 22px; border-radius: 3px;
+            border: 1px solid #eee;
+        }
+        .bizum-logo {
+            font-size: .85rem; font-weight: 900;
+            color: #00AAAD; font-style: italic;
+        }
+        .paypal-logo { color: #003087; font-weight: 900; font-size: .9rem; }
+
+        /* Card detail fields */
+        #card-fields {
+            margin-top: 14px;
+            padding: 18px;
+            background: var(--crema);
+            border-radius: 8px;
+            display: none;
+        }
+        #card-fields.visible { display: block; }
+        .card-field-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
+
+        .ssl-note {
+            display: flex; align-items: center; gap: 7px;
+            margin-top: 16px;
+            font-size: .7rem; color: #aaa;
+        }
+        .ssl-note i { color: #6c6; }
+
+        /* ===== ORDER SUMMARY ===== */
+        .summary-card {
+            background: var(--blanco);
+            border: 1px solid var(--arena);
+            border-radius: 12px;
+            padding: 28px 28px 32px;
+            position: sticky;
+            top: 90px;
+            align-self: start;
+        }
+        .summary-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; font-weight: 600;
+            color: var(--texto);
+            margin-bottom: 24px;
+        }
+
+        .order-items { display: flex; flex-direction: column; gap: 18px; }
+
+        .order-item {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .order-item-img {
+            width: 52px; height: 64px;
+            border-radius: 4px;
+            background: var(--arena);
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            overflow: hidden;
+        }
+        .order-item-img img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .order-item-info { flex: 1; }
+        .order-item-name {
+            font-size: .83rem; font-weight: 600;
+            color: var(--texto); line-height: 1.3;
+        }
+        .order-item-qty {
+            font-size: .72rem; color: var(--texto-mid);
+            margin-top: 2px;
+        }
+        .order-item-price {
+            font-size: .9rem; font-weight: 700;
+            color: var(--texto); white-space: nowrap;
+        }
+
+        .summary-divider {
+            border: none; border-top: 1px solid var(--arena);
+            margin: 20px 0;
+        }
+
+        .summary-row {
+            display: flex; justify-content: space-between;
+            font-size: .82rem; color: var(--texto-mid);
+            margin-bottom: 8px;
+        }
+        .summary-row.total {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--texto);
+            margin-bottom: 0;
+        }
+        .summary-row.total span:last-child { color: var(--vino); }
+
+        /* ===== PAY BUTTON ===== */
+        .btn-pay {
+            width: 100%;
+            margin-top: 20px;
+            background: var(--vino);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            height: 52px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .88rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: background .25s, transform .15s;
+        }
+        .btn-pay:hover { background: var(--vino-dark); transform: translateY(-1px); }
+        .btn-pay:active { transform: translateY(0); }
+
+        .legal-note {
+            margin-top: 12px;
+            text-align: center;
+            font-size: .68rem; color: #aaa; line-height: 1.6;
+        }
+        .legal-note a { color: var(--vino); text-decoration: none; }
+        .legal-note a:hover { text-decoration: underline; }
+
+        /* ===== SUCCESS MSG ===== */
+        #success-msg {
+            display: none;
+            margin-top: 16px;
+            background: #e8f5ee;
+            border: 1px solid #c3dfc9;
+            color: #2d7a50;
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+            font-size: .85rem;
+        }
+        #success-msg i { font-size: 1.4rem; }
+        #success-msg .factura-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem; font-weight: 700; color: var(--vino);
+            margin: 8px 0 4px;
+        }
+        #success-msg .factura-detalle {
+            font-size: .75rem; color: #3a7d55; line-height: 1.6;
+        }
+        #success-msg .factura-detalle strong { color: #2d7a50; }
+        .btn-descargar {
+            display: inline-block;
+            margin-top: 14px;
+            background: var(--vino);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 24px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .78rem; font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background .25s;
+        }
+        .btn-descargar:hover { background: var(--vino-dark); }
+        .btn-descargar i { margin-right: 6px; }
+
+        /* ===== FOOTER ===== */
+        .ftv {
+          background-color: #1e1e1e;
+          color: #e8e0d5;
+          font-family: 'Lato', Arial, sans-serif;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 1.7;
+          border-top: 2px solid #7a1c2e;
+        }
+        .ftv-top {
+          text-align: center;
+          padding: 32px 0 20px;
+          border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+          position: relative;
+        }
+        .ftv-top::after {
+          content: '—◆—';
+          display: block;
+          color: #7a1c2e;
+          font-size: 11px;
+          letter-spacing: 6px;
+          margin-top: 6px;
+        }
+        .ftv-contact-title {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 26px;
+          font-weight: 400;
+          letter-spacing: 3px;
+          color: #f0ece6;
+          margin: 0;
+          text-transform: uppercase;
+        }
+        .ftv-body {
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          padding: 36px 48px;
+          border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+        }
+        .ftv-logo-col {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding-right: 40px;
+          border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .ftv-logo-wrap {
+          background: #fff;
+          border-radius: 4px;
+          padding: 5px;
+          margin-bottom: 10px;
+          display: inline-flex;
+        }
+        .ftv-logo-img {
+          width: 50px;
+          height: auto;
+          display: block;
+        }
+        .ftv-winery-name {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          color: #b0a89e;
+          text-transform: uppercase;
+          margin: 0;
+          line-height: 1.5;
+        }
+        .ftv-cols {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          padding-left: 48px;
+        }
+        .ftv-col-title {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 15px;
+          font-weight: 500;
+          color: #f0ece6;
+          margin: 0 0 14px 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #7a1c2e;
+          letter-spacing: 0.5px;
+        }
+        .ftv-col p {
+          margin: 0 0 4px 0;
+          color: #b0a89e;
+        }
+        .ftv-email {
+          color: #c9a87c;
+          text-decoration: none;
+          font-weight: 600;
+          transition: color 0.2s;
+        }
+        .ftv-email:hover { color: #f0ece6; }
+        .ftv-call-label {
+          font-size: 11px;
+          letter-spacing: 1px;
+          color: #777;
+          margin: 0 0 2px 0;
+        }
+        .ftv-phone-num {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #e0d4c8;
+          margin: 0;
+        }
+        .ftv-social {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          padding: 24px 20px 20px;
+        }
+        .ftv-social-title {
+          font-family: 'Lato', Arial, sans-serif;
+          font-size: 10px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: #777;
+        }
+        .ftv-icons {
+          display: flex;
+          gap: 20px;
+        }
+        .ftv-icon-link {
+          color: #888;
+          font-size: 1.3rem;
+          transition: color 0.2s;
+          line-height: 1;
+        }
+        .ftv-icon-link:hover { color: #7a1c2e; }
+        .ftv-bottom-bar {
+          text-align: center;
+          padding: 18px;
+          font-size: 11px;
+          color: #555;
+          border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* ===== VALUES STRIP ===== */
+        .values-strip {
+            background: var(--vino-dark);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .value-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 28px 32px;
+            border-right: 1px solid rgba(255,255,255,.1);
+        }
+        .value-item:last-child { border-right: none; }
+        .value-icon {
+            width: 48px; height: 48px; flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,.35);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.8);
+            font-size: 1.1rem;
+        }
+        .value-name {
+            font-family: 'Cinzel', serif;
+            font-size: .75rem; letter-spacing: 2px;
+            text-transform: uppercase; color: #f0ece6;
+            margin-bottom: 4px;
+        }
+        .value-desc { font-size: .72rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .checkout-layout { grid-template-columns: 1fr; padding: 0 24px 64px; }
+            .summary-card { position: static; }
+            .page-header, .breadcrumb { padding-left: 24px; padding-right: 24px; }
+            .values-strip { grid-template-columns: 1fr 1fr; }
+            .navbar { padding: 0 24px; }
+            .navbar ul { display: none; }
+            .hamburger { display: flex; }
+        }
+        @media (max-width: 768px) {
+            .values-strip { grid-template-columns: 1fr; }
+            .value-item { padding: 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+            .value-item:last-child { border-bottom: none; }
+            .page-header h1 { font-size: 2rem; }
+            .field-row { grid-template-columns: 1fr; }
+            .field-row.triple { grid-template-columns: 1fr; }
+            .card-field-row { grid-template-columns: 1fr; }
+            .payment-option { padding: 12px 14px; }
+            .order-item-img { width: 42px; height: 52px; }
+            .summary-card { padding: 20px; }
+            .form-card { padding: 24px 20px; }
+            .checkout-layout { padding: 0 12px 40px; }
+            .page-header, .breadcrumb { padding-left: 12px; padding-right: 12px; }
+            .nav-badge { font-size: .65rem; }
+            .navbar { padding: 0 16px; }
+            .ftv-body { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+            .ftv-cols { justify-content: center; }
+            .ftv-logo-col { align-items: center; }
+            .field input, .field select { font-size: 16px; }
+            .btn-pay { height: 48px; font-size: .82rem; }
+        }
+        @media (max-width: 480px) {
+            .checkout-layout { padding: 0 8px 30px; }
+            .page-header { padding: 12px 8px 20px; }
+            .breadcrumb { padding: 14px 8px 0; font-size: .6rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .page-header p { font-size: .75rem; }
+            .form-card { padding: 16px 12px; border-radius: 8px; }
+            .summary-card { padding: 16px; }
+            .step-title { font-size: .8rem; }
+            .step-num { width: 24px; height: 24px; font-size: .65rem; }
+            .payment-label { font-size: .78rem; }
+            .card-logo { height: 16px; }
+            .bizum-logo { font-size: .75rem; }
+            .paypal-logo { font-size: .8rem; }
+            .order-item-name { font-size: .75rem; }
+            .order-item-qty { font-size: .65rem; }
+            .order-item-price { font-size: .8rem; }
+            .summary-title { font-size: 1.1rem; }
+            .summary-row.total { font-size: 1rem; }
+            .legal-note { font-size: .6rem; }
+            #card-fields { padding: 12px; }
+            .ftv-body { padding: 24px 16px; gap: 20px; }
+            .ftv-cols { gap: 24px; }
+            .value-item { padding: 14px; }
+            .value-icon { width: 36px; height: 36px; font-size: .9rem; }
+            .value-name { font-size: .65rem; }
+            .value-desc { font-size: .65rem; }
+        }
+
+    </style>
 </head>
-<script src="./Javascript/Hamburger.js"></script>
-<body class="bg-gray-50">
+<body>
 
-    <div id="loader-overlay">
-        <div class="loader-spinner"></div>
-        <div class="loader-text flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            Pago Seguro
-        </div>
+<div id="loader-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text"><i class="fa-solid fa-lock" style="margin-right:6px;font-size:.75rem"></i>Pago Seguro</div>
+</div>
+
+<nav class="navbar">
+    <div class="logo_nav">
+        <a href="index.html"><img src="./css/img/Logo-alargado.png" alt="Vinos Tierra Vieja"></a>
     </div>
-
-    <div class="min-h-screen flex items-center justify-center p-6">
-
-        <div class="checkout-container max-w-md w-full p-10 shadow-lg">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800 tracking-tighter text-center">
-        Finalizar Compra
-    </h2>
-    
-    <div class="resumen-pago text-center mb-6">
-        <h3 class="text-gray-500 uppercase text-[10px] font-bold tracking-widest mb-1">Resumen de tu pedido</h3>
-        <p id="total-final-pago" class="text-3xl font-black" style="color: #6f2236;">
-            0.00€
-        </p>
+    <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Tienda.html">Tienda</a></li>
+        <li><a href="bodega.html">Nosotros</a></li>
+        <li><a href="#">Experiencias</a></li>
+        <li><a href="#">Contacto</a></li>
+    </ul>
+    <div class="nav-badge">
+        <i class="fa-solid fa-lock"></i> Pago seguro
     </div>
+</nav>
 
-    <div class="space-y-6">
-        <div class="relative flex py-2 items-center">
-            <div class="flex-grow border-t border-gray-200"></div>
-            <span class="flex-shrink mx-4 text-gray-400 text-[9px] uppercase font-bold tracking-widest">Otras opciones</span>
-            <div class="flex-grow border-t border-gray-200"></div>
+<div class="breadcrumb">03. <span>Pago</span></div>
+
+<div class="page-header">
+    <h1>Finaliza tu compra</h1>
+    <p>Completa tus datos y elige tu método de pago.</p>
+</div>
+
+<div class="checkout-layout">
+
+    <div class="form-card">
+
+        <div class="step-header">
+            <div class="step-num">1</div>
+            <div class="step-title">Información de contacto</div>
         </div>
 
-        <button class="w-full bg-[#00AAAD] text-white font-bold py-4 rounded-xl flex items-center justify-center shadow-sm hover:opacity-90 transition">
-            <span class="italic font-black mr-2 text-xl">bizum</span> Pagar
+        <div class="field-row">
+            <div class="field">
+                <label>Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Ej. Juan Pérez">
+            </div>
+            <div class="field">
+                <label>Correo electrónico</label>
+                <input type="email" id="email" placeholder="Ej. juan@correo.com">
+            </div>
+        </div>
+        <div class="field-full field" style="margin-top:16px">
+            <label>CIF / NIF <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+            <input type="text" id="cif" placeholder="Ej. 12345678Z">
+        </div>
+        <div class="field-full field" style="margin-top:16px">
+            <label>Teléfono <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+            <input type="tel" id="telefono" placeholder="Ej. +34 600 123 456">
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="step-header">
+            <div class="step-num">2</div>
+            <div class="step-title">Dirección de envío</div>
+        </div>
+
+        <div class="field">
+            <label>Dirección</label>
+            <input type="text" id="direccion" placeholder="Ej. Calle Mayor 12">
+        </div>
+
+        <div class="field-row triple" style="margin-top:16px">
+            <div class="field">
+                <label>Código postal</label>
+                <input type="text" id="cp" placeholder="Ej. 28001">
+            </div>
+            <div class="field">
+                <label>Ciudad</label>
+                <input type="text" id="ciudad" placeholder="Ej. Madrid">
+            </div>
+            <div class="field">
+                <label>País</label>
+                <select id="pais">
+                    <option value="es" selected>España</option>
+                    <option value="pt">Portugal</option>
+                    <option value="fr">Francia</option>
+                    <option value="de">Alemania</option>
+                    <option value="it">Italia</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="checkbox-row">
+            <input type="checkbox" id="dir-diferente">
+            <label for="dir-diferente">Enviar a una dirección diferente</label>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="step-header">
+            <div class="step-num">3</div>
+            <div class="step-title">Método de pago</div>
+        </div>
+
+        <div class="payment-options">
+            <label class="payment-option selected" id="opt-card">
+                <input type="radio" name="pago" value="card" checked onchange="selectPayment('card')">
+                <span class="payment-label">Tarjeta de crédito / débito</span>
+                <div class="payment-logos">
+                    <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
+                        <rect width="780" height="500" rx="40" fill="#1A1F71"/>
+                        <path d="M293 348.3L321.8 152H364l-28.9 196.3H293zm152.8-198.2c-15.3-5.8-39.2-12-69.1-12-76.2 0-129.8 38.6-130.1 93.8-.4 40.8 38.1 63.5 67.2 77.1 29.8 13.9 39.8 22.8 39.7 35.2-.2 19-23.9 27.7-46 27.7-30.7 0-47-4.3-72.3-14.9l-9.9-4.5-10.8 63.4c17.9 7.9 51 14.8 85.4 15.2 80.6 0 132.9-38 133.4-97 .2-32.3-20.1-56.9-64.2-77.2-26.7-13.1-43.1-21.9-42.9-35.2.1-11.8 13.8-24.3 43.7-24.3 24.9-.4 42.9 5 56.9 10.7l6.8 3.2 10.2-59.2zm198.7-1.1H604c-13.8 0-24 3.8-30.1 17.7L473 348.3h80.6s13.2-34.8 16.2-42.4c8.8 0 87.3.1 98.4.1 2.3 9.8 9.3 42.3 9.3 42.3h71.3l-62.2-196.3h-12zm-94.4 130.7c6.3-16.2 30.5-79 30.5-79-.4.7 6.3-16.3 10.1-26.9l5.2 24.3s14.7 67.6 17.8 81.6H550.1z" fill="#fff"/>
+                    </svg>
+                    <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
+                        <rect width="780" height="500" rx="40" fill="#252525"/>
+                        <circle cx="295" cy="250" r="145" fill="#EB001B"/>
+                        <circle cx="485" cy="250" r="145" fill="#F79E1B"/>
+                        <path d="M390 141.8c35.6 27.1 58.7 68.9 58.7 113.2s-23.1 86.1-58.7 113.2c-35.6-27.1-58.7-68.9-58.7-113.2s23.1-86.1 58.7-113.2z" fill="#FF5F00"/>
+                    </svg>
+                    <svg class="card-logo" viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" width="40" height="26">
+                        <rect width="780" height="500" rx="40" fill="#2557D6"/>
+                        <text x="390" y="290" font-family="Arial" font-size="110" font-weight="bold" fill="white" text-anchor="middle">AMEX</text>
+                    </svg>
+                </div>
+            </label>
+
+            <div id="card-fields" class="visible">
+                <div class="card-field-row">
+                    <div class="field">
+                        <label>Número de tarjeta</label>
+                        <input type="text" id="card-num" placeholder="•••• •••• •••• ••••" maxlength="19">
+                    </div>
+                    <div class="field">
+                        <label>Caducidad</label>
+                        <input type="text" id="card-date" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="field">
+                        <label>CVV</label>
+                        <input type="text" id="card-cvv" placeholder="•••" maxlength="4">
+                    </div>
+                </div>
+            </div>
+
+            <label class="payment-option" id="opt-paypal">
+                <input type="radio" name="pago" value="paypal" onchange="selectPayment('paypal')">
+                <span class="payment-label">PayPal</span>
+                <div class="payment-logos">
+                    <span class="paypal-logo"><span style="color:#009cde">Pay</span><span style="color:#003087">Pal</span></span>
+                </div>
+            </label>
+
+            <label class="payment-option" id="opt-bizum">
+                <input type="radio" name="pago" value="bizum" onchange="selectPayment('bizum')">
+                <span class="payment-label">Bizum</span>
+                <div class="payment-logos">
+                    <span class="bizum-logo">bizum</span>
+                </div>
+            </label>
+        </div>
+
+        <div id="paypal-button-container" style="margin-top:14px; display:none;"></div>
+
+        <div id="bizum-fields" style="display:none; margin-top:14px;">
+            <div style="background:var(--crema); border-radius:8px; padding:18px;">
+                <div class="field">
+                    <label>Teléfono Bizum</label>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <select id="bizum-prefix" style="width:90px; height:44px; border:1px solid var(--arena); border-radius:6px; padding:0 8px; font-family:'Montserrat',sans-serif; font-size:.85rem; background:#fff; flex-shrink:0;">
+                            <option value="+34">🇪🇸 +34</option>
+                            <option value="+351">🇵🇹 +351</option>
+                        </select>
+                        <input type="tel" id="bizum-phone" placeholder="600 123 456" maxlength="9" style="flex:1; height:44px; border:1px solid var(--arena); border-radius:6px; padding:0 14px; font-family:'Montserrat',sans-serif; font-size:.85rem; transition:border-color .2s, box-shadow .2s;">
+                    </div>
+                    <span id="bizum-phone-error" style="display:none; color:#c0392b; font-size:.7rem; margin-top:4px;">Introduce un número de teléfono válido (9 dígitos).</span>
+                </div>
+                <p style="margin-top:10px; font-size:.7rem; color:var(--texto-mid); line-height:1.6;">
+                    <i class="fa-solid fa-circle-info" style="color:var(--vino);margin-right:4px;"></i>
+                    Recibirás una notificación en tu app bancaria para confirmar el pago de <strong id="bizum-total-label">—</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="ssl-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            Tus datos están protegidos con cifrado SSL.
+        </div>
+
+        <div id="success-msg">
+            <div>✅</div>
+            <div class="factura-num" id="factura-num">FACTURA #—</div>
+            <div class="factura-detalle" id="factura-detalle">
+                Gracias por tu compra. Te enviaremos un email con los detalles.
+            </div>
+            <button class="btn-descargar" id="btn-descargar" onclick="descargarPDF()">
+                <i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)
+            </button>
+        </div>
+
+    </div><aside class="summary-card">
+        <div class="summary-title">Resumen del pedido</div>
+
+        <div class="order-items" id="order-items">
+            </div>
+
+        <hr class="summary-divider">
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">52,40 €</span>
+        </div>
+        <div class="summary-row">
+            <span>Envío</span>
+            <span>4,90 €</span>
+        </div>
+
+        <hr class="summary-divider" style="margin:14px 0">
+
+        <div class="summary-row total">
+            <span>Total</span>
+            <span id="total-display">57,30 €</span>
+        </div>
+
+        <button class="btn-pay" id="btn-pago" onclick="procesarPago()">
+            <i class="fa-solid fa-lock"></i>
+            Pagar <span id="total-btn">57,30 €</span>
         </button>
 
-        <div class="pt-2">
-            <div id="paypal-button-container" style="min-height: 50px;" class="w-full"></div>
-            <p class="text-[10px] text-center text-gray-500 mt-2">La forma rápida y segura de pagar</p>
-        </div>
+        <p class="legal-note">
+            Al realizar el pago aceptas nuestros<br>
+            <a href="#">Términos y condiciones</a> y <a href="#">Política de privacidad</a>
+        </p>
+    </aside>
 
-        <div id="success-msg" class="hidden msg-valido p-4 rounded-2xl text-center font-bold animate-pulse">
-            ✅ ¡Operación válida!
+</div><div class="values-strip">
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div>
+            <div class="value-name">Tradición</div>
+            <div class="value-desc">Raíces que nos definen.</div>
+        </div>
+    </div>
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-flask"></i></div>
+        <div>
+            <div class="value-name">Innovación</div>
+            <div class="value-desc">Miramos al futuro sin olvidar el origen.</div>
+        </div>
+    </div>
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-medal"></i></div>
+        <div>
+            <div class="value-name">Calidad</div>
+            <div class="value-desc">Comprometidos con la excelencia en cada detalle.</div>
+        </div>
+    </div>
+    <div class="value-item">
+        <div class="value-icon"><i class="fa-solid fa-heart"></i></div>
+        <div>
+            <div class="value-name">Pasión</div>
+            <div class="value-desc">Lo que hacemos, lo hacemos con alma.</div>
         </div>
     </div>
 </div>
+
+<div id="invoice-template" style="display: none;">
+    <div id="invoice-content" style="width: 800px; background-color: #fdfbf7; color: #333; font-family: 'Montserrat', sans-serif; padding: 40px; box-sizing: border-box;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+            <div style="flex: 1;">
+                <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 38px; color: #6f2236; margin: 0 0 10px 0; letter-spacing: 2px;">FACTURA</h1>
+                <div style="font-size: 14px; font-weight: 700; color: #6f2236; margin-bottom: 20px;" class="target-numero">Nº —</div>
+                
+                <table style="font-size: 11px; color: #333; line-height: 1.8;">
+                    <tr><td style="width: 130px; font-weight: 600;">Fecha de emisión:</td><td class="target-fecha">—</td></tr>
+                    <tr><td style="font-weight: 600;">Forma de pago:</td><td class="target-pago">—</td></tr>
+                    <tr><td style="font-weight: 600;">Moneda:</td><td>EUR (€)</td></tr>
+                </table>
+            </div>
+            
+            <div style="flex: 1; text-align: center; padding-top: 10px;">
+                <img src="https://www.vinostierravieja.com/css/img/logotipo.png" alt="Logo" style="width: 55px; margin-bottom: 10px;">
+                <div style="font-family: 'Cinzel', serif; font-size: 22px; color: #6f2236; line-height: 1.1; letter-spacing: 2px;">TIERRA<br>VIEJA</div>
+                <div style="margin-top: 15px; font-size: 11px; color: #666; border-top: 1px solid #d4c5b9; padding-top: 10px; width: 60%; margin-left: auto; margin-right: auto;">
+                    Tradición que perdura,<br>calidad que se disfruta.
+                </div>
+            </div>
+            <div style="flex: 1;"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 30px; gap: 20px;">
+            <div style="flex: 1; display: flex; gap: 15px;">
+                <div style="width: 40px; height: 40px; border: 1.5px solid #6f2236; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #6f2236; font-size: 18px;">
+                    <span style="font-family: serif; font-weight: bold;">W</span>
+                </div>
+                <div style="font-size: 11px; line-height: 1.6; color: #444;">
+                    <div style="font-size: 10px; letter-spacing: 1px; color: #6f2236; font-weight: 700; margin-bottom: 4px;">EMISOR</div>
+                    <strong style="font-size: 13px; color: #222;">Vinos Tierra Vieja, S.L.</strong><br>
+                    CIF: B12345678<br>
+                    Ctra. N-330, km 450<br>
+                    50400 Cariñena, Zaragoza (España)<br>
+                    info@vinostierravieja.com<br>
+                    +34 634 44 55 46
+                </div>
+            </div>
+            
+            <div style="flex: 1; display: flex; gap: 15px;">
+                <div style="width: 40px; height: 40px; border: 1.5px solid #6f2236; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #6f2236; font-size: 18px;">
+                    <span style="font-family: serif; font-weight: bold;">U</span>
+                </div>
+                <div style="font-size: 11px; line-height: 1.6; color: #444;">
+                    <div style="font-size: 10px; letter-spacing: 1px; color: #6f2236; font-weight: 700; margin-bottom: 4px;">CLIENTE</div>
+                    <strong style="font-size: 13px; color: #222;" class="target-cliente-nombre">—</strong><br>
+                    <span class="target-envio-dir">—</span><br>
+                    <span class="target-envio-ciudad">—</span><br>
+                    <span class="target-envio-pais">—</span><br>
+                    <span class="target-cliente-email">—</span>
+                </div>
+            </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+                <tr style="background-color: #6f2236; color: #fff; font-size: 10px; letter-spacing: 1px; text-transform: uppercase;">
+                    <th style="padding: 12px 15px; text-align: left;">Descripción</th>
+                    <th style="padding: 12px 15px; text-align: center;">Cantidad</th>
+                    <th style="padding: 12px 15px; text-align: right;">Precio Unitario</th>
+                    <th style="padding: 12px 15px; text-align: right;">Importe</th>
+                </tr>
+            </thead>
+            <tbody class="target-articulos"></tbody>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+            <div style="width: 45%;">
+                <div style="border: 1px solid #e0d4c8; padding: 15px; border-radius: 6px; font-size: 11px; color: #555; background-color: #fff; margin-bottom: 15px;">
+                    <div style="color: #6f2236; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px;">INFORMACIÓN DEL PAGO</div>
+                    El pago de esta factura ha sido procesado correctamente mediante el método seleccionado. No es necesaria ninguna acción adicional.
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; color: #6f2236; font-size: 11px; font-style: italic;">
+                    <span>🍷</span>
+                    <div>Gracias por confiar en nuestros vinos.<br>Cada botella cuenta una historia.</div>
+                </div>
+            </div>
+            
+            <div style="width: 45%; font-size: 12px; color: #333;">
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                    <span>Subtotal (Productos)</span><span class="target-subtotal">—</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                    <span>Gastos de Envío</span><span class="target-envio">—</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 2px solid #e0d4c8;">
+                    <span>Impuestos (21% IVA incl.)</span><span>Incluidos</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 15px 0 5px 0; font-size: 18px; font-weight: 700; color: #6f2236;">
+                    <span>TOTAL</span><span class="target-total">—</span>
+                </div>
+                <div style="text-align: right; font-size: 10px; color: #888;">Importe con impuestos incluidos.</div>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #d4c5b9; padding-top: 20px; display: flex; justify-content: space-between; font-size: 10px; color: #666;">
+            <div>www.vinostierravieja.com<br>info@vinostierravieja.com</div>
+            <div>Cariñena, Zaragoza<br>España</div>
+            <div>Elaboramos vinos con pasión,<br>comprometidos con la tierra.</div>
+        </div>
     </div>
-    <script src="./Javascript/Pago.js"></script>
-    </body>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* --- LOADER --- */
+    setTimeout(() => {
+        const l = document.getElementById('loader-overlay');
+        if (l) { l.style.opacity = '0'; l.style.visibility = 'hidden'; }
+    }, 900);
+
+    /* --- CARGAR CARRITO DESDE localStorage --- */
+    const orderItemsContainer = document.getElementById('order-items');
+    const subtotalEl  = document.getElementById('subtotal');
+    const totalDisplay = document.getElementById('total-display');
+    const totalBtn    = document.getElementById('total-btn');
+
+    const ENVIO = 4.90;
+
+    let items = [];
+    try {
+        const raw = localStorage.getItem('carritoItems');
+        if (raw) items = JSON.parse(raw);
+    } catch(e) { items = []; }
+
+    if (items.length > 0) {
+        orderItemsContainer.innerHTML = '';
+        let subtotal = 0;
+
+        items.forEach(item => {
+            const precioUnit = parseFloat(item.precio.replace('€','').replace(',','.')) || 0;
+            const precioTotal = (precioUnit * item.cantidad).toFixed(2).replace('.',',');
+            subtotal += precioUnit * item.cantidad;
+
+            const div = document.createElement('div');
+            div.className = 'order-item';
+
+            const imgContent = item.imagen
+                ? `<img src="${item.imagen}" alt="${item.titulo}">`
+                : '🍷';
+
+            div.innerHTML = `
+                <div class="order-item-img">${imgContent}</div>
+                <div class="order-item-info">
+                    <div class="order-item-name">${item.titulo}</div>
+                    <div class="order-item-qty">Cantidad: ${item.cantidad}</div>
+                </div>
+                <div class="order-item-price">${precioTotal} €</div>
+            `;
+            orderItemsContainer.appendChild(div);
+        });
+
+        const total = (subtotal + ENVIO).toFixed(2);
+        const fmt = (n) => n.toFixed(2).replace('.',',') + ' €';
+
+        if (subtotalEl)   subtotalEl.textContent  = fmt(subtotal);
+        if (totalDisplay) totalDisplay.textContent = fmt(parseFloat(total));
+        if (totalBtn)     totalBtn.textContent     = fmt(parseFloat(total));
+
+    } else {
+        orderItemsContainer.innerHTML = `
+            <p style="color:var(--texto-mid);font-size:.82rem;text-align:center;padding:16px 0">
+                Tu carrito está vacío.<br>
+                <a href="Tienda.html" style="color:var(--vino);font-weight:600">Volver a la tienda</a>
+            </p>`;
+
+        const totalGuardado = localStorage.getItem('totalCompra');
+        if (totalGuardado) {
+            const fmt = parseFloat(totalGuardado).toFixed(2).replace('.',',') + ' €';
+            if (totalDisplay) totalDisplay.textContent = fmt;
+            if (totalBtn)     totalBtn.textContent     = fmt;
+        }
+    }
+
+    /* --- COORDENADAS MÁSCARAS TARJETA --- */
+    const cardNum = document.getElementById('card-num');
+    if (cardNum) {
+        cardNum.addEventListener('input', e => {
+            let v = e.target.value.replace(/\s+/g,'').replace(/\D/g,'');
+            let parts = [];
+            for (let i = 0; i < v.length; i += 4) parts.push(v.substring(i, i+4));
+            e.target.value = parts.join(' ');
+        });
+    }
+
+    const cardDate = document.getElementById('card-date');
+    if (cardDate) {
+        cardDate.addEventListener('input', e => {
+            let v = e.target.value.replace(/\D/g,'');
+            if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+            e.target.value = v;
+        });
+    }
+
+    const cardCvv = document.getElementById('card-cvv');
+    if (cardCvv) {
+        cardCvv.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g,'');
+        });
+    }
+
+    /* --- PAYPAL CONTAINER --- */
+    const paypalContainer = document.getElementById('paypal-button-container');
+    if (paypalContainer && typeof paypal !== 'undefined') {
+        paypal.Buttons({
+            style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+            createOrder: (data, actions) => {
+                const total = localStorage.getItem('totalCompra') || '57.30';
+                return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
+            }
+        }).render('#paypal-button-container');
+    }
+});
+
+function selectPayment(method) {
+    document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('opt-' + method).classList.add('selected');
+
+    const cardFields      = document.getElementById('card-fields');
+    const paypalContainer = document.getElementById('paypal-button-container');
+    const bizumFields     = document.getElementById('bizum-fields');
+
+    cardFields.style.display      = method === 'card'   ? 'block' : 'none';
+    paypalContainer.style.display = method === 'paypal' ? 'block' : 'none';
+    bizumFields.style.display     = method === 'bizum'  ? 'block' : 'none';
+
+    if (method === 'bizum') {
+        const totalLabel = document.getElementById('bizum-total-label');
+        if (totalLabel) totalLabel.textContent = document.getElementById('total-display').textContent;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const bizumPhone = document.getElementById('bizum-phone');
+    if (bizumPhone) {
+        bizumPhone.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    }
+});
+
+/* --- OPERACIÓN DE GENERACIÓN DE FACTURA --- */
+function generarFactura(method) {
+    const items = (() => {
+        try { return JSON.parse(localStorage.getItem('carritoItems')) || []; }
+        catch { return []; }
+    })();
+
+    const subtotal = items.reduce((s, it) => {
+        const pu = parseFloat(it.precio.replace('€','').replace(',','.')) || 0;
+        return s + pu * it.cantidad;
+    }, 0);
+    const envio = 4.90;
+    const total = subtotal + envio;
+
+    const ahora = new Date();
+    const numFactura = 'TV-' + ahora.getFullYear()
+        + String(ahora.getMonth()+1).padStart(2,'0')
+        + String(ahora.getDate()).padStart(2,'0')
+        + '-' + String(Math.floor(Math.random()*9000)+1000);
+
+    const telefono   = document.getElementById('telefono').value.trim();
+    const cp         = document.getElementById('cp').value.trim();
+    const ciudad     = document.getElementById('ciudad').value.trim();
+    const pais       = document.getElementById('pais').value;
+
+    return {
+        numero: numFactura,
+        fecha: ahora.toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' }),
+        fechaVenc: (()=>{ const v=new Date(ahora); v.setDate(v.getDate()+14); return v.toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' }); })(),
+        cliente: {
+            nombre: document.getElementById('nombre').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            telefono: telefono || '—',
+            cif: document.getElementById('cif').value.trim()
+        },
+        envio: {
+            direccion: document.getElementById('direccion').value.trim(),
+            cp: cp || '—',
+            ciudad: ciudad || '—',
+            pais: pais === 'es' ? 'España' : pais === 'pt' ? 'Portugal' : pais === 'fr' ? 'Francia' : pais === 'de' ? 'Alemania' : 'Italia'
+        },
+        pago: { metodo: method },
+        articulos: items.map(it => ({
+            titulo: it.titulo,
+            cantidad: it.cantidad,
+            precioUnitario: it.precio,
+            total: (parseFloat(it.precio.replace('€','').replace(',','.')) * it.cantidad).toFixed(2),
+            imagen: it.imagen // <--- ¡NUEVO! Vital para que el PDF sepa qué foto cargar
+        })),
+        subtotal: subtotal.toFixed(2),
+        envio: envio.toFixed(2),
+        total: total.toFixed(2)
+    };
+}
+
+/* --- LOG DE INICIALIZACIÓN DE EMAILJS --- */
+(function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init({ publicKey: "qrkTSkp82bdu-5qc6" });
+    }
+})();
+
+function enviarFacturaEmail(factura) {
+    if (typeof emailjs === 'undefined') return;
+    
+    let direccionCompleta = "No especificada";
+    if (factura.cliente && factura.cliente.direccion) {
+        direccionCompleta = factura.cliente.direccion;
+    } else if (factura.envio && factura.envio.direccion) {
+        direccionCompleta = factura.envio.direccion;
+    }
+
+    const params = {
+        email:         factura.cliente?.email || '',
+        nombre:        factura.cliente?.nombre || 'Cliente',
+        factura_num:   factura.numero || '',
+        factura_fecha: factura.fecha || '',
+        direccion:     direccionCompleta,
+        total:         (factura.total ? factura.total.toString().replace('.', ',') : '0') + ' €',
+        articulos:     factura.articulos ? factura.articulos.map(a => `${a.cantidad}x ${a.titulo} — ${(a.total || 0).toString().replace('.', ',')} €`).join('\n') : ''
+    };
+    
+    emailjs.send('service_g5xtv8s', 'template_2fnwjjr', params)
+        .then(() => { console.log('Correo enviado correctamente.'); })
+        .catch(e => console.error('Error en EmailJS:', e));
+}
+
+function procesarPago() {
+    const method  = document.querySelector('input[name="pago"]:checked').value;
+    const btn     = document.getElementById('btn-pago');
+    const success = document.getElementById('success-msg');
+    const facturaNum = document.getElementById('factura-num');
+    const facturaDet = document.getElementById('factura-detalle');
+
+    const nombre = document.getElementById('nombre').value.trim();
+    const email  = document.getElementById('email').value.trim();
+    const dir    = document.getElementById('direccion').value.trim();
+
+    if (!nombre || !email || !dir) {
+        alert('Por favor, completa todos los campos obligatorios.');
+        return;
+    }
+
+    if (method === 'card') {
+        const num = document.getElementById('card-num').value;
+        if (num.replace(/\s/g,'').length < 16) {
+            alert('Introduce un número de tarjeta válido.');
+            return;
+        }
+    }
+
+    const finalizar = () => {
+        const factura = generarFactura(method);
+        localStorage.setItem('ultimaFactura', JSON.stringify(factura));
+        localStorage.removeItem('carritoItems');
+        localStorage.removeItem('totalCompra');
+
+        enviarFacturaEmail(factura);
+
+        facturaNum.textContent = 'FACTURA ' + factura.numero;
+        facturaDet.innerHTML = 'Gracias, <strong>' + factura.cliente.nombre + '</strong>. '
+            + 'Hemos registrado tu pedido por importe de <strong>' + factura.total.replace('.',',') + ' €</strong>. '
+            + 'Recibirás un email con la factura en <strong>' + factura.cliente.email + '</strong>.';
+
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Pago completado';
+        success.style.display = 'block';
+    };
+
+    if (method === 'bizum') {
+        const phone   = document.getElementById('bizum-phone').value.trim();
+        const errorEl = document.getElementById('bizum-phone-error');
+        const phoneEl = document.getElementById('bizum-phone');
+
+        if (phone.length !== 9 || !/^[6789]\d{8}$/.test(phone)) {
+            errorEl.style.display = 'block';
+            phoneEl.style.borderColor = '#c0392b';
+            phoneEl.focus();
+            return;
+        }
+        errorEl.style.display = 'none';
+        phoneEl.style.borderColor = '';
+
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Esperando confirmación Bizum...';
+        btn.disabled = true;
+        setTimeout(finalizar, 2200);
+        return;
+    }
+
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...';
+    btn.disabled = true;
+    setTimeout(finalizar, 1500);
+}
+
+
+/* --- DESCARGAR PDF (jsPDF) ASÍNCRONO CON IMÁGENES PROPORCIONALES --- */
+
+// Función Helper MEJORADA: Ahora devuelve la imagen y sus dimensiones originales
+function getBase64ImageFromUrl(imageUrl) {
+    return new Promise((resolve) => {
+        if (!imageUrl) { resolve(null); return; }
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            resolve({
+                dataUrl: canvas.toDataURL('image/png'),
+                width: img.width,
+                height: img.height
+            });
+        };
+        img.onerror = () => resolve(null); // Si falla, ignora la foto para no romper el PDF
+        img.src = imageUrl;
+    });
+}
+
+async function descargarPDF() {
+    const factura = (() => {
+        try { return JSON.parse(localStorage.getItem('ultimaFactura')); }
+        catch { return null; }
+    })();
+    if (!factura) { alert('No se encuentra la factura de compra.'); return; }
+
+    const btn = document.getElementById('btn-descargar');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cargando imágenes...';
+
+    const pestana = window.open('', '_blank');
+    if (pestana) {
+        pestana.document.write('<html lang="es"><head><title>Generando factura...</title></head><body style="font-family:sans-serif;text-align:center;padding-top:50px;">Generando tu factura en PDF, por favor espera...</body></html>');
+    }
+
+    if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF !== 'function') {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
+        alert('Error al cargar la librería PDF. Comprueba tu conexión e intenta de nuevo.');
+        if (pestana) pestana.close();
+        return;
+    }
+
+    try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pgW = pdf.internal.pageSize.getWidth();
+        const pH = pdf.internal.pageSize.getHeight();
+        const M = 15; 
+        const cW = pgW - 2 * M;
+        let y = M + 5;
+
+        // Paleta y utilidades
+        const V = [88,17,36], O = [194,155,104], D = [51,51,51], G = [100,100,100], CREMA = [253,251,247];
+        const S = { bod: 'bold', nor: 'normal', ita: 'italic' };
+        function L(text, x, y2) { pdf.text(String(text), x, y2); }
+        function R(text, rx, y2) { const w = pdf.getTextWidth(String(text)); pdf.text(String(text), rx-w, y2); }
+        function C(text, cx, y2) { const w = pdf.getTextWidth(String(text)); pdf.text(String(text), cx-w/2, y2); }
+        function setF(f, s) { pdf.setFont(f, s); }
+        function setS(s) { pdf.setFontSize(s); }
+        function setC(c) { pdf.setTextColor(c[0],c[1],c[2]); }
+        function setFC(c) { pdf.setFillColor(c[0],c[1],c[2]); }
+        function setDC(c) { pdf.setDrawColor(c[0],c[1],c[2]); }
+        
+        function fmtPrecio(val) { 
+            if (!val) return '0,00 \u20AC';
+            const n = parseFloat(String(val).replace(/€/g,'').replace(',','.').trim()); 
+            if (isNaN(n)) return String(val);
+            let parts = n.toFixed(2).split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return parts.join(',') + ' \u20AC'; 
+        }
+
+        function fmtCant(val) { 
+            const c = parseInt(val) || 0; 
+            return c + ' ' + (c === 1 ? 'botella' : 'botellas'); 
+        }
+
+        // --- PRECARGA DE IMÁGENES (Avanzada) ---
+        const logoObj = await getBase64ImageFromUrl('./css/img/logo-uva.png'); 
+        const logoMain = logoObj ? logoObj.dataUrl : null;
+
+        for (let item of factura.articulos) {
+            if (item.imagen) {
+                const imgObj = await getBase64ImageFromUrl(item.imagen);
+                if (imgObj) {
+                    item.base64 = imgObj.dataUrl;
+                    item.imgW = imgObj.width;
+                    item.imgH = imgObj.height;
+                }
+            }
+        }
+        
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Dibujando PDF...';
+
+        // Fondo base Pag 1
+        setFC(CREMA); pdf.rect(0, 0, pgW, pH, 'F');
+
+        // ===================== CABECERA =====================
+        const cxMid = pgW / 2;
+
+        setF('times', S.bod); setS(24); setC(V);
+        L('FACTURA', M, y); y += 2;
+
+        const lineY = y + 1;
+        setDC(O); pdf.setLineWidth(0.3);
+        pdf.line(M, lineY, M+35, lineY); pdf.line(M+39, lineY, M+44, lineY);
+        setFC(O);
+        pdf.triangle(M+37, lineY-1, M+38.5, lineY, M+37, lineY+1, 'F');
+        pdf.triangle(M+37, lineY-1, M+35.5, lineY, M+37, lineY+1, 'F');
+        y += 6;
+
+        setF('helvetica', S.bod); setS(9); setC(V); L('N\u00BA ' + factura.numero, M, y); y += 4;
+        
+        const ml = { card:'Tarjeta de cr\xE9dito/d\xE9bito', paypal:'PayPal', bizum:'Bizum' };
+        setF('helvetica', S.nor); setS(7); setC(D);
+        L('Fecha de emisi\xF3n:', M, y); L(factura.fecha, M+30, y); y += 4;
+        L('Fecha de vencimiento:', M, y); L(factura.fechaVenc || factura.fecha, M+30, y); y += 4;
+        L('Forma de pago:', M, y); L(ml[factura.pago.metodo]||'Transferencia', M+30, y); y += 4;
+        L('Moneda:', M, y); L('EUR (\u20AC)', M+30, y);
+
+        let ycHead = M + 2;
+        if (logoMain) {
+            pdf.addImage(logoMain, 'PNG', cxMid - 6, ycHead, 12, 12);
+            ycHead += 15;
+        } else {
+            setFC(O); setDC(O);
+            pdf.triangle(cxMid-1.5, ycHead+5, cxMid, ycHead+6.5, cxMid+1.5, ycHead+5, 'F');
+            pdf.triangle(cxMid-1.5, ycHead+8, cxMid, ycHead+6.5, cxMid+1.5, ycHead+8, 'F');
+            ycHead += 12;
+        }
+
+        setC(V); setF('times', S.bod); setS(16);
+        C('TIERRA', cxMid, ycHead);
+        C('VIEJA', cxMid, ycHead+6);
+
+        setC(G); setF('helvetica', S.ita); setS(7);
+        C('Tradici\xF3n que perdura,', cxMid, ycHead+11); 
+        C('calidad que se disfruta.', cxMid, ycHead+15);
+        
+        y = Math.max(y + 4, ycHead + 20);
+
+        setDC([230,220,210]); pdf.setLineWidth(0.3);
+        pdf.line(M, y, M+cW, y); y += 6;
+
+        // ===================== EMISOR / CLIENTE =====================
+        const divX = pgW / 2;
+        const emY = y;
+
+        setF('helvetica', S.bod); setS(6); setC(V); L('EMISOR', M+10, emY);
+        setF('helvetica', S.bod); setS(8); setC(D); L('Vinos Tierra Vieja, S.L.', M+10, emY+5);
+        setF('helvetica', S.nor); setS(7); setC(G);
+        L('CIF: B12345678', M+10, emY+9);
+        L('Ctra. N-330, km 450', M+10, emY+13);
+        L('50400 Cari\xF1ena, Zaragoza (Espa\xF1a)', M+10, emY+17);
+        L('info@vinostierravieja.com', M+10, emY+21);
+        L('+34 634 44 55 46', M+10, emY+25);
+
+        const cX = divX + 8;
+        let cY = emY;
+        setF('helvetica', S.bod); setS(6); setC(V); L('CLIENTE', cX+10, cY); cY += 5;
+        setF('helvetica', S.bod); setS(8); setC(D); L(factura.cliente.nombre || 'Cliente', cX+10, cY); cY += 4;
+        
+        setF('helvetica', S.nor); setS(7); setC(G);
+        const cifVal = factura.cliente.cif && factura.cliente.cif !== '—' ? factura.cliente.cif : '';
+        if (cifVal) { L('CIF/NIF: ' + cifVal, cX+10, cY); cY += 4; }
+        
+        const dirVal = factura.envio.direccion && factura.envio.direccion !== '—' ? factura.envio.direccion : '';
+        if (dirVal) { L('Direcci\xF3n: ' + dirVal, cX+10, cY); cY += 4; }
+        
+        if (factura.envio.ciudad && factura.envio.ciudad !== '—') { L('Ciudad: ' + factura.envio.ciudad, cX+10, cY); cY += 4; }
+        L('Pa\xEDs: ' + (factura.envio.pais && factura.envio.pais !== '—' ? factura.envio.pais : 'España'), cX+10, cY); cY += 4;
+        if (factura.cliente.email && factura.cliente.email !== '—') { L('Email: ' + factura.cliente.email, cX+10, cY); }
+
+        setDC([230,220,210]); pdf.setLineWidth(0.2); pdf.line(divX, emY-2, divX, emY+28);
+        y = emY + 34;
+
+        // ===================== TABLA DE PRODUCTOS =====================
+        const colDescX = M + 2;
+        const colCanCenter = M + cW * 0.55;
+        const colPriceRight = M + cW * 0.78;
+        const colImpX = M + cW - 2;
+
+        function dibujarCabeceraTabla() {
+            setFC(V); pdf.rect(M, y, cW, 6.5, 'F');
+            setC([255,255,255]); setF('helvetica', S.bod); setS(6);
+            L('DESCRIPCI\xD3N', colDescX + 10, y+4.2); // Más margen para la botella
+            C('CANTIDAD', colCanCenter, y+4.2);
+            R('PRECIO UNITARIO', colPriceRight, y+4.2);
+            R('IMPORTE', colImpX, y+4.2);
+            y += 7;
+        }
+
+        function comprobarPaginacion(espacioReq) {
+            if (y + espacioReq > pH - 40) {
+                pdf.addPage();
+                setFC(CREMA); pdf.rect(0, 0, pgW, pH, 'F'); 
+                y = M + 5;
+                return true;
+            }
+            return false;
+        }
+
+        dibujarCabeceraTabla();
+
+        const rowH = 9; // Alto de cada fila
+
+        factura.articulos.forEach((a, i) => {
+            if (comprobarPaginacion(rowH + 1)) { dibujarCabeceraTabla(); }
+
+            if (i%2===0) { setFC([255,255,255]); pdf.rect(M, y, cW, rowH, 'F'); } 
+            
+            // DIBUJADO PROPORCIONAL DE LA BOTELLA
+            if (a.base64 && a.imgW && a.imgH) {
+                try {
+                    // Calculamos la caja máxima que le permitimos a la botella (ej: 6mm de ancho, 7.5mm de alto)
+                    const maxW = 6;
+                    const maxH = 7.5;
+                    
+                    // Calculamos el ratio para que no se deforme
+                    const ratio = Math.min(maxW / a.imgW, maxH / a.imgH);
+                    const finalW = a.imgW * ratio;
+                    const finalH = a.imgH * ratio;
+
+                    // Centramos la botella en su "columna" virtual
+                    const imgX = colDescX + (maxW - finalW) / 2 + 1; 
+                    const imgY = y + (rowH - finalH) / 2; // Centrado vertical
+
+                    pdf.addImage(a.base64, 'PNG', imgX, imgY, finalW, finalH);
+                } catch(e) { console.warn("Error dibujando botella proporcionada"); }
+            } else {
+                // Si no hay foto, un pequeño guión
+                setC(G); setF('helvetica', S.bod); setS(6); L('-', colDescX + 3, y+5.5);
+            }
+
+            setC(D); setF('helvetica', S.bod); setS(7.5);
+            L(a.titulo, colDescX + 10, y + 5.5);
+
+            setF('helvetica', S.nor);
+            C(fmtCant(a.cantidad), colCanCenter, y + 5.5);
+            R(fmtPrecio(a.precioUnitario), colPriceRight, y + 5.5);
+
+            setF('helvetica', S.bod); setC(V);
+            R(fmtPrecio(a.total), colImpX, y + 5.5);
+
+            setDC([230,220,210]); pdf.setLineWidth(0.15);
+            pdf.line(M, y + rowH, M + cW, y + rowH);
+            y += rowH;
+        });
+
+        y += 8;
+
+        comprobarPaginacion(55);
+
+        // ===================== DATOS BANCARIOS + TOTALES =====================
+        const bankW = 85, totalsW = 75, totalsX = M + cW - totalsW;
+
+        setFC([255,255,255]); setDC([230,220,210]); pdf.setLineWidth(0.3);
+        pdf.roundedRect(M, y, bankW, 28, 2, 2, 'FD');
+        setF('helvetica', S.bod); setS(6.5); setC(V); L('DATOS BANCARIOS', M+12, y+5);
+        setF('helvetica', S.nor); setS(7); setC(D);
+        L('Banco:      Banco Santander', M+6, y+11);
+        L('Titular:      Vinos Tierra Vieja S.L.', M+6, y+16);
+        L('IBAN:         ES23 0049 1234 56 1234567890', M+6, y+21);
+        
+        setFC([248,241,234]); pdf.roundedRect(M, y+32, bankW, 12, 2, 2, 'F');
+        setF('helvetica', S.ita); setS(6.5); setC(G);
+        L('Gracias por confiar en nuestros vinos.', M+6, y+37);
+        L('Cada botella cuenta una historia.', M+6, y+41);
+
+        let totY = y + 2;
+        const ivaRate = 0.21;
+        const totalNum = parseFloat(factura.total.replace(',', '.')) || 0;
+        const baseNum = totalNum / (1 + ivaRate);
+        const ivaNum = totalNum - baseNum;
+
+        function totalRow(label, value, yPos, bold) {
+            setF('helvetica', bold ? S.bod : S.nor); setS(bold ? 8 : 7.5);
+            setC(D); L(label, totalsX, yPos); R(value, totalsX+totalsW, yPos);
+        }
+
+        totalRow('Subtotal', fmtPrecio(baseNum), totY, false); totY+=5;
+        totalRow('Descuento', '-0,00 \u20AC', totY, false); totY+=5;
+        totalRow('Base imponible', fmtPrecio(baseNum), totY, false); totY+=5;
+        totalRow('IVA (21%)', fmtPrecio(ivaNum), totY, false); totY+=5;
+
+        setDC([230,220,210]); pdf.setLineWidth(0.3);
+        pdf.line(totalsX, totY, totalsX+totalsW, totY); totY += 3;
+
+        setFC([243,235,223]); pdf.rect(totalsX, totY, totalsW, 10, 'F');
+        setF('helvetica', S.bod); setS(11); setC(V); L('TOTAL', totalsX+4, totY+7);
+        setS(14); R(fmtPrecio(totalNum), totalsX+totalsW-2, totY+7);
+        
+        setF('helvetica', S.ita); setS(6); setC(V);
+        L('*Importe con impuestos incluidos.', totalsX, totY+14);
+
+        // ===================== FOOTER GLOBAL (Multipágina) =====================
+        const totalPages = pdf.internal.getNumberOfPages();
+        const footY = pH - 25; 
+
+        for (let i = 1; i <= totalPages; i++) {
+            pdf.setPage(i);
+            
+            setDC([230,220,210]); pdf.setLineWidth(0.3);
+            pdf.line(M, footY, M+cW, footY); 
+            
+            const colW = (cW - 20) / 3;
+            const cols = [
+                { label:'Vinos Tierra Vieja', line1:'www.vinostierravieja.com', line2:'info@vinostierravieja.com' },
+                { label:'Ctra. N-330, km 450', line1:'50400 Cari\xF1ena, Zaragoza', line2:'Espa\xF1a' },
+                { label:'Elaboramos vinos con pasi\xF3n,', line1:'comprometidos con la tierra', line2:'y con quienes los disfrutan.' }
+            ];
+
+            cols.forEach((col, idx) => {
+                const cx = M + idx * (colW + 10) + colW/2;
+                setC(V); setF('helvetica', S.bod); setS(6.5); C(col.label, cx, footY + 6);
+                setC(G); setF('helvetica', S.nor); setS(6); C(col.line1, cx, footY + 10); C(col.line2, cx, footY + 14);
+            });
+
+            setC(G); setF('helvetica', S.nor); setS(6);
+            R(`Pág. ${i} / ${totalPages}`, M+cW, footY + 18);
+        }
+
+        // ===================== DESCARGA =====================
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
+
+        if (pestana) {
+            pestana.location.href = pdf.output('bloburl');
+        } else {
+            pdf.save('Factura_' + factura.numero + '.pdf');
+        }
+
+    } catch (e) {
+        console.error('Error generando PDF:', e);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Descargar factura (PDF)';
+        if (pestana) pestana.close();
+        alert('Error al generar el PDF: ' + e.message);
+    }
+}
+</script>
+
+</body>
 </html>

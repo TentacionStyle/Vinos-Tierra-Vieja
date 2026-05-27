@@ -228,6 +228,7 @@ body.mo-page {
     height: 2px;
     background: var(--mo-amber);
     margin-bottom: 28px;
+    padding: 0 !important;
 }
 
 .mo-intro-text p {
@@ -296,7 +297,6 @@ body.mo-page {
 .mo-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
     box-sizing: border-box;
 }
 

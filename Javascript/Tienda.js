@@ -10,13 +10,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnCart               = document.querySelector('.container-carrito');
     const containerCartProducts = document.querySelector('.container-cart-products');
-    const cartEmpty             = document.querySelector('.cart-empty');   // ← mensaje vacío
+    const cartEmpty             = document.querySelector('.cart-empty');   
     const valorTotal            = document.querySelector('.total-pagar');
     const itemsList             = document.querySelector('.container-items');
     const contadorProductos     = document.querySelector('#contador-productos');
-    const numeroBurbuja         = document.querySelector('.numero-productos'); // ← burbuja
+    const numeroBurbuja         = document.querySelector('.numero-productos'); 
 
+    // REPARACIÓN: Recuperar el carrito guardado previamente si existe en el navegador
     let articulosCarrito = [];
+    try {
+        const guardado = localStorage.getItem('carritoItems');
+        if (guardado) {
+            articulosCarrito = JSON.parse(guardado);
+        }
+    } catch (e) {
+        articulosCarrito = [];
+    }
+
+    // CREACIÓN DEL ELEMENTO PARA LA NOTIFICACIÓN
+    const nodoNotificacion = document.createElement('div');
+    nodoNotificacion.classList.add('notificacion-carrito');
+    document.body.appendChild(nodoNotificacion);
+
+    const mostrarMensajeFlotante = (nombreProducto) => {
+        nodoNotificacion.textContent = `¡${nombreProducto.toUpperCase()} AÑADIDO!`;
+        nodoNotificacion.classList.add('mostrar');
+        
+        setTimeout(() => {
+            nodoNotificacion.classList.remove('mostrar');
+        }, 2000);
+    };
 
     // 2. LÓGICA DE FILTROS
     const filtrarProductos = () => {
@@ -27,6 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const precioMaximo = parseFloat(precioSlider.value);
 
         if (precioTagMax) precioTagMax.textContent = `€${precioMaximo}.00`;
+
+        if (precioSlider) {
+            const min = precioSlider.min || 0;
+            const max = precioSlider.max || 30; 
+            const porcentaje = ((precioMaximo - min) / (max - min)) * 100;
+            precioSlider.style.backgroundSize = `${porcentaje}% 100%`;
+        }
 
         productos.forEach(producto => {
             const marcaProd  = producto.getAttribute('data-marca');
@@ -43,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. ABRIR / CERRAR CARRITO
     btnCart.addEventListener('click', (e) => {
-        if (e.target.closest('.icono-carrito')) {
+        if (e.target.closest('.icono-carrito') || e.target.classList.contains('icono-carrito')) {
             containerCartProducts.classList.toggle('hidden-cart');
         }
     });
@@ -51,11 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. AÑADIR AL CARRITO
     itemsList.addEventListener('click', e => {
         if (e.target.classList.contains('botonAñadir')) {
-            const product     = e.target.parentElement.parentElement;
+            const product     = e.target.closest('.item');
+            const tituloProd  = product.querySelector('h4').textContent;
+            const precioProd  = product.querySelector('.precio').textContent;
+            const imgEl       = product.querySelector('figure img');
+            const imagenProd  = imgEl ? imgEl.src : '';
+
             const infoProduct = {
                 cantidad: 1,
-                titulo:   product.querySelector('h4').textContent,
-                precio:   product.querySelector('.precio').textContent,
+                titulo:   tituloProd,
+                precio:   precioProd,
+                imagen:   imagenProd,
             };
 
             const existe = articulosCarrito.some(p => p.titulo === infoProduct.titulo);
@@ -68,14 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 articulosCarrito = [...articulosCarrito, infoProduct];
             }
 
-            // Animación pop en la burbuja
             if (numeroBurbuja) {
                 numeroBurbuja.classList.remove('pop');
-                void numeroBurbuja.offsetWidth; // reflow para reiniciar animación
+                void numeroBurbuja.offsetWidth; 
                 numeroBurbuja.classList.add('pop');
                 setTimeout(() => numeroBurbuja.classList.remove('pop'), 300);
             }
 
+            mostrarMensajeFlotante(tituloProd);
             showHTML();
         }
     });
@@ -100,18 +136,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. RENDERIZAR CARRITO
     const showHTML = () => {
-        // Limpiar filas anteriores
         const rowProduct = containerCartProducts.querySelector('.row-product');
-        if (rowProduct) rowProduct.querySelectorAll('.cart-product').forEach(p => p.remove());
+        if (!rowProduct) return;
 
-        let total          = 0;
+        rowProduct.querySelectorAll('.cart-product').forEach(p => p.remove());
+
+        let total = 0;
         let totalOfProducts = 0;
 
         if (articulosCarrito.length === 0) {
-            // ── Carrito vacío: mostrar mensaje ──
             if (cartEmpty) cartEmpty.style.display = 'block';
         } else {
-            // ── Hay productos: ocultar mensaje ──
             if (cartEmpty) cartEmpty.style.display = 'none';
 
             articulosCarrito.forEach(product => {
@@ -136,10 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </svg>
                     </div>
                 `;
-
-                // Insertar antes del bloque de total
-                const rowProduct = containerCartProducts.querySelector('.row-product');
-                if (rowProduct) rowProduct.appendChild(containerProduct);
+                rowProduct.appendChild(containerProduct);
             });
         }
 
@@ -147,7 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (valorTotal)        valorTotal.innerText        = `${totalFinal}€`;
         if (contadorProductos) contadorProductos.innerText = totalOfProducts;
 
+        // Persistencia correcta de los datos para la pasarela de pago
         localStorage.setItem('totalCompra', totalFinal);
+        localStorage.setItem('carritoItems', JSON.stringify(articulosCarrito));
     };
 
     // 7. EVENTOS FILTROS
@@ -159,19 +193,54 @@ document.addEventListener('DOMContentLoaded', () => {
         btnBorrar.addEventListener('click', () => {
             checkboxesMarca.forEach(cb => cb.checked = false);
             checkboxesTipo.forEach(cb  => cb.checked = false);
-            precioSlider.value = 15;
+            precioSlider.value = 15; 
             filtrarProductos();
         });
     }
 
+    // 8. DESPLEGAR / COLAPSAR MENÚS LATERALES
+    const titulosFiltros = document.querySelectorAll('.titulo-filtro');
+
+    titulosFiltros.forEach(titulo => {
+        const grupo = titulo.closest('.grupo-filtro');
+        
+        if (grupo) {
+            grupo.classList.add('colapsado');
+            titulo.classList.add('colapsado');
+        }
+
+        titulo.addEventListener('click', () => {
+            if (grupo) {
+                grupo.classList.toggle('colapsado');
+                titulo.classList.toggle('colapsado');
+            }
+        });
+    });
+
+    // 9. SEARCH BAR
+    const buscador = document.getElementById('buscador');
+    if (buscador) {
+        buscador.addEventListener('input', () => {
+            const termino = buscador.value.toLowerCase().trim();
+            productos.forEach(p => {
+                const titulo = p.querySelector('.info-producto h4')?.textContent?.toLowerCase() || '';
+                const coincide = !termino || titulo.includes(termino);
+                p.style.display = coincide ? '' : 'none';
+            });
+        });
+    }
+
+    // EJECUCIÓN INICIAL
     filtrarProductos();
     showHTML();
 });
 
-// 8. IR A PAGAR
+// 10. IR A PAGAR (CORREGIDO PARA ENLAZAR CON EL HTML DE PAGO)
 function irAPagar() {
     const totalTexto  = document.querySelector('.total-pagar').innerText;
     const soloNumero  = totalTexto.replace('€', '').trim();
-    localStorage.setItem('totalFacturaDefinitivo', soloNumero);
+    
+    // Guardamos la misma variable exacta ('totalCompra') que busca la pasarela de pago
+    localStorage.setItem('totalCompra', soloNumero);
     window.location.href = 'Pago.html';
 }

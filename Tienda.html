@@ -49,93 +49,94 @@
     </nav>
 
     <div class="div-tienda">
-        <header>
-            <h2>Tienda</h2>
-            <div id="container-carrito" class="container-carrito">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="icono-carrito">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
+    <header>
+        <h2>Tienda</h2>
+        <div id="container-carrito" class="container-carrito">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="icono-carrito">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
 
-                <div class="container-cart-products hidden-cart">
-                    <div class="row-product">
-                        <p class="cart-empty">El carrito está vacío</p>
-                    </div>
+            <span id="contador-productos" class="numero-productos">0</span>
 
-                    <div class="cart-total">
-                        <h3>Total:</h3>
-                        <span class="total-pagar">$0</span>
-                    </div>
-
-                    <a href="Pago"><button class="btn-pagar">Finalizar Compra</button></a>
+            <div class="container-cart-products hidden-cart">
+                <div class="row-product">
+                    <p class="cart-empty">El carrito está vacío</p>
                 </div>
 
+                <div class="cart-total">
+                    <h3>Total:</h3>
+                    <span class="total-pagar">0€</span>
+                </div>
 
+                <button class="btn-pagar" onclick="irAPagar()">Finalizar Compra</button>
             </div>
-    </div>
+        </div>
     </header>
+    </div>
     <div class="contenido-principal">
 
         <aside class="sidebar-filtros">
 
-            <div class="grupo-filtro">
-                <div class="titulo-filtro">
-                    <h3>MARCA</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                    </svg>
-                </div>
-                <ul>
-                    <li><label><input type="checkbox"> 8.0.1</label></li>
-                    <li><label><input type="checkbox"> Castillo Ducay</label></li>
-                    <li><label><input type="checkbox"> Celebrities</label></li>
-                    <li><label><input type="checkbox"> Gran Ducay</label></li>
-                    <li><label><input type="checkbox"> Julietta</label></li>
-                    <li><label><input type="checkbox"> Marqués de Tosos</label></li>
-                    <li><label><input type="checkbox"> Particular</label></li>
-                </ul>
+        <div class="barra-busqueda">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icono-busqueda"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="buscador" class="input-busqueda" placeholder="Buscar vinos..." aria-label="Buscar productos">
+        </div>
+
+        <div class="grupo-filtro colapsado">
+            <div class="titulo-filtro colapsado">
+                <h3>MARCA</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                </svg>
             </div>
+            <ul>
+                <li><label><input type="checkbox"> 8.0.1</label></li>
+                <li><label><input type="checkbox"> Castillo Ducay</label></li>
+                <li><label><input type="checkbox"> Celebrities</label></li>
+                <li><label><input type="checkbox"> Gran Ducay</label></li>
+                <li><label><input type="checkbox"> Julietta</label></li>
+                <li><label><input type="checkbox"> Marqués de Tosos</label></li>
+                <li><label><input type="checkbox"> Particular</label></li>
+            </ul>
+        </div>
 
-            <div class="grupo-filtro">
-                <div class="titulo-filtro">
-                    <h3>TIPO DE VINO</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                    </svg>
-                </div>
-                <ul>
-                    <li><label><input type="checkbox"> Blanco</label></li>
-                    <li><label><input type="checkbox"> Cava</label></li>
-                    <li><label><input type="checkbox"> Crianza</label></li>
-                    <li><label><input type="checkbox"> Reserva</label></li>
-                    <li><label><input type="checkbox"> Roble</label></li>
-                    <li><label><input type="checkbox"> Rosado</label></li>
-                    <li><label><input type="checkbox"> Tinto</label></li>
-                    <li><label><input type="checkbox"> Vinos de autor</label></li>
-                </ul>
+        <div class="grupo-filtro colapsado">
+            <div class="titulo-filtro colapsado">
+                <h3>TIPO DE VINO</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                </svg>
             </div>
+            <ul>
+                <li><label><input type="checkbox"> Blanco</label></li>
+                <li><label><input type="checkbox"> Cava</label></li>
+                <li><label><input type="checkbox"> Crianza</label></li>
+                <li><label><input type="checkbox"> Reserva</label></li>
+                <li><label><input type="checkbox"> Roble</label></li>
+                <li><label><input type="checkbox"> Rosado</label></li>
+                <li><label><input type="checkbox"> Tinto</label></li>
+                <li><label><input type="checkbox"> Vinos de autor</label></li>
+            </ul>
+        </div>
 
-            <div class="grupo-filtro">
-                <div class="titulo-filtro">
-                    <h3>PRECIO</h3>
-                </div>
-                <div class="slider-precio">
-                    <input type="range" min="0" max="30" class="input-rango">
-                    <div class="etiquetas-precio">
-                        <span class="precio-tag">€0.00</span>
-                        <span class="precio-tag">€30.00</span>
-                    </div>
+        <div class="grupo-filtro">
+            <div class="titulo-filtro">
+                <h3>PRECIO</h3>
+            </div>
+            <div class="slider-precio">
+                <input type="range" min="0" max="30" class="input-rango" value="15">
+                <div class="etiquetas-precio">
+                    <span class="precio-tag">€0.00</span>
+                    <span class="precio-tag">€30.00</span>
                 </div>
             </div>
+        </div>
 
-            <button class="btn-borrar-filtros">BORRAR FILTROS</button>
+        <button class="btn-borrar-filtros">BORRAR FILTROS</button>
 
-        </aside>
+    </aside>
         <div class="container-items">
             <div class="item" data-marca="8.0.1" data-tipo="Tinto" data-precio="16.00">
                 <figure>
@@ -480,62 +481,60 @@
         <div class="ftv-top">
             <h2 class="ftv-contact-title">Contacto</h2>
         </div>
-        
+
         <div class="ftv-body">
             <div class="ftv-logo-col">
-            <div class="ftv-logo-wrap">
-                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+                <div class="ftv-logo-wrap">
+                    <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+                </div>
+                <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
             </div>
-            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
-            </div>
-        
+
             <div class="ftv-cols">
-            <div class="ftv-col">
-                <h3 class="ftv-col-title">Oficina</h3>
-                <p>Ctra. N-330, km 450, 50400</p>
-                <p>Cariñena, Zaragoza</p>
-                <p class="ftv-email-row">
-                <a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a>
-                </p>
-            </div>
-        
-            <div class="ftv-col">
-                <h3 class="ftv-col-title">Horario</h3>
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Oficina</h3>
+                    <p>Ctra. N-330, km 450, 50400</p>
+                    <p>Cariñena, Zaragoza</p>
+                    <p class="ftv-email-row">
+                        <a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a>
+                    </p>
+                </div>
+
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Horario</h3>
                     <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
                     <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
-            </h3>
-            </div>
-        
-            <div class="ftv-col">
-                <h3 class="ftv-col-title">Teléfono</h3>
-                <p class="ftv-call-label">Llámanos</p>
-                <p class="ftv-phone-num">+34 634 44 55 46</p>
-            </div>
+                    </h3>
+                </div>
+
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Teléfono</h3>
+                    <p class="ftv-call-label">Llámanos</p>
+                    <p class="ftv-phone-num">+34 634 44 55 46</p>
+                </div>
             </div>
         </div>
-        
+
         <div class="ftv-social">
             <p class="ftv-social-title">Redes Sociales</p>
             <div class="ftv-icons">
-            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
-                <!-- Opción A: Font Awesome -->
-                <i class="fa-brands fa-instagram"></i>
-                <!-- Opción B: tu PNG — comenta la línea de arriba y descomenta: -->
-                <!-- <img src="./css/img/Instagram.png" alt="Instagram" class="ftv-icon-png"> -->
-            </a>
-            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-                <!-- <img src="./css/img/WhatsApp.png" alt="WhatsApp" class="ftv-icon-png"> -->
-            </a>
+                <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link"
+                    aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
         </div>
-        
+
         <div class="ftv-bottom-bar">
             © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
         </div>
     </footer>
     <script src="./Javascript/Scroll.js"></script>
     <script src="./Javascript/Tienda.js"></script>
+    <script src="./Javascript/VerificacionEdad.js"></script>
 </body>
 
 </html>

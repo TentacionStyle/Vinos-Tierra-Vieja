@@ -36,7 +36,7 @@ body.index-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./img/Fondo_portada.jpeg') no-repeat center center;
+    background: url('./img/Fondo_web.png') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -45,7 +45,7 @@ body.index-page {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(18,16,15,0.4) 0%, rgba(18,16,15,0.85) 100%);
+    background: linear-gradient(147deg, rgba(40,15,15,0.4) 100%);
     z-index: 1;
 }
 

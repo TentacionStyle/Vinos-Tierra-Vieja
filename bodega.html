@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<script src="./Javascript/Hamburger.js"></script>
 <body class="bodega-page">
 
     <!-- HERO -->
@@ -95,10 +94,15 @@
             <div class="tl-item left">
                 <div class="tl-dot"></div>
                 <div class="tl-content-card">
-                    <div class="tl-year-box">1944</div>
-                    <div class="tl-text">
-                        <div class="tl-icon">🤝</div>
-                        <p class="tl-desc">Fundación de la cooperativa en <strong>Cariñena</strong>. Un grupo de viticultores locales une sus fuerzas para defender la calidad de su uva.</p>
+                    <div class="tl-card-row">
+                        <div class="tl-icon-col">
+                            <div class="tl-icon">🤝</div>
+                        </div>
+                        <div class="tl-body-col">
+                            <span class="tl-year-badge">1944</span>
+                            <h3 class="tl-titulo">Fundación de la cooperativa en Cariñena</h3>
+                            <p class="tl-desc">Un grupo de viticultores locales une sus fuerzas para defender la calidad de su uva.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,10 +111,15 @@
             <div class="tl-item right">
                 <div class="tl-dot"></div>
                 <div class="tl-content-card">
-                    <div class="tl-year-box">1962</div>
-                    <div class="tl-text">
-                        <div class="tl-icon">🏗️</div>
-                        <p class="tl-desc">Inauguración de las instalaciones actuales. Se incorpora tecnología de vanguardia para la época, manteniendo el espíritu artesanal.</p>
+                    <div class="tl-card-row">
+                        <div class="tl-icon-col">
+                            <div class="tl-icon">🏗️</div>
+                        </div>
+                        <div class="tl-body-col">
+                            <span class="tl-year-badge">1962</span>
+                            <h3 class="tl-titulo">Inauguración de las instalaciones actuales</h3>
+                            <p class="tl-desc">Se incorpora tecnología de vanguardia para la época, manteniendo el espíritu artesanal.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,10 +128,15 @@
             <div class="tl-item left">
                 <div class="tl-dot"></div>
                 <div class="tl-content-card">
-                    <div class="tl-year-box">1983</div>
-                    <div class="tl-text">
-                        <div class="tl-icon">🌍</div>
-                        <p class="tl-desc">Primeras exportaciones a Europa. Nuestros vinos comienzan a ganar reconocimiento internacional por su estructura y carácter.</p>
+                    <div class="tl-card-row">
+                        <div class="tl-icon-col">
+                            <div class="tl-icon">🌍</div>
+                        </div>
+                        <div class="tl-body-col">
+                            <span class="tl-year-badge">1983</span>
+                            <h3 class="tl-titulo">Primeras exportaciones a Europa</h3>
+                            <p class="tl-desc">Nuestros vinos comienzan a ganar reconocimiento internacional por su estructura y carácter.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,10 +145,15 @@
             <div class="tl-item right">
                 <div class="tl-dot"></div>
                 <div class="tl-content-card">
-                    <div class="tl-year-box">2010</div>
-                    <div class="tl-text">
-                        <div class="tl-icon">🍇</div>
-                        <p class="tl-desc">Lanzamiento de la gama Premium. Selección exhaustiva de parcelas centenarias para crear vinos de autor únicos.</p>
+                    <div class="tl-card-row">
+                        <div class="tl-icon-col">
+                            <div class="tl-icon">🍇</div>
+                        </div>
+                        <div class="tl-body-col">
+                            <span class="tl-year-badge">2010</span>
+                            <h3 class="tl-titulo">Lanzamiento de la gama Premium</h3>
+                            <p class="tl-desc">Selección exhaustiva de parcelas centenarias para crear vinos de autor únicos.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,61 +203,58 @@
         <div class="ftv-top">
             <h2 class="ftv-contact-title">Contacto</h2>
         </div>
-        
+
         <div class="ftv-body">
             <div class="ftv-logo-col">
-            <div class="ftv-logo-wrap">
-                <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+                <div class="ftv-logo-wrap">
+                    <img src="./css/img/logotipo.png" alt="Vinos Tierra Vieja" class="ftv-logo-img">
+                </div>
+                <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
             </div>
-            <p class="ftv-winery-name">Vinos<br>Tierra Vieja</p>
-            </div>
-        
+
             <div class="ftv-cols">
-            <div class="ftv-col">
-                <h3 class="ftv-col-title">Oficina</h3>
-                <p>Ctra. N-330, km 450, 50400</p>
-                <p>Cariñena, Zaragoza</p>
-                <p class="ftv-email-row">
-                <a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a>
-                </p>
-            </div>
-        
-            <div class="ftv-col">
-                <h3 class="ftv-col-title">Horario</h3>
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Oficina</h3>
+                    <p>Ctra. N-330, km 450, 50400</p>
+                    <p>Cariñena, Zaragoza</p>
+                    <p class="ftv-email-row">
+                        <a href="mailto:info@vinostierravieja.com" class="ftv-email">info@vinostierravieja.com</a>
+                    </p>
+                </div>
+
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Horario</h3>
                     <p>Lun – jue: <strong>08:00 – 14:00 h</strong> y <strong>15:00 – 17:00 h</strong></p>
                     <p style="margin-top:4px">Viernes: <strong>07:00 – 15:00 h</strong></p>
-            </h3>
-            </div>
-        
-            <div class="ftv-col">
-                <h3 class="ftv-col-title">Teléfono</h3>
-                <p class="ftv-call-label">Llámanos</p>
-                <p class="ftv-phone-num">+34 634 44 55 46</p>
-            </div>
+                    </h3>
+                </div>
+
+                <div class="ftv-col">
+                    <h3 class="ftv-col-title">Teléfono</h3>
+                    <p class="ftv-call-label">Llámanos</p>
+                    <p class="ftv-phone-num">+34 634 44 55 46</p>
+                </div>
             </div>
         </div>
-        
+
         <div class="ftv-social">
             <p class="ftv-social-title">Redes Sociales</p>
             <div class="ftv-icons">
-            <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link" aria-label="Instagram">
-                <!-- Opción A: Font Awesome -->
-                <i class="fa-brands fa-instagram"></i>
-                <!-- Opción B: tu PNG — comenta la línea de arriba y descomenta: -->
-                <!-- <img src="./css/img/Instagram.png" alt="Instagram" class="ftv-icon-png"> -->
-            </a>
-            <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-                <!-- <img src="./css/img/WhatsApp.png" alt="WhatsApp" class="ftv-icon-png"> -->
-            </a>
+                <a href="https://www.instagram.com/vinostierravieja/" target="_blank" class="ftv-icon-link"
+                    aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/34634445546" target="_blank" class="ftv-icon-link" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
         </div>
-        
+
         <div class="ftv-bottom-bar">
             © 2025 Vinos Tierra Vieja · Cariñena, Zaragoza
         </div>
     </footer>
-
+    <script src="./Javascript/Hamburger.js"></script>
     <script src="./Javascript/Scroll.js"></script>
 </body>
 

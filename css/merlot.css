@@ -228,6 +228,7 @@ body.merlot-page {
     height: 2px;
     background: var(--ml-soft);
     margin-bottom: 28px;
+    padding: 0 !important;
 }
 
 .ml-intro-text p {
@@ -296,7 +297,6 @@ body.merlot-page {
 .ml-section-header {
     width: auto !important;
     max-width: none !important;
-    padding: 0 !important;
     box-sizing: border-box;
 }
 
