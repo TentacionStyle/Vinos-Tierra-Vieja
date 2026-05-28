@@ -143,21 +143,6 @@ body.mo-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.mo-page .navbar {
-    background-color: var(--mo-cream);
-}
-
-.mo-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.mo-page .navbar li a:hover {
-    color: #a3752c;
-}
-
-/* =========================================
    3. SECCIÓN INTRO — Glassmorphism
    ========================================= */
 .mo-intro {

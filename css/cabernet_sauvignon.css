@@ -166,21 +166,6 @@ body.cabernet-page {
 }
 
 /* =========================================
-   2. NAVBAR (hereda de basic.css)
-   ========================================= */
-.cabernet-page .navbar {
-    background-color: var(--cs-cream);
-}
-
-.cabernet-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.cabernet-page .navbar li a:hover {
-    color: var(--cs-ruby);
-}
-
-/* =========================================
    3. SECCIÓN INTRO — Glassmorphism
    ========================================= */
 .cs-intro {

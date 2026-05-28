@@ -147,22 +147,6 @@ body.actualidad-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.actualidad-page .navbar {
-    background-color: var(--act-cream);
-}
-
-.actualidad-page .navbar li a {
-    color: var(--act-dark);
-}
-
-.actualidad-page .navbar li a:hover,
-.actualidad-page .navbar li a.active {
-    color: var(--act-wine);
-}
-
-/* =========================================
    3. SECCIÓN DESTACADA
    ========================================= */
 .act-destacada {

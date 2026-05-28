@@ -143,21 +143,6 @@ body.gb-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.gb-page .navbar {
-    background-color: var(--gb-cream);
-}
-
-.gb-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.gb-page .navbar li a:hover {
-    color: #7b9643;
-}
-
-/* =========================================
    3. SECCIÓN INTRO — Glassmorphism
    ========================================= */
 .gb-intro {

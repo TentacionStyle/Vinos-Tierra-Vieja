@@ -10,11 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/basic.css">
     <link rel="stylesheet" href="./css/Animaciones.css">
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=EUR"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="./Javascript/Hamburger.js"></script>
+    <script src="./Javascript/NavCart.js"></script>
     <style>
         /* ===== RESET & BASE ===== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -652,6 +654,47 @@
     <div class="loader-spinner"></div>
     <div class="loader-text"><i class="fa-solid fa-lock" style="margin-right:6px;font-size:.75rem"></i>Pago Seguro</div>
 </div>
+
+    <nav class="navbar">
+        <div class="logo_nav">
+            <a href="index">
+                <img src="./css/img/Logo-alargado-invertido-sinfondo.png" alt="Tierra Vieja">
+            </a>
+        </div>
+        <ul>
+            <li><a href="index">Inicio</a></li>
+            <li><a href="bodega">Bodega</a></li>
+            <li><a href="Tienda">Tienda</a></li>
+            <li><a href="viñedos">Viñedos</a></li>
+            <li><a href="actualidad">Actualidad</a></li>
+            <li><a href="sostenibilidad">Sostenibilidad</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Usuario">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <circle cx="12" cy="7" r="4" stroke="white" stroke-width="1.5"/>
+                    <path d="M4 22 C4 16, 8 13, 12 13 C16 13, 20 16, 20 22" stroke="white" stroke-width="1.5" fill="none"/>
+                </svg>
+            </a>
+            <a href="#" class="nav-icon" aria-label="Carrito">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <path d="M4 5 L8 5 L11 16 L19 16 L21 7 L7 7" stroke="white" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                    <circle cx="10" cy="20" r="1.5" stroke="white" stroke-width="1.5"/>
+                    <circle cx="18" cy="20" r="1.5" stroke="white" stroke-width="1.5"/>
+                </svg>
+            </a>
+            <div class="container-cart-products hidden-cart">
+                <div class="row-product">
+                    <p class="cart-empty">El carrito está vacío</p>
+                </div>
+                <div class="cart-total">
+                    <h3>Total:</h3>
+                    <span class="total-pagar">0€</span>
+                </div>
+                <button class="btn-pagar" onclick="irAPagar()">Finalizar Compra</button>
+            </div>
+        </div>
+    </nav>
 
 <div class="pago-topbar">
     <a href="Tienda.html" class="pago-back"><i class="fa-solid fa-arrow-left"></i> Volver a la tienda</a>
@@ -1645,5 +1688,6 @@ async function descargarPDF() {
 }
 </script>
 
+    <script src="./Javascript/NavCart.js"></script>
 </body>
 </html>

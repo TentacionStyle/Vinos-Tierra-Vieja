@@ -127,22 +127,6 @@ body.tempranillo-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.tempranillo-page .navbar {
-    background-color: #f6eee3;
-}
-
-.tempranillo-page .navbar li a {
-    color: #12100f;
-}
-
-.tempranillo-page .navbar li a:hover {
-    color: var(--tempranillo-ruby);
-}
-
-
-/* =========================================
    3. SECCIÓN 1: INTRODUCCIÓN Y GRÁFICO CIRCULAR
    ========================================= */
 .section-intro-tempranillo {

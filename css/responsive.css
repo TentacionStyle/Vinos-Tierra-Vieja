@@ -22,19 +22,15 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
     .noticia-navbar, .noticia1-navbar, .noticia2-navbar, .noticia3-navbar,
     .noticia4-navbar, .noticia5-navbar, .noticia6-navbar, .noticia7-navbar,
     .noticia8-navbar, .noticia9-navbar, .noticia-eno-navbar {
-        animation: none !important;
-        transition: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
         height: 75px !important;
-        background-color: #f6eee3 !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+        background-color: #581124 !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.15) !important;
         z-index: 10020 !important;
-        padding: 0 !important;
+        padding: 0 15px !important;
         display: flex !important;
     }
 
@@ -49,18 +45,14 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
         z-index: 10030 !important;
     }
 
-    .logo_nav img {
-        display: none !important;
+    .logo-text {
+        font-size: 0.7rem !important;
+        letter-spacing: 2px !important;
     }
 
-    .logo_nav a {
-        display: block !important;
-        width: 200px !important;
-        height: 69px !important;
-        background-image: url('./img/Logo-alargado.png') !important;
-        background-size: contain !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
+    .nav-logo-icon {
+        width: 22px !important;
+        height: 24px !important;
     }
 
     /* Hamburger button on the right */
@@ -72,8 +64,8 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-around !important;
-        width: 30px !important;
-        height: 30px !important;
+        width: 28px !important;
+        height: 28px !important;
         background: transparent !important;
         border: none !important;
         cursor: pointer !important;
@@ -83,8 +75,8 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
 
     .hamburger span {
         width: 100% !important;
-        height: 3px !important;
-        background-color: #6f2236 !important;
+        height: 2.5px !important;
+        background-color: #ffffff !important;
         border-radius: 10px !important;
         transition: all 0.3s linear !important;
         display: block !important;
@@ -102,9 +94,9 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
         width: 100% !important;
         position: absolute !important;
         top: 75px !important;
-        background-color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-        padding: 20px 0 !important;
+        background-color: #581124 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+        padding: 10px 0 !important;
         margin: 0 !important;
     }
 
@@ -113,21 +105,49 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
     }
 
     .navbar ul li {
-        margin: 15px 0 !important;
+        margin: 10px 0 !important;
         text-align: center !important;
     }
 
     .navbar ul li a {
-        font-size: 1.2rem !important;
-        color: #333333 !important;
+        font-size: 1rem !important;
+        color: rgba(255,255,255,0.85) !important;
         text-decoration: none !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         display: block !important;
+        padding: 6px 0 !important;
+    }
+
+    .navbar ul li a:hover,
+    .navbar ul li a.active {
+        color: #ffffff !important;
+    }
+
+    /* Position nav-actions on mobile */
+    .nav-actions {
+        position: absolute !important;
+        right: 55px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        display: flex !important;
+        gap: 10px !important;
+        z-index: 10035 !important;
+    }
+
+    .nav-actions .nav-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .nav-actions .nav-icon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     /* ============================================================
-       2. HERO — FIX LOGO/TITLE POSITION ON MOBILE
-       ============================================================ */
+        2. HERO — FIX LOGO/TITLE POSITION ON MOBILE
+        ============================================================ */
 
     /* Override the fixed-position logo from basic.css on all inner pages */
     .hero #logotipo {
@@ -251,7 +271,7 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
     }
 
     /* ============================================================
-       4. VINE DETAIL PAGES — INTRO, AROMAS, TABLE, CTA
+        4. VINE DETAIL PAGES — INTRO, AROMAS, TABLE, CTA
        ============================================================ */
 
     /* Intro sections: stack vertically */
@@ -764,5 +784,4 @@ label, button, .hamburger, [onclick], .logo_nav a, .navbar ul li a,
         position: static !important;
         translate: none !important;
     }
-
 }

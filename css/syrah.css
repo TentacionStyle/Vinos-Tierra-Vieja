@@ -143,21 +143,6 @@ body.syrah-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.syrah-page .navbar {
-    background-color: var(--sy-cream);
-}
-
-.syrah-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.syrah-page .navbar li a:hover {
-    color: var(--sy-ruby);
-}
-
-/* =========================================
    3. SECCIÓN INTRO — Glassmorphism
    ========================================= */
 .sy-intro {

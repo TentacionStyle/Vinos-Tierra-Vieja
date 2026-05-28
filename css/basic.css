@@ -150,6 +150,7 @@ section div {
 
 /* --- NAVBAR (Barra de Navegación) — Estilo Tierra Vieja --- */
 
+/* ===== NUEVA BARRA DE NAVEGACIÓN BURGUNDY ===== */
 .navbar {
     display: flex;
     align-items: center;
@@ -160,14 +161,12 @@ section div {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: #f6eee3;
+    background-color: #581124;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(111, 34, 54, 0.1);
 }
 
-/* Logo + nombre de marca */
+/* Logo: icono + texto */
 .logo_nav {
-    position: static;
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -180,41 +179,46 @@ section div {
     text-decoration: none;
 }
 
-.logo_nav img {
-    width: 200px;
-    object-fit: contain;
+.logo_nav a img {
+    height: 130px;
 }
 
-.logo_nav .brand-name {
+.nav-logo-icon {
+    flex-shrink: 0;
+}
+
+.logo-text {
     font-family: 'Cinzel', serif;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 3px;
-    color: #6f2236;
+    line-height: 1.15;
+    color: #ffffff;
     text-transform: uppercase;
 }
 
-/* Links centrados absolutamente */
+/* Menú centrado */
 .navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 36px;
+    gap: 28px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .navbar li a {
-    color: #333;
+    color: rgba(255,255,255,0.85);
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
     position: relative;
     padding-bottom: 4px;
 }
@@ -226,8 +230,8 @@ section div {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #6f2236;
-    transition: width 0.3s ease;
+    background-color: #ffffff;
+    transition: width 0.25s ease;
 }
 
 .navbar li a:hover::after,
@@ -237,7 +241,30 @@ section div {
 
 .navbar li a:hover,
 .navbar li a.active {
-    color: #6f2236;
+    color: #ffffff;
+}
+
+/* Iconos de acción a la derecha */
+/* Íconos de usuario y carrito a la derecha */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.nav-icon:hover {
+    background: rgba(255,255,255,0.12);
 }
 
 
@@ -531,4 +558,192 @@ section div {
     text-transform: uppercase;
     color: var(--gold, #c9a96e);
     margin: 0;
+}
+
+/* ===== NAV CART DROPDOWN (mismo estilo que Tienda.css) ===== */
+.nav-actions {
+    position: relative;
+}
+
+.nav-actions .container-cart-products {
+    position: absolute;
+    top: 48px;
+    right: -10px;
+    width: 340px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 2px 8px rgba(111,34,54,0.08);
+    border: 1px solid #f0e8e0;
+    overflow: hidden;
+    z-index: 99999;
+    transform-origin: top right;
+    animation: cart-open 0.25s cubic-bezier(0.34,1.2,0.64,1) both;
+}
+
+.nav-actions .container-cart-products.hidden-cart {
+    display: none !important;
+}
+
+@keyframes cart-open {
+    from { opacity: 0; transform: scale(0.92) translateY(-8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.nav-actions .container-cart-products::before {
+    content: '🛒  MI CARRITO';
+    display: block;
+    background: linear-gradient(135deg, #6f2236, #4a1725);
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    padding: 13px 18px;
+}
+
+.nav-actions .row-product {
+    max-height: 240px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c9a96e #f6eee3;
+    padding: 8px 12px;
+}
+
+.nav-actions .row-product::-webkit-scrollbar { width: 4px; }
+.nav-actions .row-product::-webkit-scrollbar-track { background: #f6eee3; border-radius: 4px; }
+.nav-actions .row-product::-webkit-scrollbar-thumb { background: #c9a96e; border-radius: 4px; }
+
+.nav-actions .cart-empty {
+    text-align: center;
+    color: #999;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    padding: 24px 0;
+}
+
+.nav-actions .cart-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: #f9f5f0;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    gap: 8px;
+}
+
+.nav-actions .info-cart-product {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.nav-actions .cantidad-producto-carro {
+    font-weight: 600;
+    color: #6f2236;
+    font-size: 0.85rem;
+    min-width: 20px;
+}
+
+.nav-actions .titulo-producto-carrito {
+    font-size: 0.8rem;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-actions .precio-producto-carrito {
+    font-size: 0.8rem;
+    color: #6f2236;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.nav-actions .acciones-carrito {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-actions .btn-restar {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.nav-actions .btn-restar:hover {
+    background: #6f2236;
+    color: #fff;
+    border-color: #6f2236;
+}
+
+.nav-actions .icono-borrar {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    color: #c0392b;
+    transition: opacity 0.2s;
+}
+
+.nav-actions .icono-borrar:hover {
+    opacity: 0.7;
+}
+
+.nav-actions .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-top: 1px solid #eee;
+}
+
+.nav-actions .cart-total h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.nav-actions .total-pagar {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #6f2236;
+}
+
+.nav-actions .btn-pagar {
+    width: calc(100% - 32px);
+    margin: 0 16px 14px;
+    padding: 12px;
+    background: #6f2236;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.nav-actions .btn-pagar:hover {
+    background: #4e1828;
+}
+
+/* ===== Hide navbar cart icon on Tienda page ===== */
+body.tienda-page .navbar .nav-icon[aria-label="Carrito"] {
+    display: none !important;
 }

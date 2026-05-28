@@ -151,23 +151,6 @@
     }
 }
 
-/* =========================================
-   2. NAVBAR
-   ========================================= */
-/* Aseguramos que la navbar sea coherente. 
-   Por defecto, basic usa #f6eee3. Lo mantenemos igual. */
-.garnacha-page .navbar {
-    background-color: #f6eee3;
-}
-
-.garnacha-page .navbar li a {
-    color: #12100f;
-}
-
-.garnacha-page .navbar li a:hover {
-    color: var(--garnacha-red);
-}
-
 /* Redefinimos los separadores del footer para que queden bien con el fondo oscuro */
 .garnacha-page .footer-tv {
     background-color: #1a1716;

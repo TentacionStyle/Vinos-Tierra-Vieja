@@ -143,21 +143,6 @@ body.chardonnay-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.chardonnay-page .navbar {
-    background-color: var(--ch-cream);
-}
-
-.chardonnay-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.chardonnay-page .navbar li a:hover {
-    color: #a88d50;
-}
-
-/* =========================================
    3. SECCIÓN INTRO — Glassmorphism
    ========================================= */
 .ch-intro {

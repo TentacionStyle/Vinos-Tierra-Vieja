@@ -143,21 +143,6 @@ body.merlot-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.merlot-page .navbar {
-    background-color: var(--ml-cream);
-}
-
-.merlot-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.merlot-page .navbar li a:hover {
-    color: var(--ml-ruby);
-}
-
-/* =========================================
    3. SECCIÓN INTRO — Glassmorphism
    ========================================= */
 .ml-intro {

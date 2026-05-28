@@ -155,21 +155,6 @@ body.blanco-page {
 }
 
 /* =========================================
-   2. NAVBAR
-   ========================================= */
-.blanco-page .navbar {
-    background-color: var(--blanco-cream);
-}
-
-.blanco-page .navbar li a {
-    color: #1a1a1a;
-}
-
-.blanco-page .navbar li a:hover {
-    color: #5a7035;
-}
-
-/* =========================================
    3. SECCIÓN INTRO
    ========================================= */
 .bl-intro {

@@ -38,7 +38,9 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="logo_nav">
-            <a href="index"><img src="./css/img/Logo-alargado.png" alt="Logotipo"></a>
+            <a href="index">
+                <img src="./css/img/Logo-alargado-invertido-sinfondo.png" alt="Tierra Vieja">
+            </a>
         </div>
         <ul>
             <li><a href="index">Inicio</a></li>
@@ -48,6 +50,31 @@
             <li><a href="actualidad">Actualidad</a></li>
             <li><a href="sostenibilidad" class="active">Sostenibilidad</a></li>
         </ul>
+        <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Usuario">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <circle cx="12" cy="7" r="4" stroke="white" stroke-width="1.5"/>
+                    <path d="M4 22 C4 16, 8 13, 12 13 C16 13, 20 16, 20 22" stroke="white" stroke-width="1.5" fill="none"/>
+                </svg>
+            </a>
+            <a href="#" class="nav-icon" aria-label="Carrito">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <path d="M4 5 L8 5 L11 16 L19 16 L21 7 L7 7" stroke="white" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                    <circle cx="10" cy="20" r="1.5" stroke="white" stroke-width="1.5"/>
+                    <circle cx="18" cy="20" r="1.5" stroke="white" stroke-width="1.5"/>
+                </svg>
+            </a>
+            <div class="container-cart-products hidden-cart">
+                <div class="row-product">
+                    <p class="cart-empty">El carrito está vacío</p>
+                </div>
+                <div class="cart-total">
+                    <h3>Total:</h3>
+                    <span class="total-pagar">0€</span>
+                </div>
+                <button class="btn-pagar" onclick="irAPagar()">Finalizar Compra</button>
+            </div>
+        </div>
     </nav>
 
     <!-- INTRO -->
